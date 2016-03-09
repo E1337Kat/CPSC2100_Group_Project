@@ -15,7 +15,6 @@ public class InstructorPanel extends JPanelwithBackground {
 
     /**
      * Creates new form InstructorPanel
-     * @param String for filename
      * @throws IOException
      */
     public InstructorPanel() throws IOException{

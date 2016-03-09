@@ -15,21 +15,34 @@ import javax.swing.JPanel;
  *
  * @author EllieKat
  */
+
+/**
+ *   The purpose of this class is to simply provide
+ *   a background image on the panels that hold all 
+ *   the real data.
+ */
 public class JPanelwithBackground extends JPanel {
     private final Image backgroundImage;
 
-  // Some code to initialize the background image.
-  // Here, we use the constructor to load the image. This
-  // can vary depending on the use case of the panel.
-  public JPanelwithBackground() throws IOException {
-    backgroundImage = ImageIO.read(new File("Background.png"));
-  }
+    // Some code to initialize the background image.
+    // Here, we use the constructor to load the image. This
+    // can vary depending on the use case of the panel.
+    public JPanelwithBackground() throws IOException {
+        
+        //Sets the background image from the relative path and *should* work on any given system ideally...
+        backgroundImage = ImageIO.read(new File( "."  + File.separator + "res" + File.separator + "Background.png"));
+    }
 
-  @Override
-  public void paintComponent(Graphics g) {
-    super.paintComponent(g);
+    /*
+    *    This method 
+    *
+    *
+    */
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-    // Draw the background image.
-    g.drawImage(backgroundImage, 0, 0, this);
-  }
+        // Draw the background image.
+        g.drawImage(backgroundImage, 0, 0, this);
+    }
 }

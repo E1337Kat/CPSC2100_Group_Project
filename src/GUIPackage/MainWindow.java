@@ -8,11 +8,10 @@ package GUIPackage;
 import Backend.AdminRegistry;
 import Backend.InstructorRegistry;
 import Backend.StudentRegistry;
-import java.awt.BorderLayout;
 
 import java.io.IOException;
+import java.net.URL;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 
 /**
@@ -24,29 +23,14 @@ public class MainWindow extends javax.swing.JFrame {
     public AdminRegistry adminReg = new AdminRegistry() ;
     public InstructorRegistry instructorReg = new InstructorRegistry() ;
     public StudentRegistry stuReg = new StudentRegistry() ;
+    public ImageIcon img = new ImageIcon("G:\\Users\\Ellie\\Documents\\College\\Senior 2\\CPSC 2100\\GP2\\CourseRegistrationSystem\\res\\poo.png");
     public String username;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
-        /*try{
-        JFrame f = new JFrame();
-        f.getContentPane().add(new JPanelwithBackground());
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
-        */
-        setTitle("Background Color for JFrame");
-	setSize(1064,677);
-	setLocationRelativeTo(null);
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	setVisible(true);
-        setLayout(new BorderLayout());
-	javax.swing.JLabel background=new javax.swing.JLabel(new ImageIcon("G:\\Users\\Ellie\\Documents\\College\\Senior 2\\CPSC 2100\\GP2\\CourseRegistrationSystem\\src\\GUIPackage\\Background.png"));
-	add(background);
-        // Just for refresh :) Not optional!
-	setSize(1063,676);
-	setSize(1064,677);
+        
+        setIconImage(img.getImage());
         initComponents();
     }
 
@@ -71,7 +55,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        studentPane.setOpaque(false);
         studentPane.setLayout(new java.awt.BorderLayout());
 
         if ( adminReg.isAdmin(username) || stuReg.isStudent(username)  ) {
@@ -79,8 +62,6 @@ public class MainWindow extends javax.swing.JFrame {
             jTabbedPane5.addTab("Student", studentPane);
         }
         studentPane.getAccessibleContext().setAccessibleName("");
-
-        InstructorPane.setOpaque(false);
 
         javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
         InstructorPane.setLayout(InstructorPaneLayout);
@@ -98,8 +79,6 @@ public class MainWindow extends javax.swing.JFrame {
             jTabbedPane5.addTab("Teacher", InstructorPane);
         }
         InstructorPane.getAccessibleContext().setAccessibleName("");
-
-        AdminPane.setOpaque(false);
 
         javax.swing.GroupLayout AdminPaneLayout = new javax.swing.GroupLayout(AdminPane);
         AdminPane.setLayout(AdminPaneLayout);
