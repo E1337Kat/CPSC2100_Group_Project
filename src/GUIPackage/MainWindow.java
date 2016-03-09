@@ -5,16 +5,48 @@
  */
 package GUIPackage;
 
+import Backend.AdminRegistry;
+import Backend.InstructorRegistry;
+import Backend.StudentRegistry;
+import java.awt.BorderLayout;
+
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+
 /**
  *
  * @author EMCS306
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    public AdminRegistry adminReg = new AdminRegistry() ;
+    public InstructorRegistry instructorReg = new InstructorRegistry() ;
+    public StudentRegistry stuReg = new StudentRegistry() ;
+    public String username;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
+        /*try{
+        JFrame f = new JFrame();
+        f.getContentPane().add(new JPanelwithBackground());
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        */
+        setTitle("Background Color for JFrame");
+	setSize(1064,677);
+	setLocationRelativeTo(null);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setVisible(true);
+        setLayout(new BorderLayout());
+	javax.swing.JLabel background=new javax.swing.JLabel(new ImageIcon("G:\\Users\\Ellie\\Documents\\College\\Senior 2\\CPSC 2100\\GP2\\CourseRegistrationSystem\\src\\GUIPackage\\Background.png"));
+	add(background);
+        // Just for refresh :) Not optional!
+	setSize(1063,676);
+	setSize(1064,677);
         initComponents();
     }
 
@@ -28,53 +60,63 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane5 = new javax.swing.JTabbedPane();
-        studentPane = new StudentPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        try {
+            studentPane = new StudentPanel();
+            InstructorPane = new InstructorPanel();
+            AdminPane = new AdminPanel();
+        } catch (IOException e1)
+        {
+            System.out.println("Exception thrown  :" + e1);
+        }
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout studentPaneLayout = new javax.swing.GroupLayout(studentPane);
-        studentPane.setLayout(studentPaneLayout);
-        studentPaneLayout.setHorizontalGroup(
-            studentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
-        );
-        studentPaneLayout.setVerticalGroup(
-            studentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
-        );
+        studentPane.setOpaque(false);
+        studentPane.setLayout(new java.awt.BorderLayout());
 
-        jTabbedPane5.addTab("Student", studentPane);
+        if ( adminReg.isAdmin(username) || stuReg.isStudent(username)  ) {
+
+            jTabbedPane5.addTab("Student", studentPane);
+        }
         studentPane.getAccessibleContext().setAccessibleName("");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        InstructorPane.setOpaque(false);
+
+        javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
+        InstructorPane.setLayout(InstructorPaneLayout);
+        InstructorPaneLayout.setHorizontalGroup(
+            InstructorPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 632, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        InstructorPaneLayout.setVerticalGroup(
+            InstructorPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 419, Short.MAX_VALUE)
         );
 
-        jTabbedPane5.addTab("Teacher", jPanel2);
-        jPanel2.getAccessibleContext().setAccessibleName("TeacherTab");
+        if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jTabbedPane5.addTab("Teacher", InstructorPane);
+        }
+        InstructorPane.getAccessibleContext().setAccessibleName("");
+
+        AdminPane.setOpaque(false);
+
+        javax.swing.GroupLayout AdminPaneLayout = new javax.swing.GroupLayout(AdminPane);
+        AdminPane.setLayout(AdminPaneLayout);
+        AdminPaneLayout.setHorizontalGroup(
+            AdminPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 632, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        AdminPaneLayout.setVerticalGroup(
+            AdminPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 419, Short.MAX_VALUE)
         );
 
-        jTabbedPane5.addTab("Administrator", jPanel3);
-        jPanel3.getAccessibleContext().setAccessibleName("AdminTab");
+        if (adminReg.isAdmin(username)) {
+
+            jTabbedPane5.addTab("Administrator", AdminPane);
+        }
+        AdminPane.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,15 +148,11 @@ public class MainWindow extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -126,8 +164,8 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel AdminPane;
+    private javax.swing.JPanel InstructorPane;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel studentPane;
     // End of variables declaration//GEN-END:variables
