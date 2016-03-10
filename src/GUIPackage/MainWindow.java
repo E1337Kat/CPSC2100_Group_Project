@@ -8,9 +8,9 @@ package GUIPackage;
 import Backend.AdminRegistry;
 import Backend.InstructorRegistry;
 import Backend.StudentRegistry;
+import java.io.File;
 
 import java.io.IOException;
-import java.net.URL;
 import javax.swing.ImageIcon;
 
 
@@ -23,7 +23,7 @@ public class MainWindow extends javax.swing.JFrame {
     public AdminRegistry adminReg = new AdminRegistry() ;
     public InstructorRegistry instructorReg = new InstructorRegistry() ;
     public StudentRegistry stuReg = new StudentRegistry() ;
-    public ImageIcon img = new ImageIcon("G:\\Users\\Ellie\\Documents\\College\\Senior 2\\CPSC 2100\\GP2\\CourseRegistrationSystem\\res\\poo.png");
+    public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
     public String username;
     /**
      * Creates new form MainWindow

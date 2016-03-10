@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+*  Most credit for this code goes to :
+*  http://java-demos.blogspot.in/2012/09/setting-background-image-in-jframe.html
+*  I did add in a little bit of my own additions in file locating
+*  and the actual file.
+*/
 package GUIPackage;
 
 import java.awt.Graphics;

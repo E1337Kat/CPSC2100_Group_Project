@@ -15,7 +15,7 @@ public class AdminRegistry implements Registry {
     ArrayList users = new ArrayList();
     
     public AdminRegistry(){
-        
+        users.add("SysAdmin");
     }
     
     public boolean isAdmin(String username) {

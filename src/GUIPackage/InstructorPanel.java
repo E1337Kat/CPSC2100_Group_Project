@@ -30,19 +30,43 @@ public class InstructorPanel extends JPanelwithBackground {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        instructorWelcome = new javax.swing.JPanel();
+        modifyCourse = new javax.swing.JPanel();
+
+        setLayout(null);
+
+        javax.swing.GroupLayout instructorWelcomeLayout = new javax.swing.GroupLayout(instructorWelcome);
+        instructorWelcome.setLayout(instructorWelcomeLayout);
+        instructorWelcomeLayout.setHorizontalGroup(
+            instructorWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        instructorWelcomeLayout.setVerticalGroup(
+            instructorWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        add(instructorWelcome);
+        instructorWelcome.setBounds(0, 0, 100, 100);
+
+        javax.swing.GroupLayout modifyCourseLayout = new javax.swing.GroupLayout(modifyCourse);
+        modifyCourse.setLayout(modifyCourseLayout);
+        modifyCourseLayout.setHorizontalGroup(
+            modifyCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        modifyCourseLayout.setVerticalGroup(
+            modifyCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        add(modifyCourse);
+        modifyCourse.setBounds(0, 0, 100, 100);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel instructorWelcome;
+    private javax.swing.JPanel modifyCourse;
     // End of variables declaration//GEN-END:variables
 }
