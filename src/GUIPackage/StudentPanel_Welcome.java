@@ -11,15 +11,13 @@ import java.io.IOException;
  *
  * @author EMCS306
  */
-public class StudentPanel extends JPanelwithBackground {
+public class StudentPanel_Welcome extends JPanelwithBackground {
 
     /**
-     * Creates new form Student
-     * @throws IOException
+     * Creates new form StudentPanel_Welcome
      */
-    public StudentPanel() throws IOException{
+    public StudentPanel_Welcome() throws IOException {
         initComponents();
-        
     }
 
     /**
@@ -31,24 +29,12 @@ public class StudentPanel extends JPanelwithBackground {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        try{
-            a = new StudentPanel_Welcome();
-        } catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.MatteBorder(null), "Welcome Student ####", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         setLayout(null);
-
-        a.setLayout(null);
-        add(a);
-        a.setBounds(0, 0, 443, 283);
+        getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel a;
     // End of variables declaration//GEN-END:variables
 }
