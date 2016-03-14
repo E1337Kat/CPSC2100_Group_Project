@@ -20,11 +20,15 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Login">
-              <Font PropertyName="font" name="Tahoma" size="12" style="1"/>
+              <Connection PropertyName="font" code="arialicFont.deriveFont(20)" type="code"/>
             </TitledBorder>
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jPanel1.setFont(arialicFont);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Font arialicFont;&#xa;try {&#xa;            //create the font to use. Specify the size!&#xa;            arialicFont = Font.createFont(Font.TRUETYPE_FONT, &#xa;                    new File( &quot;.&quot;  + &#xa;                            File.separator + &#xa;                            &quot;res&quot; + &#xa;                            File.separator + &#xa;                            &quot;Arialic_Hollow.ttf&quot;)).deriveFont(12f);&#xa;            GraphicsEnvironment ge = &#xa;            GraphicsEnvironment.getLocalGraphicsEnvironment();&#xa;            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, &#xa;                    new File(&quot;.&quot;  + &#xa;                            File.separator + &#xa;                            &quot;res&quot; + &#xa;                            File.separator + &#xa;                            &quot;Arialic_Hollow.ttf&quot;)));&#xa;        } catch (IOException|FontFormatException e) {&#xa;            throw new RuntimeException(e);&#xa;        }"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>
