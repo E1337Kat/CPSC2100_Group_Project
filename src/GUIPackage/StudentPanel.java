@@ -31,24 +31,25 @@ public class StudentPanel extends JPanelwithBackground {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        try{
-            a = new StudentPanel_Welcome();
-        } catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+        studentWelcome = new javax.swing.JPanel();
+        modifySchedule = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLayout(null);
 
-        a.setLayout(null);
-        add(a);
-        a.setBounds(0, 0, 443, 283);
+        studentWelcome.setLayout(new java.awt.GridLayout());
+        add(studentWelcome);
+        studentWelcome.setBounds(0, 0, 443, 283);
+
+        modifySchedule.setLayout(new java.awt.GridLayout());
+        add(modifySchedule);
+        modifySchedule.setBounds(0, 0, 100, 100);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel a;
+    private javax.swing.JPanel modifySchedule;
+    private javax.swing.JPanel studentWelcome;
     // End of variables declaration//GEN-END:variables
 }
