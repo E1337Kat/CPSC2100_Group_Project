@@ -91,7 +91,7 @@ public class LoginPanel extends javax.swing.JPanel
     } catch (IOException|FontFormatException e) {
         throw new RuntimeException(e);
     }
-    jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, arialicFont.deriveFont(20)));
+    jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", 0, 0, arialicFont.deriveFont(20)));
     jPanel1.setFont(arialicFont);
     jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -104,7 +104,6 @@ public class LoginPanel extends javax.swing.JPanel
     gridBagConstraints.insets = new java.awt.Insets(90, 100, 0, 0);
     jPanel1.add(jLabel1, gridBagConstraints);
 
-    jTextField1.setText("username");
     jTextField1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jTextField1ActionPerformed(evt);
@@ -121,6 +120,7 @@ public class LoginPanel extends javax.swing.JPanel
     jPanel1.add(jTextField1, gridBagConstraints);
 
     jLabel2.setText("Password:");
+    jLabel2.setToolTipText("");
     gridBagConstraints = new java.awt.GridBagConstraints();
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 2;
@@ -161,7 +161,7 @@ public class LoginPanel extends javax.swing.JPanel
     gridBagConstraints.insets = new java.awt.Insets(30, 23, 97, 0);
     jPanel1.add(jButton2, gridBagConstraints);
 
-    add(jPanel1, java.awt.BorderLayout.CENTER);
+    add(jPanel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
