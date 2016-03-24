@@ -104,6 +104,7 @@ public class LoginPanel extends javax.swing.JPanel
     gridBagConstraints.insets = new java.awt.Insets(90, 100, 0, 0);
     jPanel1.add(jLabel1, gridBagConstraints);
 
+    jTextField1.setText("Username");
     jTextField1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jTextField1ActionPerformed(evt);
