@@ -31,6 +31,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         
         setIconImage(img.getImage());
+        setTitle("University of FtS");
         initComponents();
     }
 
@@ -45,7 +46,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTabbedPane5 = new javax.swing.JTabbedPane();
         try {
-            student_welcome = new StudentPanel_Welcome();
+            //student_welcome = new StudentPanel_Welcome();
             studentPane = new StudentPanel();
             InstructorPane = new InstructorPanel();
             AdminPane = new AdminPanel();
@@ -63,9 +64,9 @@ public class MainWindow extends javax.swing.JFrame {
             jTabbedPane5.addTab("Student", studentPane);
         }
 
-        jTabbedPane5.addTab("Bullshit", student_welcome);
+        //jTabbedPane5.addTab("Bullshit", student_welcome);
         studentPane.getAccessibleContext().setAccessibleName("");
-        student_welcome.getAccessibleContext().setAccessibleName("");
+        //student_welcome.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
         InstructorPane.setLayout(InstructorPaneLayout);
@@ -151,6 +152,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel InstructorPane;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel studentPane;
-    private javax.swing.JPanel student_welcome;
+    //private javax.swing.JPanel student_welcome;
     // End of variables declaration//GEN-END:variables
 }

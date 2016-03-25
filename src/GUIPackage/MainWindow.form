@@ -39,13 +39,13 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="studentPane">
           <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="" postCode="student_welcome.getAccessibleContext().setAccessibleName(&quot;&quot;);"/>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="" postCode="//student_welcome.getAccessibleContext().setAccessibleName(&quot;&quot;);"/>
           </AccessibilityProperties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="}&#xa;&#xa;jTabbedPane5.addTab(&quot;Bullshit&quot;, student_welcome);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="}&#xa;&#xa;//jTabbedPane5.addTab(&quot;Bullshit&quot;, student_welcome);"/>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new StudentPanel()"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xa;student_welcome = new StudentPanel_Welcome();"/>
-            <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private javax.swing.JPanel student_welcome;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xa;//student_welcome = new StudentPanel_Welcome();"/>
+            <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="//private javax.swing.JPanel student_welcome;"/>
             <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="if ( adminReg.isAdmin(username) || stuReg.isStudent(username)  ) {"/>
           </AuxValues>
           <Constraints>

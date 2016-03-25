@@ -38,13 +38,15 @@ public class StudentPanel extends JPanelwithBackground {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setLayout(null);
 
-        studentWelcome.setLayout(new java.awt.GridLayout());
+        studentWelcome.setOpaque(false);
+        studentWelcome.setLayout(new java.awt.GridLayout(1, 0));
         add(studentWelcome);
-        studentWelcome.setBounds(0, 0, 443, 283);
+        studentWelcome.setBounds(0, 0, 0, 0);
 
-        modifySchedule.setLayout(new java.awt.GridLayout());
+        modifySchedule.setOpaque(false);
+        modifySchedule.setLayout(new java.awt.GridLayout(1, 0));
         add(modifySchedule);
-        modifySchedule.setBounds(0, 0, 100, 100);
+        modifySchedule.setBounds(0, 0, 0, 0);
     }// </editor-fold>//GEN-END:initComponents
 
 

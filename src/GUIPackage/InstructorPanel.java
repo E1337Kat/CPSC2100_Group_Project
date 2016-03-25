@@ -35,6 +35,8 @@ public class InstructorPanel extends JPanelwithBackground {
 
         setLayout(null);
 
+        instructorWelcome.setOpaque(false);
+
         javax.swing.GroupLayout instructorWelcomeLayout = new javax.swing.GroupLayout(instructorWelcome);
         instructorWelcome.setLayout(instructorWelcomeLayout);
         instructorWelcomeLayout.setHorizontalGroup(
@@ -48,6 +50,8 @@ public class InstructorPanel extends JPanelwithBackground {
 
         add(instructorWelcome);
         instructorWelcome.setBounds(0, 0, 100, 100);
+
+        modifyCourse.setOpaque(false);
 
         javax.swing.GroupLayout modifyCourseLayout = new javax.swing.GroupLayout(modifyCourse);
         modifyCourse.setLayout(modifyCourseLayout);
