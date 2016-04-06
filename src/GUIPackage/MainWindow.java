@@ -8,10 +8,11 @@ package GUIPackage;
 import Backend.AdminRegistry;
 import Backend.InstructorRegistry;
 import Backend.StudentRegistry;
+import java.awt.CardLayout;
 import java.io.File;
 
 import java.io.IOException;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 
 /**
@@ -20,15 +21,22 @@ import javax.swing.ImageIcon;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    public AdminRegistry adminReg = new AdminRegistry() ;
-    public InstructorRegistry instructorReg = new InstructorRegistry() ;
-    public StudentRegistry stuReg = new StudentRegistry() ;
+    public AdminRegistry adminReg;
+    public InstructorRegistry instructorReg;
+    public StudentRegistry stuReg;
     public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
     public String username;
     /**
      * Creates new form MainWindow
      */
-    public MainWindow() {
+    public MainWindow(String u, 
+            AdminRegistry aR, 
+            InstructorRegistry iR, 
+            StudentRegistry sR) {
+        username = u;
+        adminReg = aR;
+        instructorReg = iR;
+        stuReg = sR;
         
         setIconImage(img.getImage());
         setTitle("University of FtS");
@@ -43,14 +51,25 @@ public class MainWindow extends javax.swing.JFrame {
         
         checkPermissions();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane5)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane5)
+        );
 
-        pack();
-    }                       
+        this.setSize(750,600);
+    }  
+    
 
     /**
      * @param args the command line arguments
      */
+    /*
     public static void main(String args[]) {
         
         try {
@@ -64,17 +83,18 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
+        // Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                JFrame frame = new MainWindow();
+                frame.setVisible(true);
             }
         });
-    }
+    }*/
     
     private void checkPermissions(){
 
-        
+        //Checks if student
         if ( adminReg.isAdmin(username) || stuReg.isStudent(username)  ) {
 
             try {
@@ -84,9 +104,11 @@ public class MainWindow extends javax.swing.JFrame {
             }
             jTabbedPane5.updateUI();
             jTabbedPane5.addTab("Student", studentPane);
+            CardLayout c1 = (CardLayout)(studentPane.getLayout());
             studentPane.getAccessibleContext().setAccessibleName("");
         }
         
+        //checks if Instructor
         if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
 
             try {
@@ -98,10 +120,11 @@ public class MainWindow extends javax.swing.JFrame {
             jTabbedPane5.updateUI();
             jTabbedPane5.addTab("Teacher", InstructorPane);
             InstructorPane.getAccessibleContext().setAccessibleName("");
-            javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
+            //javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
         
         }
         
+        //checks if Admin
         if (adminReg.isAdmin(username)) {
 
             try {
@@ -116,19 +139,11 @@ public class MainWindow extends javax.swing.JFrame {
             AdminPane.getAccessibleContext().setAccessibleName("");
         }
         
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
-        );
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify   
+    private JFrame loginFrame;
+    private LoginFrame loginPanel;
     private javax.swing.JPanel AdminPane;
     private javax.swing.JPanel InstructorPane;
     private javax.swing.JTabbedPane jTabbedPane5;

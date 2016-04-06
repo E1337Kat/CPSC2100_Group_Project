@@ -5,7 +5,9 @@
  */
 package GUIPackage;
 
+import java.io.File;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -13,10 +15,13 @@ import java.io.IOException;
  */
 public class LoginWindow extends javax.swing.JFrame {
 
+    public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
     /**
      * Creates new form LoginWindow
      */
     public LoginWindow() {
+        setIconImage(img.getImage());
+        setTitle("University of FtS");
         initComponents();
     }
 
@@ -24,21 +29,38 @@ public class LoginWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")                       
     private void initComponents() {
 
+        
+        //loginPane = new LoginFrame();
+        
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
+        
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginPane)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginPane)
+        );
 
         pack();
     }                       
 
+    public String getUsername() {
+        return loginPane.getUsername();
+    }
     /**
      * @param args the command line arguments
      */
+    /*
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        // Set the Nimbus look and feel
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -46,24 +68,19 @@ public class LoginWindow extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        /* Create and display the form */
+        // Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginWindow().setVisible(true);
             }
         });
-    }
+    }*/
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify  
+    private LoginFrame loginPane;
     // End of variables declaration                   
 }
