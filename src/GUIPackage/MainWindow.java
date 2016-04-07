@@ -5,12 +5,9 @@
  */
 package GUIPackage;
 
-import Backend.AdminRegistry;
-import Backend.InstructorRegistry;
-import Backend.StudentRegistry;
-import java.awt.CardLayout;
-import java.io.File;
+import Backend.*;
 
+import java.io.File;
 import java.io.IOException;
 import javax.swing.*;
 
@@ -61,36 +58,15 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane5)
         );
+        
+        getAccessibleContext().setAccessibleName("Main Window");
 
-        this.setSize(750,600);
+        setSize(750,600);
     }  
     
-
-    /**
-     * @param args the command line arguments
-     */
-    /*
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        // Create and display the form
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new MainWindow();
-                frame.setVisible(true);
-            }
-        });
-    }*/
+    public String getUsername() {
+        return username;
+    }
     
     private void checkPermissions(){
 
@@ -104,23 +80,24 @@ public class MainWindow extends javax.swing.JFrame {
             }
             jTabbedPane5.updateUI();
             jTabbedPane5.addTab("Student", studentPane);
-            CardLayout c1 = (CardLayout)(studentPane.getLayout());
-            studentPane.getAccessibleContext().setAccessibleName("");
+            studentPane.setVisible(true);
+            studentPane.getAccessibleContext().setAccessibleName("Student Panel");
         }
         
         //checks if Instructor
         if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
 
             try {
-                InstructorPane = new InstructorPanel();;
+                instructorPane = new InstructorPanel();;
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
             
             jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Teacher", InstructorPane);
-            InstructorPane.getAccessibleContext().setAccessibleName("");
-            //javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
+            jTabbedPane5.addTab("Teacher", instructorPane);
+            instructorPane.setVisible(true);
+            instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
+            //javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(instructorPane);
         
         }
         
@@ -128,26 +105,24 @@ public class MainWindow extends javax.swing.JFrame {
         if (adminReg.isAdmin(username)) {
 
             try {
-                AdminPane = new GUIPackage.AdminPanel();
+                adminPane = new GUIPackage.AdminPanel();
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            System.out.println("running");
-            
             jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Administrator", AdminPane);
-            AdminPane.getAccessibleContext().setAccessibleName("");
+            jTabbedPane5.addTab("Administrator", adminPane);
+            adminPane.setVisible(true);
+            adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }
         
     }
+    
+    
 
-    // Variables declaration - do not modify   
-    private JFrame loginFrame;
-    private LoginFrame loginPanel;
-    private javax.swing.JPanel AdminPane;
-    private javax.swing.JPanel InstructorPane;
+    // Variables declaration 
+    private javax.swing.JPanel adminPane;
+    private javax.swing.JPanel instructorPane;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JPanel studentPane;
-    //private javax.swing.JPanel student_welcome;
     // End of variables declaration                   
 }

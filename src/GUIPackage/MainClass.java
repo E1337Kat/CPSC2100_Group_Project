@@ -8,32 +8,26 @@ package GUIPackage;
 import Backend.AdminRegistry;
 import Backend.InstructorRegistry;
 import Backend.StudentRegistry;
-import java.awt.Window;
 import javax.swing.*;
 
 /**
- *
- * @author ellie
+ * @description This class is the primary starting point for the system. 
+ * @author Ellie Peterson
  */
 public class MainClass {
     public static final AdminRegistry adminReg = new AdminRegistry() ;
     public static final InstructorRegistry instructorReg = new InstructorRegistry() ;
     public static final StudentRegistry stuReg = new StudentRegistry() ;
+    static final String LOOKANDFEEL = "System";
     
-    
+    /*
+    * Start of Main thread
+    */
     public static void main(String args[]) {
         
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
+        /* Set Look and Feel of program to system look and feel if possible*/
+        initLookAndFeel();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -45,5 +39,47 @@ public class MainClass {
                 loginFrame.setVisible(true);
             }
         });
+    }
+    
+    /*
+    * Requests system look and feel, and if unavailable, sets to metal(System independent)
+    */
+    private static void initLookAndFeel() {
+        String lookAndFeel = null;
+        
+        if (LOOKANDFEEL != null) {
+            if (LOOKANDFEEL.equals("System")) {
+                lookAndFeel = UIManager.getSystemLookAndFeelClassName(); 
+            } else { //default to java LaF
+                System.err.println("Unexpected value of LOOKANDFEEL specified: "
+                        + LOOKANDFEEL );
+                lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
+            }
+            try {
+                
+                UIManager.setLookAndFeel(lookAndFeel);
+                
+            } catch (ClassNotFoundException e) {
+                System.err.println("Couldn't find class for specified look and feel:"
+                                   + lookAndFeel);
+                System.err.println("Did you include the L&F library in the class path?");
+                System.err.println("Using the default look and feel.");
+            } 
+            
+            catch (UnsupportedLookAndFeelException e) {
+                System.err.println("Can't use the specified look and feel ("
+                                   + lookAndFeel
+                                   + ") on this platform.");
+                System.err.println("Using the default look and feel.");
+            } 
+            
+            catch (Exception e) {
+                System.err.println("Couldn't get specified look and feel ("
+                                   + lookAndFeel
+                                   + "), for some reason.");
+                System.err.println("Using the default look and feel.");
+                e.printStackTrace();
+            }
+        }
     }
 }

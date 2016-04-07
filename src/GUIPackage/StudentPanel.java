@@ -34,8 +34,8 @@ public class StudentPanel extends JPanelwithBackground {
     @SuppressWarnings("unchecked")                        
     private void initComponents() {
 
-        studentWelcome = new javax.swing.JPanel();
-        modifySchedule = new javax.swing.JPanel();
+        studentWelcome = new StudentPanel_Welcome();
+        modifySchedule = new StudentPanel_AddDrop();
 
         
         setBackground(new java.awt.Color(255, 255, 255));
@@ -43,19 +43,23 @@ public class StudentPanel extends JPanelwithBackground {
         setLayout(null);
 
         
-        JPanel cards = new JPanel(new CardLayout());
-        studentWelcome.setOpaque(false);
-        studentWelcome.setLayout(new java.awt.GridLayout(1, 0));
-        cards.add(studentWelcome, "welcome");
-        studentWelcome.setBounds(0, 0, 0, 0);
-
-        modifySchedule.setOpaque(false);
-        modifySchedule.setLayout(new java.awt.GridLayout(1, 0));
-        cards.add(modifySchedule, "modify");
-        modifySchedule.setBounds(0, 0, 0, 0);
+        //JPanel cards = new JPanel(new CardLayout());
         
-        CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.show(cards, "welcome");
+        studentWelcome.setLayout(new java.awt.GridLayout(1, 0));
+        add(studentWelcome);
+        //cards.add(studentWelcome, "welcome");
+        studentWelcome.setBounds(0, 0, 0, 0);
+        studentWelcome.setVisible(true);
+
+        
+        modifySchedule.setLayout(new java.awt.GridLayout(1, 0));
+        add(modifySchedule);
+        //cards.add(modifySchedule, "modify");
+        modifySchedule.setBounds(0, 0, 0, 0);
+        modifySchedule.setVisible(false);
+        
+        //CardLayout cl = (CardLayout)(cards.getLayout());
+        //cl.show(cards, "welcome");
     }
 
                    

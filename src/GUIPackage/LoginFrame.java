@@ -82,6 +82,7 @@ public class LoginFrame extends javax.swing.JFrame
 
 
         loginLabel.setText("Username:");
+        loginLabel.setFont(arialicFont);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -103,6 +104,7 @@ public class LoginFrame extends javax.swing.JFrame
         add(usernameTextField, gridBagConstraints);
 
         passwordLabel.setText("Password:");
+        passwordLabel.setFont(arialicFont);
         passwordLabel.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -171,7 +173,7 @@ public class LoginFrame extends javax.swing.JFrame
             setVisible(false);
             MainWindow mainFrame = new MainWindow(getUsername(), adminReg, instructorReg, stuReg);
             mainFrame.setDefaultCloseOperation(MainWindow.EXIT_ON_CLOSE);
-            mainFrame.pack();
+            mainFrame.setSize(600, 400);
             mainFrame.setVisible(true);
             dispose();
             System.out.println("Code creates window");
