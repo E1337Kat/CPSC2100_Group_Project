@@ -5,9 +5,8 @@
  */
 package GUIPackage;
 
-import Backend.AdminRegistry;
-import Backend.InstructorRegistry;
-import Backend.StudentRegistry;
+import Backend.*;
+import java.io.File;
 import javax.swing.*;
 
 /**
@@ -15,15 +14,16 @@ import javax.swing.*;
  * @author Ellie Peterson
  */
 public class MainClass {
-    public static final AdminRegistry adminReg = new AdminRegistry() ;
-    public static final InstructorRegistry instructorReg = new InstructorRegistry() ;
-    public static final StudentRegistry stuReg = new StudentRegistry() ;
     static final String LOOKANDFEEL = "System";
-    
+    private static final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    private static final String UNI_NAME = "University of FtS";
+
     /*
     * Start of Main thread
     */
     public static void main(String args[]) {
+        
+        Singleton.getInstance();
         
         /* Set Look and Feel of program to system look and feel if possible*/
         initLookAndFeel();
@@ -31,7 +31,9 @@ public class MainClass {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoginFrame loginFrame = new LoginFrame(adminReg, instructorReg, stuReg);
+                LoginFrame loginFrame = new LoginFrame();
+                loginFrame.setIconImage(img.getImage());
+                loginFrame.setTitle(UNI_NAME);
                 
                 loginFrame.setDefaultCloseOperation(LoginFrame.EXIT_ON_CLOSE);
                 loginFrame.pack();

@@ -7,18 +7,13 @@ package GUIPackage;
 
 import Backend.AdminRegistry;
 import Backend.InstructorRegistry;
+import Backend.Singleton;
 import Backend.StudentRegistry;
-import static GUIPackage.MainClass.adminReg;
-import static GUIPackage.MainClass.instructorReg;
-import static GUIPackage.MainClass.stuReg;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.Window;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+
 
 
 /**
@@ -32,21 +27,18 @@ public class LoginFrame extends javax.swing.JFrame
     public InstructorRegistry instructorReg;
     public StudentRegistry stuReg;
     private Object bean;
-    public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    //public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
 
     /**
      * Creates new customizer Login 
      */
-    public LoginFrame(
-            AdminRegistry aR, 
-            InstructorRegistry iR, 
-            StudentRegistry sR) {
-        adminReg = aR;
-        instructorReg = iR;
-        stuReg = sR;
+    public LoginFrame() {
+        adminReg = Singleton.getAdminRegInstance();
+        instructorReg = Singleton.getInstructorRegInstance();
+        stuReg = Singleton.getStuRegInstance();
         
-        setIconImage(img.getImage());
-        setTitle("University of FtS");
+        //setIconImage(img.getImage());
+        //setTitle("University of FtS");
         initComponents();
     }
     
@@ -59,10 +51,10 @@ public class LoginFrame extends javax.swing.JFrame
     private void initComponents() {
         
                
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gBC;
 
         loginLabel = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
@@ -83,47 +75,47 @@ public class LoginFrame extends javax.swing.JFrame
 
         loginLabel.setText("Username:");
         loginLabel.setFont(arialicFont);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(90, 100, 0, 0);
-        add(loginLabel, gridBagConstraints);
+        gBC = new java.awt.GridBagConstraints();
+        gBC.gridx = 0;
+        gBC.gridy = 0;
+        gBC.gridwidth = 2;
+        gBC.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gBC.insets = new java.awt.Insets(90, 100, 0, 0);
+        add(loginLabel, gBC);
 
         usernameTextField.setText("Username");
         usernameTextField.setEditable(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 94;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(90, 3, 0, 0);
-        add(usernameTextField, gridBagConstraints);
+        gBC = new java.awt.GridBagConstraints();
+        gBC.gridx = 3;
+        gBC.gridy = 0;
+        gBC.gridwidth = 2;
+        gBC.gridheight = 2;
+        gBC.ipadx = 94;
+        gBC.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gBC.insets = new java.awt.Insets(90, 3, 0, 0);
+        add(usernameTextField, gBC);
 
         passwordLabel.setText("Password:");
         passwordLabel.setFont(arialicFont);
         passwordLabel.setToolTipText("");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 100, 0, 0);
-        add(passwordLabel, gridBagConstraints);
+        gBC = new java.awt.GridBagConstraints();
+        gBC.gridx = 0;
+        gBC.gridy = 2;
+        gBC.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gBC.insets = new java.awt.Insets(20, 100, 0, 0);
+        add(passwordLabel, gBC);
 
         passwordTextField.setText("pass");
         passwordTextField.setEditable(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 105;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 3, 0, 129);
-        add(passwordTextField, gridBagConstraints);
+        gBC = new java.awt.GridBagConstraints();
+        gBC.gridx = 3;
+        gBC.gridy = 2;
+        gBC.gridwidth = 3;
+        gBC.gridheight = 2;
+        gBC.ipadx = 105;
+        gBC.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gBC.insets = new java.awt.Insets(20, 3, 0, 129);
+        add(passwordTextField, gBC);
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,21 +124,21 @@ public class LoginFrame extends javax.swing.JFrame
                 loginActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 100, 97, 0);
-        add(loginButton, gridBagConstraints);
+        gBC = new java.awt.GridBagConstraints();
+        gBC.gridx = 0;
+        gBC.gridy = 4;
+        gBC.gridwidth = 3;
+        gBC.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gBC.insets = new java.awt.Insets(30, 100, 97, 0);
+        add(loginButton, gBC);
 
         registerButton.setText("Register");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 23, 97, 0);
-        add(registerButton, gridBagConstraints);
+        gBC = new java.awt.GridBagConstraints();
+        gBC.gridx = 3;
+        gBC.gridy = 4;
+        gBC.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gBC.insets = new java.awt.Insets(30, 23, 97, 0);
+        add(registerButton, gBC);
 
     }         
     
