@@ -163,7 +163,7 @@ public class LoginFrame extends javax.swing.JFrame
         
         if (isValidUser()) {
             setVisible(false);
-            MainWindow mainFrame = new MainWindow(getUsername(), adminReg, instructorReg, stuReg);
+            MainWindow mainFrame = new MainWindow(getUsername());
             mainFrame.setDefaultCloseOperation(MainWindow.EXIT_ON_CLOSE);
             mainFrame.setSize(600, 400);
             mainFrame.setVisible(true);

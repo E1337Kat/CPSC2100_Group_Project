@@ -16,24 +16,21 @@ import javax.swing.*;
  *
  * @author EMCS306
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends JFrame {
 
-    public AdminRegistry adminReg;
-    public InstructorRegistry instructorReg;
-    public StudentRegistry stuReg;
+    public AdminRegistry adminReg = null;
+    public InstructorRegistry instructorReg = null;
+    public StudentRegistry stuReg = null;
     public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
     public String username;
     /**
      * Creates new form MainWindow
      */
-    public MainWindow(String u, 
-            AdminRegistry aR, 
-            InstructorRegistry iR, 
-            StudentRegistry sR) {
+    public MainWindow(String u) {
         username = u;
-        adminReg = aR;
-        instructorReg = iR;
-        stuReg = sR;
+        adminReg = Singleton.getAdminRegInstance();
+        instructorReg = Singleton.getInstructorRegInstance();
+        stuReg = Singleton.getStuRegInstance();
         
         setIconImage(img.getImage());
         setTitle("University of FtS");
@@ -48,8 +45,9 @@ public class MainWindow extends javax.swing.JFrame {
         
         checkPermissions();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane5)

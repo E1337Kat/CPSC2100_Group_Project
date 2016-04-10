@@ -5,8 +5,7 @@
  */
 package GUIPackage;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -35,9 +34,9 @@ public class PanelTester extends JFrame {
         testPane = new StudentPanel_Welcome();
         
         
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
         layout.setHorizontalGroup(
@@ -48,9 +47,11 @@ public class PanelTester extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(testPane)
         );
+        
 
         //initialize testpanes components
         testPane.initMe();
+        add(testPane);
         revalidate();
         pack();
     }     

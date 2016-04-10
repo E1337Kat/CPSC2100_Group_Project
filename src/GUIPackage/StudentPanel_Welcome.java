@@ -39,15 +39,18 @@ public class StudentPanel_Welcome extends JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents() {
         
+        
+        
         usernameLabel = new JLabel();
         schedule = new CourseList();
         addCourseButton = new JButton();
         deleteCourseButton = new JButton();
         String u;
+        GridBagLayout gridBag = new GridBagLayout();
         GridBagConstraints gBC;
         
         //Set Layout
-        setLayout(new GridBagLayout());
+        this.setLayout(gridBag);
         
         PanelTester topWindow = null;
         topWindow = (PanelTester)((JFrame)SwingUtilities.getWindowAncestor(this));
@@ -59,13 +62,18 @@ public class StudentPanel_Welcome extends JPanel {
         usernameLabel.setText("Welcome " + u);
         gBC = new GridBagConstraints();
         gBC.gridheight = 1;
-        gBC.gridwidth = 1;
-        gBC.gridx = 3;
+        gBC.gridwidth = 5;
+        gBC.gridx = 0;
         gBC.gridy = 0;
-        gBC.insets = new Insets(0,0,0,0);
+        gBC.weightx = 0;
+        gBC.weighty = 0.1;
+        gBC.ipadx = 0;
+        gBC.ipady = 0;
+        gBC.insets = new Insets(2,2,2,2);
         gBC.anchor = gBC.CENTER;
-        gBC.fill = gBC.BOTH;
-        add(usernameLabel, gBC);
+        gBC.fill = gBC.HORIZONTAL;
+        gridBag.setConstraints(usernameLabel, gBC);
+        this.add(usernameLabel);
         
         //Rows 2-4
         schedule.getAccessibleContext().setAccessibleName("Course Schedule");
@@ -75,10 +83,14 @@ public class StudentPanel_Welcome extends JPanel {
         gBC.gridx = 0;
         gBC.gridy = 1;
         gBC.ipadx = 20;
-        gBC.insets = new Insets(0,0,0,0);
+        gBC.ipady = 0;
+        gBC.weightx = 1;
+        gBC.weighty = 0;
+        gBC.insets = new Insets(2,2,2,2);
         gBC.anchor = gBC.CENTER;
-        gBC.fill = gBC.BOTH;
-        add(schedule, gBC);
+        gBC.fill = gBC.HORIZONTAL;
+        gridBag.setConstraints(schedule, gBC);
+        this.add(schedule);
         
         //Row 5
         addCourseButton.setText("Add Course");
@@ -92,13 +104,16 @@ public class StudentPanel_Welcome extends JPanel {
         gBC.gridheight = 1;
         gBC.gridwidth = 2;
         gBC.gridx = 0;
-        gBC.gridy = 6;
+        gBC.gridy = 5;
         gBC.ipadx = 10;
         gBC.ipady = 3;
-        gBC.insets = new Insets(0,0,0,0);
+        gBC.weightx = 0.5;
+        gBC.weighty = 0.5;
+        gBC.insets = new Insets(2,2,2,2);
         gBC.anchor = gBC.CENTER;
-        gBC.fill = gBC.BOTH;
-        add(addCourseButton, gBC);
+        gBC.fill = gBC.HORIZONTAL;
+        gridBag.setConstraints(addCourseButton, gBC);
+        this.add(addCourseButton);
         
         deleteCourseButton.setText("Delete Course");
         deleteCourseButton.addActionListener(new ActionListener() {
@@ -111,13 +126,16 @@ public class StudentPanel_Welcome extends JPanel {
         gBC.gridheight = 1;
         gBC.gridwidth = 2;
         gBC.gridx = 2;
-        gBC.gridy = 6;
+        gBC.gridy = 5;
         gBC.ipadx = 10;
         gBC.ipady = 3;
-        gBC.insets = new Insets(0,0,0,0);
+        gBC.weightx = 0.5;
+        gBC.weighty = 0.5;
+        gBC.insets = new Insets(2,2,2,2);
         gBC.anchor = gBC.CENTER;
-        gBC.fill = gBC.BOTH;
-        add(deleteCourseButton, gBC);
+        gBC.fill = gBC.HORIZONTAL;
+        gridBag.setConstraints(deleteCourseButton, gBC);
+        this.add(deleteCourseButton);
         
         //Row 6 @TODO
         
