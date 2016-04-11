@@ -5,7 +5,9 @@
  */
 package GUIPackage;
 
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
+import javax.swing.*;
 
 /**
  *
@@ -18,26 +20,25 @@ public class AdminPanel extends JPanelwithBackground {
      * @throws IOException
      */
     public AdminPanel() throws IOException{
-        initComponents();
     }
 
+    public void initMe() {
+        initComponents();
+    }
     
     @SuppressWarnings("unchecked")                        
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
+        
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
-    }                       
-
-
-    // Variables declaration - do not modify                     
-    // End of variables declaration                   
+    }
 }

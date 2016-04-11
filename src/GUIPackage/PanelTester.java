@@ -5,6 +5,8 @@
  */
 package GUIPackage;
 
+import java.awt.*;
+import java.io.*;
 import javax.swing.*;
 
 /**
@@ -32,7 +34,7 @@ public class PanelTester extends JFrame {
     private void initComponents() {
 
         testPane = new StudentPanel_Welcome();
-        
+        testPane.setLayout(new GridBagLayout());
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -40,11 +42,11 @@ public class PanelTester extends JFrame {
         getContentPane().setLayout(layout);
         
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(testPane)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(testPane)
         );
         
@@ -53,25 +55,26 @@ public class PanelTester extends JFrame {
         testPane.initMe();
         add(testPane);
         revalidate();
-        pack();
+        setSize(750, 600);
     }     
     
     public static void main(String args[]) {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelTester().setVisible(true);
+                PanelTester pane = new PanelTester();
+                pane.setVisible(true);
             }
         });
     }

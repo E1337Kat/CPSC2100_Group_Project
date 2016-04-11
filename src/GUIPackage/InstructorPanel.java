@@ -5,7 +5,9 @@
  */
 package GUIPackage;
 
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
+import javax.swing.*;
 
 /**
  *
@@ -18,9 +20,11 @@ public class InstructorPanel extends JPanelwithBackground {
      * @throws IOException
      */
     public InstructorPanel() throws IOException{
-        initComponents();
     }
 
+    public void initMe() {
+        initComponents();
+    }
     
     @SuppressWarnings("unchecked")                         
     private void initComponents() {

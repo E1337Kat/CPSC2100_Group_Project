@@ -7,8 +7,8 @@ package GUIPackage;
 
 import Backend.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import javax.swing.*;
 
 
@@ -18,13 +18,28 @@ import javax.swing.*;
  */
 public class MainWindow extends JFrame {
 
-    public AdminRegistry adminReg = null;
-    public InstructorRegistry instructorReg = null;
-    public StudentRegistry stuReg = null;
-    public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
-    public String username;
+    
+    // Variables declaration 
+    private JTabbedPane CardTabbedPane;
+    private AdminPanel adminPane;
+    private InstructorPanel instructorPane;
+    private StudentPanel studentPane;
+    
+    private AdminRegistry adminReg = null;
+    private InstructorRegistry instructorReg = null;
+    private StudentRegistry stuReg = null;
+    
+    private int AdminTabTrue = 0;
+    private int InstTabTrue = 0;
+    private int StuTabTrue = 0;
+    
+    private final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    private final String username;
+    // End of variables declaration 
+    
     /**
      * Creates new form MainWindow
+     * @param u String for username of user... received for login
      */
     public MainWindow(String u) {
         username = u;
@@ -37,35 +52,51 @@ public class MainWindow extends JFrame {
         initComponents();
     }
 
-    
-    @SuppressWarnings("unchecked")                      
+    /**
+    *  Makes everything the way is should be
+    */                    
     private void initComponents() {
 
-        jTabbedPane5 = new javax.swing.JTabbedPane();
+        CardTabbedPane = new JTabbedPane();
         
         checkPermissions();
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(CardTabbedPane)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(CardTabbedPane)
         );
         
         getAccessibleContext().setAccessibleName("Main Window");
 
+        if (AdminTabTrue != 0) {
+            adminPane.initMe();
+        }
+        if (InstTabTrue != 0) {
+            instructorPane.initMe();
+        }
+        if (StuTabTrue != 0) {
+            studentPane.initMe();
+        }
+        revalidate();
         setSize(750,600);
     }  
     
+    /**
+    *  Fetches the username for Database query
+    *  @return the username of logged in student
+    */
     public String getUsername() {
         return username;
     }
     
+    /**
+    *  Checks logged in users permissions and creates tabs appropriately
+    */
     private void checkPermissions(){
 
         //Checks if student
@@ -76,8 +107,8 @@ public class MainWindow extends JFrame {
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Student", studentPane);
+            CardTabbedPane.updateUI();
+            CardTabbedPane.addTab("Student", studentPane);
             studentPane.setVisible(true);
             studentPane.getAccessibleContext().setAccessibleName("Student Panel");
         }
@@ -86,13 +117,13 @@ public class MainWindow extends JFrame {
         if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
 
             try {
-                instructorPane = new InstructorPanel();;
+                instructorPane = new InstructorPanel();
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
             
-            jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Teacher", instructorPane);
+            CardTabbedPane.updateUI();
+            CardTabbedPane.addTab("Teacher", instructorPane);
             instructorPane.setVisible(true);
             instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
             //javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(instructorPane);
@@ -107,20 +138,11 @@ public class MainWindow extends JFrame {
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Administrator", adminPane);
+            CardTabbedPane.updateUI();
+            CardTabbedPane.addTab("Administrator", adminPane);
             adminPane.setVisible(true);
             adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }
         
-    }
-    
-    
-
-    // Variables declaration 
-    private javax.swing.JPanel adminPane;
-    private javax.swing.JPanel instructorPane;
-    private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JPanel studentPane;
-    // End of variables declaration                   
+    }            
 }

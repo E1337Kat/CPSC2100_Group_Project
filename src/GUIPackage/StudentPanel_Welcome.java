@@ -28,7 +28,6 @@ public class StudentPanel_Welcome extends JPanel {
      * Creates new form StudentPanel_Welcome
      */
     public StudentPanel_Welcome() {
-        
     }
     
     public void initMe() {

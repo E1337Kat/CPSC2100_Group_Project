@@ -5,9 +5,9 @@
  */
 package GUIPackage;
 
-import java.awt.CardLayout;
-import java.io.IOException;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.io.*;
+import javax.swing.*;
 
 /**
  *
@@ -15,9 +15,11 @@ import javax.swing.JPanel;
  */
 public class StudentPanel extends JPanelwithBackground {    
     
-// Variables declaration - do not modify                     
-    private javax.swing.JPanel modifySchedule;
-    private javax.swing.JPanel studentWelcome;
+// Variables declaration - do not modify 
+    private final String MODPANE = "";
+    private final String ADDPANE = "";
+    private StudentPanel_AddDrop modifySchedule;
+    private StudentPanel_Welcome studentWelcome;
     private int context;
     // End of variables declaration 
     
@@ -25,11 +27,44 @@ public class StudentPanel extends JPanelwithBackground {
      * Creates new form Student
      * @throws IOException
      */
-    public StudentPanel() throws IOException{
-        initComponents();
-        
+    public StudentPanel() throws IOException {
+        setLayout(null);
     }
 
+    /*StudentPanel(CardLayout cardLayout) throws IOException {
+        setLayout(new CardLayout());
+    }*/
+
+    public void initMe() {
+        initComponents();
+    }
+    
+    public void switchPane() {
+        Container child = getChildClass();
+        if (child.getClass().equals(StudentPanel_Welcome.class)) {
+            context = 0;
+        } else if (child.getClass().equals(StudentPanel_AddDrop.class)) {
+            context = 1;
+        } 
+        
+        switch(context) {
+            case 0:
+                studentWelcome.setVisible(true);
+                break;
+            case 1:
+                modifySchedule.setVisible(true);
+                break;
+            default:
+                System.err.println("No window to show");
+                break;
+        }
+    
+        
+    }
+    
+    private Container getChildClass() {
+        return new StudentPanel_Welcome();
+    }
     
     @SuppressWarnings("unchecked")                        
     private void initComponents() {
@@ -40,26 +75,22 @@ public class StudentPanel extends JPanelwithBackground {
         
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLayout(null);
 
         
         //JPanel cards = new JPanel(new CardLayout());
         
-        studentWelcome.setLayout(new java.awt.GridLayout(1, 0));
-        add(studentWelcome);
-        //cards.add(studentWelcome, "welcome");
-        studentWelcome.setBounds(0, 0, 0, 0);
+        studentWelcome.setLayout(new java.awt.GridBagLayout());
+        this.add(studentWelcome);
         studentWelcome.setVisible(true);
 
         
-        modifySchedule.setLayout(new java.awt.GridLayout(1, 0));
-        add(modifySchedule);
-        //cards.add(modifySchedule, "modify");
-        modifySchedule.setBounds(0, 0, 0, 0);
+        modifySchedule.setLayout(new java.awt.GridBagLayout());
+        this.add(modifySchedule);
         modifySchedule.setVisible(false);
         
-        //CardLayout cl = (CardLayout)(cards.getLayout());
-        //cl.show(cards, "welcome");
+        studentWelcome.initMe();
+        modifySchedule.initMe();
+        revalidate();
     }
 
                    

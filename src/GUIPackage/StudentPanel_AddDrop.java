@@ -15,9 +15,13 @@ public class StudentPanel_AddDrop extends javax.swing.JPanel {
      * Creates new form StudentPanel_AddDrop
      */
     public StudentPanel_AddDrop() {
-        initComponents();
+        
     }
 
+    public void initMe() {
+        initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
