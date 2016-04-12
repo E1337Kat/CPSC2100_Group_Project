@@ -20,7 +20,7 @@ public class InstructorRegistry implements Registry {
     
     public boolean isInstructor(String username) {
         
-        return false;
+        return true;
     }
     
 }

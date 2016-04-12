@@ -20,6 +20,6 @@ public class AdminRegistry implements Registry {
     
     public boolean isAdmin(String username) {
         
-        return true;
+        return false;
     }
 }
