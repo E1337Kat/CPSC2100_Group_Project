@@ -22,7 +22,6 @@ public class MainClass {
     * Start of Main thread
     */
     public static void main(String args[]) {
-        
         Singleton.getInstance();
         
         /* Set Look and Feel of program to system look and feel if possible*/
@@ -30,6 +29,7 @@ public class MainClass {
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 LoginFrame loginFrame = new LoginFrame();
                 loginFrame.setIconImage(img.getImage());

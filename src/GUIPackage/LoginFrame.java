@@ -181,14 +181,15 @@ public class LoginFrame extends JFrame
         
         if (isValidUser()) {
             setVisible(false);
-            MainWindow mainFrame = new MainWindow(getUsername());
-            mainFrame.setDefaultCloseOperation(MainWindow.EXIT_ON_CLOSE);
+            System.out.println("Log: Login username = " + getUsername());
+            MainWindow mainORSWindow = new MainWindow(getUsername());
+            mainORSWindow.setDefaultCloseOperation(MainWindow.EXIT_ON_CLOSE);
             //mainFrame.setSize(600, 400);
-            mainFrame.setVisible(true);
+            mainORSWindow.setVisible(true);
             dispose();
-            System.out.println("Code creates window");
+            System.out.println("Log: Code creates window");
         } else {
-            System.out.println("invalid user");
+            System.out.println("Log: Invalid user");
         }
     }           
     

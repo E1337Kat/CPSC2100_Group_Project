@@ -16,29 +16,37 @@ import javax.swing.*;
 public class StudentPanel extends JPanelwithBackground {    
     
 // Variables declaration - do not modify 
-    private final String MODPANE = "";
-    private final String ADDPANE = "";
-    private StudentPanel_AddDrop modifySchedule;
+    private static StudentPanel stuPane = null;
+    //private StudentPanel_AddDrop modifySchedule;
     private StudentPanel_Welcome studentWelcome;
     private int context;
     // End of variables declaration 
+
+    /**
+     * Singleton method of getting the student panel
+     * @return a single student panel
+     */
+    public static StudentPanel getStudentPanelInstance() {
+        if (stuPane == null) {
+            try {
+                stuPane = new StudentPanel();
+            } catch (IOException ex) {
+                System.err.println("Log: ERROR Exception at " + ex);
+            }
+        }
+        return stuPane;
+    }
     
     /**
-     * Creates new form Student
-     * @throws IOException
+     * public method to init the GUI
      */
-    public StudentPanel() throws IOException {
-        setLayout(null);
-    }
-
-    /*StudentPanel(CardLayout cardLayout) throws IOException {
-        setLayout(new CardLayout());
-    }*/
-
     public void initMe() {
         initComponents();
     }
     
+    /**
+     * Switches between welcome and modify views
+     */
     public void switchPane() {
         Container child = getChildClass();
         if (child.getClass().equals(StudentPanel_Welcome.class)) {
@@ -49,10 +57,12 @@ public class StudentPanel extends JPanelwithBackground {
         
         switch(context) {
             case 0:
-                studentWelcome.setVisible(true);
+                //modifySchedule.setVisible(true);
+                System.out.println("log: Student Add/Drop displayed");
                 break;
             case 1:
-                modifySchedule.setVisible(true);
+                studentWelcome.setVisible(true);
+                System.out.println("log: Student Welcome displayed");
                 break;
             default:
                 System.err.println("No window to show");
@@ -62,36 +72,48 @@ public class StudentPanel extends JPanelwithBackground {
         
     }
     
+    /**
+     * Creates new form Student
+     * @throws IOException
+     */
+    private StudentPanel() throws IOException {
+        setLayout(null);
+    }
+    
+    /**
+     * Gets the child class of this panel
+     * @return child container
+     */
     private Container getChildClass() {
         return new StudentPanel_Welcome();
     }
     
-    @SuppressWarnings("unchecked")                        
+    /**
+     * Sets the look and displays the gui
+     */                      
     private void initComponents() {
 
         studentWelcome = new StudentPanel_Welcome();
-        modifySchedule = new StudentPanel_AddDrop();
+        //modifySchedule = new StudentPanel_AddDrop();
 
         
-        setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        //setBackground(new java.awt.Color(255, 255, 255));
+        //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        
-        //JPanel cards = new JPanel(new CardLayout());
         
         studentWelcome.setLayout(new java.awt.GridBagLayout());
         this.add(studentWelcome);
-        studentWelcome.setVisible(true);
-
-        
-        modifySchedule.setLayout(new java.awt.GridBagLayout());
-        this.add(modifySchedule);
-        modifySchedule.setVisible(false);
-        
         studentWelcome.initMe();
-        modifySchedule.initMe();
-        revalidate();
-    }
+        studentWelcome.setVisible(true);
+        System.out.println("log: Student Welcome displayed");
 
-                   
+        //modifySchedule.setLayout(new java.awt.GridBagLayout());
+        //this.add(modifySchedule);
+        //modifySchedule.initMe();
+        //modifySchedule.setVisible(false);
+        //System.out.println("log: Student Add/Drop not displayed");
+        
+        revalidate();
+        repaint();
+    }           
 }

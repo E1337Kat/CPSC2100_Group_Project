@@ -6,7 +6,6 @@
 package GUIPackage;
 
 import java.awt.*;
-import java.io.*;
 import javax.swing.*;
 
 /**
@@ -18,7 +17,7 @@ public class PanelTester extends JFrame {
     
     // Variables declaration - do not modify  
     private StudentPanel_Welcome testPane;
-    private String username = "fucker";
+    private final String username = "fucker";
     // End of variables declaration   
     
     public PanelTester () {
@@ -38,6 +37,7 @@ public class PanelTester extends JFrame {
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
+        /*
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
@@ -49,6 +49,9 @@ public class PanelTester extends JFrame {
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(testPane)
         );
+        */
+        getContentPane().add(testPane, BorderLayout.CENTER);
+                
         
 
         //initialize testpanes components
@@ -72,6 +75,7 @@ public class PanelTester extends JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 PanelTester pane = new PanelTester();
                 pane.setVisible(true);
