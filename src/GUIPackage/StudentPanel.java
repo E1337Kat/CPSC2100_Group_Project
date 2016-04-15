@@ -17,7 +17,7 @@ public class StudentPanel extends JPanelwithBackground {
     
 // Variables declaration - do not modify 
     private static StudentPanel stuPane = null;
-    //private StudentPanel_AddDrop modifySchedule;
+    private StudentPanel_AddDrop modifySchedule;
     private StudentPanel_Welcome studentWelcome;
     private int context;
     // End of variables declaration 
@@ -77,7 +77,7 @@ public class StudentPanel extends JPanelwithBackground {
      * @throws IOException
      */
     private StudentPanel() throws IOException {
-        setLayout(null);
+        setLayout(new GridBagLayout());
     }
     
     /**
@@ -94,24 +94,24 @@ public class StudentPanel extends JPanelwithBackground {
     private void initComponents() {
 
         studentWelcome = new StudentPanel_Welcome();
-        //modifySchedule = new StudentPanel_AddDrop();
+        modifySchedule = new StudentPanel_AddDrop();
 
         
         //setBackground(new java.awt.Color(255, 255, 255));
         //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         
-        studentWelcome.setLayout(new java.awt.GridBagLayout());
+        studentWelcome.setLayout(null);
         this.add(studentWelcome);
         studentWelcome.initMe();
         studentWelcome.setVisible(true);
         System.out.println("log: Student Welcome displayed");
 
-        //modifySchedule.setLayout(new java.awt.GridBagLayout());
-        //this.add(modifySchedule);
-        //modifySchedule.initMe();
-        //modifySchedule.setVisible(false);
-        //System.out.println("log: Student Add/Drop not displayed");
+        modifySchedule.setLayout(new java.awt.GridBagLayout());
+        this.add(modifySchedule);
+        modifySchedule.initMe();
+        modifySchedule.setVisible(false);
+        System.out.println("log: Student Add/Drop not displayed");
         
         revalidate();
         repaint();

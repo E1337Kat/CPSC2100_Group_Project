@@ -96,6 +96,8 @@ public class CourseList extends javax.swing.JPanel {
                 )
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        
+        setOpaque(false);
     }
 
     // Variables declaration - do not modify                     

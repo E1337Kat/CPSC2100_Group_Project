@@ -7,6 +7,7 @@ package GUIPackage;
 
 import Backend.*;
 
+import java.awt.*;
 import java.io.*;
 import javax.swing.*;
 
@@ -56,46 +57,73 @@ public class MainWindow extends JFrame {
     */                    
     private void initComponents() {
 
+        //GroupLayout layout = new GroupLayout(getContentPane());
+        //getContentPane().setLayout(layout);
+        //getContentPane().add(cardTabbedPane);
+        GridBagConstraints gbc;
+        
         cardTabbedPane = new JTabbedPane();
-        System.out.println("Log: Tabbed pane added.");
+        System.out.println("Log: Tabbed pane initilized.");
+        
+        //setLayout(new FlowLayout());
+        
         
         //cardTabbedPane.setLayout(null);
         checkPermissions();
-
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         
+        /*
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(cardTabbedPane)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(cardTabbedPane)
         );
+        */
         
-        this.add(cardTabbedPane);
+        /*
+        gbc = new GridBagConstraints();
+        gbc.gridheight = 1;
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.ipadx = 0;
+        gbc.ipady = 0;
+        gbc.insets = new Insets(0,0,0,0);
+        gbc.anchor = gbc.NORTHWEST;
+        gbc.fill = gbc.BOTH;
+        */
+        
+        
+        
+        
+        getContentPane().add(cardTabbedPane, BorderLayout.CENTER);
+        
         getAccessibleContext().setAccessibleName("Main Window");
 
         if (AdminTabTrue) {
             System.out.println("Log: Admin tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Administrator", adminPane);
             adminPane.initMe();
-            adminPane.setVisible(AdminTabTrue);
+            //adminPane.setVisible(AdminTabTrue);
         }
         if (InstTabTrue) {
             System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Teacher", instructorPane);
             instructorPane.initMe();
-            instructorPane.setVisible(InstTabTrue);
+            //instructorPane.setVisible(InstTabTrue);
         }
         if (StuTabTrue) {
             System.out.println("Log: Student tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Student", studentPane);
             studentPane.initMe();
             System.out.println("Log: Student tab initialized");
-            studentPane.setVisible(StuTabTrue);
+            //studentPane.setVisible(StuTabTrue);
         }
+        
+        this.add(cardTabbedPane);
+        
         revalidate();
-        repaint();
+        //repaint();
         setSize(750,600);
     }  
     
@@ -117,9 +145,9 @@ public class MainWindow extends JFrame {
 
             this.StuTabTrue = true;
             studentPane = StudentPanel.getStudentPanelInstance();
-            cardTabbedPane.updateUI();
+            //cardTabbedPane.updateUI();
             //cardTabbedPane.addTab("Student", studentPane);
-            System.out.println("Log: Student tab added");
+            System.out.println("Log: Student tab initialized");
             System.out.println("Log: I hate this program");
             studentPane.getAccessibleContext().setAccessibleName("Student Panel");
         }
@@ -134,7 +162,7 @@ public class MainWindow extends JFrame {
                 System.out.println("Exception thrown  :" + e1);
             }
             
-            cardTabbedPane.updateUI();
+            //cardTabbedPane.updateUI();
             //cardTabbedPane.addTab("Teacher", instructorPane);
             System.out.println("Log: Instructor tab added");
             instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
@@ -151,7 +179,7 @@ public class MainWindow extends JFrame {
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            cardTabbedPane.updateUI();
+            //cardTabbedPane.updateUI();
             //cardTabbedPane.addTab("Administrator", adminPane);
             System.out.println("Log: Admin tab added");
             adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
