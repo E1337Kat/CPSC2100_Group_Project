@@ -57,47 +57,14 @@ public class MainWindow extends JFrame {
     */                    
     private void initComponents() {
 
-        //GroupLayout layout = new GroupLayout(getContentPane());
-        //getContentPane().setLayout(layout);
-        //getContentPane().add(cardTabbedPane);
-        GridBagConstraints gbc;
+       GridBagConstraints gbc;
         
         cardTabbedPane = new JTabbedPane();
         System.out.println("Log: Tabbed pane initilized.");
         
-        //setLayout(new FlowLayout());
-        
-        
-        //cardTabbedPane.setLayout(null);
         checkPermissions();
         
-        /*
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(cardTabbedPane)
-        );
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(cardTabbedPane)
-        );
-        */
-        
-        /*
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 1;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.ipadx = 0;
-        gbc.ipady = 0;
-        gbc.insets = new Insets(0,0,0,0);
-        gbc.anchor = gbc.NORTHWEST;
-        gbc.fill = gbc.BOTH;
-        */
-        
-        
-        
-        
         getContentPane().add(cardTabbedPane, BorderLayout.CENTER);
-        
         getAccessibleContext().setAccessibleName("Main Window");
 
         if (AdminTabTrue) {
@@ -123,7 +90,6 @@ public class MainWindow extends JFrame {
         this.add(cardTabbedPane);
         
         revalidate();
-        //repaint();
         setSize(750,600);
     }  
     
@@ -136,6 +102,34 @@ public class MainWindow extends JFrame {
     }
     
     /**
+     * Establishes the font the system should use
+     * @return Font object built from provided parameters
+     */
+    public static Font getArialicFont() {
+        Font font;
+        try {
+            //create the font to use. Specify the size!
+            font = Font.createFont(Font.TRUETYPE_FONT,
+                new File( "."  +
+                    File.separator +
+                    "res" +
+                    File.separator +
+                    "Arialic_Hollow.ttf")).deriveFont(12f);
+            GraphicsEnvironment ge =
+            GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
+                new File("."  +
+                    File.separator +
+                    "res" +
+                    File.separator +
+                    "Arialic_Hollow.ttf")));
+        } catch (IOException|FontFormatException e) {
+            throw new RuntimeException(e);
+        }
+        return font;
+    }
+    
+    /**
     *  Checks logged in users permissions and creates tabs appropriately
     */
     private void checkPermissions(){
@@ -145,8 +139,6 @@ public class MainWindow extends JFrame {
 
             this.StuTabTrue = true;
             studentPane = StudentPanel.getStudentPanelInstance();
-            //cardTabbedPane.updateUI();
-            //cardTabbedPane.addTab("Student", studentPane);
             System.out.println("Log: Student tab initialized");
             System.out.println("Log: I hate this program");
             studentPane.getAccessibleContext().setAccessibleName("Student Panel");
@@ -161,12 +153,8 @@ public class MainWindow extends JFrame {
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            
-            //cardTabbedPane.updateUI();
-            //cardTabbedPane.addTab("Teacher", instructorPane);
             System.out.println("Log: Instructor tab added");
             instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
-            //javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(instructorPane);
         
         }
         
@@ -179,8 +167,6 @@ public class MainWindow extends JFrame {
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            //cardTabbedPane.updateUI();
-            //cardTabbedPane.addTab("Administrator", adminPane);
             System.out.println("Log: Admin tab added");
             adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }

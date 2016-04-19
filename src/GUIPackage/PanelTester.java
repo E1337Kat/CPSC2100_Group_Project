@@ -16,8 +16,8 @@ public class PanelTester extends JFrame {
     
     
     // Variables declaration - do not modify  
-    private StudentPanel_Welcome testPane;
-    private final String username = "fucker";
+    private StudentPanel_AddDrop testPane;
+    private final String username = "Panel T. Ester";
     // End of variables declaration   
     
     public PanelTester () {
@@ -32,26 +32,13 @@ public class PanelTester extends JFrame {
         
     private void initComponents() {
 
-        testPane = new StudentPanel_Welcome();
+        testPane = new StudentPanel_AddDrop();
         testPane.setLayout(new GridBagLayout());
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        /*
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(testPane)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(testPane)
-        );
-        */
         getContentPane().add(testPane, BorderLayout.CENTER);
-                
         
 
         //initialize testpanes components

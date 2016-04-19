@@ -47,8 +47,8 @@ public class StudentPanel extends JPanelwithBackground {
     /**
      * Switches between welcome and modify views
      */
-    public void switchPane() {
-        Container child = getChildClass();
+    public void switchPane(Container child) {
+        
         if (child.getClass().equals(StudentPanel_Welcome.class)) {
             context = 0;
         } else if (child.getClass().equals(StudentPanel_AddDrop.class)) {
@@ -57,17 +57,23 @@ public class StudentPanel extends JPanelwithBackground {
         
         switch(context) {
             case 0:
-                //modifySchedule.setVisible(true);
+                studentWelcome.setVisible(false);
+                modifySchedule.setVisible(true);
+                
                 System.out.println("log: Student Add/Drop displayed");
                 break;
             case 1:
+                modifySchedule.setVisible(false);
                 studentWelcome.setVisible(true);
+                
                 System.out.println("log: Student Welcome displayed");
                 break;
             default:
                 System.err.println("No window to show");
                 break;
         }
+        
+        revalidate();
     
         
     }

@@ -7,6 +7,8 @@ package GUIPackage;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -16,12 +18,14 @@ import javax.swing.border.*;
  */
 public class StudentPanel_Welcome extends JPanel {
 
-    // Variables declaration - do not modify  
+    // Variables declaration 
     private JLabel usernameLabel;
     private JPanel schedule;
     private JButton addCourseButton;
     private JButton deleteCourseButton;
     private JButton printScheduleButton;
+    private JButton feesButton;
+    private SwingLink helpLink;
     private JButton logoutButton;
     // End of variables declaration
     
@@ -31,126 +35,141 @@ public class StudentPanel_Welcome extends JPanel {
     public StudentPanel_Welcome() {
     }
     
+    /**
+     * Public method to initialize components
+     * calls initComponents
+     */
     public void initMe() {
         initComponents();
     }
 
+    /**
+     * Retrieves the username stored in the MainWindow object
+     * @return The username provided in login
+     */
+    private String getUsername() {
+        String u;
+        PanelTester testWindow = null;
+        MainWindow topWindow = null;
+        
+        if (SwingUtilities.getWindowAncestor(this).getClass().equals(MainWindow.class)) {
+            
+            topWindow = (MainWindow)((JFrame)SwingUtilities.getWindowAncestor(this));
+            System.out.println("Log: Parent window = " + topWindow.getName());
+            System.out.println("Log: Student username = " + topWindow.getUsername());
+            u = topWindow.getUsername();
+        } else if (SwingUtilities.getWindowAncestor(this).getClass().equals(PanelTester.class)) {
+            
+            testWindow = (PanelTester)((JFrame)SwingUtilities.getWindowAncestor(this));
+            System.out.println("Log: Parent window = " + testWindow.getName());
+            System.out.println("Log: Student username = " + testWindow.getUsername());
+            u = testWindow.getUsername();
+        } else {
+            u = "";
+        }
+        
+        return u;
+    }
     
-    
+    /**
+     * Initializes and adds components to the panel.
+     */
     private void initComponents() {
-        
-        
         
         usernameLabel = new JLabel();
         schedule = new CourseList();
         addCourseButton = new JButton();
         deleteCourseButton = new JButton();
         printScheduleButton = new JButton();
+        feesButton = new JButton();
+        helpLink = new SwingLink("help", "http://java.sun.com");
         logoutButton = new JButton();
-        String u;
+        Font welcomeFont;
+        String welcomeText;
         GridBagLayout gridBag = new GridBagLayout();
         GridBagConstraints gbc;
         
         //Set Layout
         this.setLayout(gridBag);
         
-        //PanelTester topWindow = null;
-        //topWindow = (PanelTester)((JFrame)SwingUtilities.getWindowAncestor(this));
-        MainWindow topWindow = null;
-        topWindow = (MainWindow)((JFrame)SwingUtilities.getWindowAncestor(this));
+        welcomeText = getWelcomeText();
         
-        System.out.println("Log: Parent window = " + topWindow.getName());
-        System.out.println("Log: Student username = " + topWindow.getUsername());
-        u = topWindow.getUsername();
         
         //Row One
-        usernameLabel.setText("Welcome " + u);
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 7;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        //gbc.weightx = 0.1;
-        //gbc.weighty = 0.1;
-        //gbc.ipadx = 0;
-        //gbc.ipady = 0;
-        gbc.insets = new Insets(20,10,10,10); //top, left, bottom, right
-        gbc.anchor = gbc.CENTER;
-        gbc.fill = gbc.BOTH;
-        //gridBag.setConstraints(usernameLabel, gbc);
+        usernameLabel.setText(welcomeText);
+        welcomeFont = usernameLabel.getFont();
+            Map attributes = welcomeFont.getAttributes();
+            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+            attributes.put(TextAttribute.SIZE, 14);
+            attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
+        usernameLabel.setFont(welcomeFont.deriveFont(attributes));
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 6;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(20,10,10,10); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
         this.add(usernameLabel, gbc);
         
         //Rows 2-4
         schedule.getAccessibleContext().setAccessibleName("Course Schedule");
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 3;
-        gbc.gridwidth = 7;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        //gbc.ipadx = 20;
-        //gbc.ipady = 0;
-        //gbc.weightx = 1;
-        //gbc.weighty = 0;
-        gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
-        gbc.anchor = gbc.CENTER;
-        gbc.fill = gbc.BOTH;
-        //gridBag.setConstraints(schedule, gbc);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 3;
+            gbc.gridwidth = 6;
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
+            gbc.fill = gbc.BOTH;
         this.add(schedule, gbc);
         
         //Row 5 - empty label
         JLabel hiddenLabel1 = new JLabel();
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 7;
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
-        gbc.fill = gbc.BOTH;
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 6;
+            gbc.gridx = 0;
+            gbc.gridy = 4;
+            gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
+            gbc.fill = gbc.BOTH;
         this.add(hiddenLabel1, gbc);
         
         //Row 6
-        addCourseButton.setText("Add Course");
+        addCourseButton.setText("Register");
         addCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 addCourseActionPerformed(evt);
             }
         });
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 2;
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.ipadx = 10;
-        //gbc.ipady = 3;
-        gbc.weightx = 0.5;
-        //gbc.weighty = 0.5;
-        gbc.insets = new Insets(10,10,10,5); //top, left, bottom, right
-        gbc.anchor = gbc.CENTER;
-        //gbc.fill = gbc.BOTH;
-        //gridBag.setConstraints(addCourseButton, gbc);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 0;
+            gbc.gridy = 5;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,10,10,5); //top, left, bottom, right
+            gbc.anchor = gbc.LINE_END;
         this.add(addCourseButton, gbc);
         
-        deleteCourseButton.setText("Delete Course");
+        deleteCourseButton.setText("Drop Delete Course");
         deleteCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 deleteCourseActionPerformed(evt);
             }
         });
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 2;
-        gbc.gridx = 2;
-        gbc.gridy = 5;
-        gbc.ipadx = 10;
-        //gbc.ipady = 3;
-        gbc.weightx = 0.5;
-        //gbc.weighty = 0.5;
-        gbc.insets = new Insets(10,5,10,5); //top, left, bottom, right
-        gbc.anchor = gbc.CENTER;
-        //gbc.fill = gbc.BOTH;
-        //gridBag.setConstraints(deleteCourseButton, gbc);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 2;
+            gbc.gridy = 5;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,10,5); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
         this.add(deleteCourseButton, gbc);
         
         
@@ -161,44 +180,50 @@ public class StudentPanel_Welcome extends JPanel {
                 printScheduleActionPerformed(evt);
             }
         });
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 2;
-        gbc.gridx = 4;
-        gbc.gridy = 5;
-        gbc.ipadx = 10;
-        //gbc.ipady = 3;
-        gbc.weightx = 0.5;
-        //gbc.weighty = 0.5;
-        gbc.insets = new Insets(10,5,10,0); //top, left, bottom, right
-        gbc.anchor = gbc.CENTER;
-        //gbc.fill = gbc.BOTH;
-        //gridBag.setConstraints(printScheduleButton, gbc);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 4;
+            gbc.gridy = 5;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,10,10); //top, left, bottom, right
+            gbc.anchor = gbc.LINE_START;
         this.add(printScheduleButton, gbc);
         
         
-        JLabel hiddenLabel2 = new JLabel();
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 1;
-        gbc.gridx = 6;
-        gbc.gridy = 5;
-        gbc.weightx = 0.6;
-        gbc.insets = new Insets(10,0,10,0); //top, left, bottom, right
-        gbc.fill = gbc.BOTH;
-        this.add(hiddenLabel2, gbc);
-        
         //Row 7
-        JLabel hiddenLabel3 = new JLabel();
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 5;
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.weightx = 0.4;
-        gbc.insets = new Insets(10,10,20,2); //top, left, bottom, right
-        gbc.fill = gbc.BOTH;
-        this.add(hiddenLabel3, gbc);
+        feesButton.setText("fees");
+        feesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                feesButtonActionPerformed(evt);
+            }
+        });
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,10,20,5); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER; 
+        this.add(feesButton, gbc);
+        
+        
+        //Help Link postioning
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 2;
+            gbc.gridy = 6;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,20,5); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
+        //helpLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.add(helpLink, gbc);
         
         logoutButton.setText("Logout");
         logoutButton.addActionListener(new ActionListener() {
@@ -207,19 +232,15 @@ public class StudentPanel_Welcome extends JPanel {
                 logoutButtonActionPerformed(evt);
             }
         });
-        gbc = new GridBagConstraints();
-        gbc.gridheight = 1;
-        gbc.gridwidth = 1;
-        gbc.gridx = 5;
-        gbc.gridy = 6;
-        gbc.ipadx = 10;
-        //gbc.ipady = 3;
-        gbc.weightx = 0.5;
-        //gbc.weighty = 0.8;
-        gbc.insets = new Insets(10,2,20,10); //top, left, bottom, right
-        gbc.anchor = gbc.LINE_START; 
-        //gbc.fill = gbc.BOTH;
-        //gridBag.setConstraints(logoutButton, gbc);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 4;
+            gbc.gridy = 6;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,20,10); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER; 
         this.add(logoutButton, gbc);
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
@@ -228,20 +249,59 @@ public class StudentPanel_Welcome extends JPanel {
         setOpaque(false);
     }      
     
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
     private void addCourseActionPerformed(ActionEvent evt) {
+        PanelTester testPanel = null;
+        StudentPanel parentPanel = null;
+        
+        if (SwingUtilities.getAncestorNamed("StudentPanel", this) != null) {
+            
+        }
+        
         
     }
 
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
     private void deleteCourseActionPerformed(ActionEvent evt) {
-        
+        //TODO: confirmation dialog, if yes, delete, else do nothing
     }
 
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
     private void printScheduleActionPerformed(ActionEvent evt) {
         
     }
     
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
+    private void feesButtonActionPerformed(ActionEvent evt) {
+        
+    }
+    
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
     private void logoutButtonActionPerformed(ActionEvent evt) {
         
+    }
+
+    /**
+     * creates the welcome/title text
+     * @return title text with username
+     */
+    private String getWelcomeText() {
+        return "Welcome " + getUsername();
     }
                      
 }

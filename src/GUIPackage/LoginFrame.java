@@ -75,15 +75,12 @@ public class LoginFrame extends JFrame
         setLayout(new GridBagLayout());
         
         
-        //Get and set font on border
         Font arialicFont = getArialicFont();
-        //setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, arialicFont.deriveFont(20)));
         setFont(arialicFont);
         
 
 
         loginLabel.setText("Username:");
-        //loginLabel.setFont(arialicFont);
         gBC = new GridBagConstraints();
         gBC.gridx = 0;
         gBC.gridy = 0;
@@ -105,7 +102,6 @@ public class LoginFrame extends JFrame
         add(usernameTextField, gBC);
 
         passwordLabel.setText("Password:");
-        //passwordLabel.setFont(arialicFont);
         passwordLabel.setToolTipText("");
         gBC = new GridBagConstraints();
         gBC.gridx = 0;
