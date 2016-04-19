@@ -5,9 +5,9 @@
  */
 package GUIPackage;
 
-import java.awt.CardLayout;
-import java.io.IOException;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.io.*;
+import javax.swing.*;
 
 /**
  *
@@ -15,48 +15,111 @@ import javax.swing.JPanel;
  */
 public class StudentPanel extends JPanelwithBackground {    
     
-// Variables declaration - do not modify                     
-    private javax.swing.JPanel modifySchedule;
-    private javax.swing.JPanel studentWelcome;
+// Variables declaration - do not modify 
+    private static StudentPanel stuPane = null;
+    private StudentPanel_AddDrop modifySchedule;
+    private StudentPanel_Welcome studentWelcome;
     private int context;
     // End of variables declaration 
+
+    /**
+     * Singleton method of getting the student panel
+     * @return a single student panel
+     */
+    public static StudentPanel getStudentPanelInstance() {
+        if (stuPane == null) {
+            try {
+                stuPane = new StudentPanel();
+            } catch (IOException ex) {
+                System.err.println("Log: ERROR Exception at " + ex);
+            }
+        }
+        return stuPane;
+    }
+    
+    /**
+     * public method to init the GUI
+     */
+    public void initMe() {
+        initComponents();
+    }
+    
+    /**
+     * Switches between welcome and modify views
+     */
+    public void switchPane(Container child) {
+        
+        if (child.getClass().equals(StudentPanel_Welcome.class)) {
+            context = 0;
+        } else if (child.getClass().equals(StudentPanel_AddDrop.class)) {
+            context = 1;
+        } 
+        
+        switch(context) {
+            case 0:
+                studentWelcome.setVisible(false);
+                modifySchedule.setVisible(true);
+                
+                System.out.println("log: Student Add/Drop displayed");
+                break;
+            case 1:
+                modifySchedule.setVisible(false);
+                studentWelcome.setVisible(true);
+                
+                System.out.println("log: Student Welcome displayed");
+                break;
+            default:
+                System.err.println("No window to show");
+                break;
+        }
+        
+        revalidate();
+    
+        
+    }
     
     /**
      * Creates new form Student
      * @throws IOException
      */
-    public StudentPanel() throws IOException{
-        initComponents();
-        
+    private StudentPanel() throws IOException {
+        setLayout(new GridBagLayout());
     }
-
     
-    @SuppressWarnings("unchecked")                        
+    /**
+     * Gets the child class of this panel
+     * @return child container
+     */
+    private Container getChildClass() {
+        return new StudentPanel_Welcome();
+    }
+    
+    /**
+     * Sets the look and displays the gui
+     */                      
     private void initComponents() {
 
-        studentWelcome = new javax.swing.JPanel();
-        modifySchedule = new javax.swing.JPanel();
+        studentWelcome = new StudentPanel_Welcome();
+        modifySchedule = new StudentPanel_AddDrop();
 
         
-        setBackground(new java.awt.Color(255, 255, 255));
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setLayout(null);
+        //setBackground(new java.awt.Color(255, 255, 255));
+        //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         
-        JPanel cards = new JPanel(new CardLayout());
-        studentWelcome.setOpaque(false);
-        studentWelcome.setLayout(new java.awt.GridLayout(1, 0));
-        cards.add(studentWelcome, "welcome");
-        studentWelcome.setBounds(0, 0, 0, 0);
+        studentWelcome.setLayout(null);
+        this.add(studentWelcome);
+        studentWelcome.initMe();
+        studentWelcome.setVisible(true);
+        System.out.println("log: Student Welcome displayed");
 
-        modifySchedule.setOpaque(false);
-        modifySchedule.setLayout(new java.awt.GridLayout(1, 0));
-        cards.add(modifySchedule, "modify");
-        modifySchedule.setBounds(0, 0, 0, 0);
+        modifySchedule.setLayout(new java.awt.GridBagLayout());
+        this.add(modifySchedule);
+        modifySchedule.initMe();
+        modifySchedule.setVisible(false);
+        System.out.println("log: Student Add/Drop not displayed");
         
-        CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.show(cards, "welcome");
-    }
-
-                   
+        revalidate();
+        repaint();
+    }           
 }

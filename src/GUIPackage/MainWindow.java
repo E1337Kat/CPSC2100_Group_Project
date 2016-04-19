@@ -5,13 +5,10 @@
  */
 package GUIPackage;
 
-import Backend.AdminRegistry;
-import Backend.InstructorRegistry;
-import Backend.StudentRegistry;
-import java.awt.CardLayout;
-import java.io.File;
+import Backend.*;
 
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import javax.swing.*;
 
 
@@ -19,135 +16,160 @@ import javax.swing.*;
  *
  * @author EMCS306
  */
-public class MainWindow extends javax.swing.JFrame {
+public class MainWindow extends JFrame {
 
-    public AdminRegistry adminReg;
-    public InstructorRegistry instructorReg;
-    public StudentRegistry stuReg;
-    public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
-    public String username;
+    
+    // Variables declaration 
+    private JTabbedPane cardTabbedPane;
+    private AdminPanel adminPane;
+    private InstructorPanel instructorPane;
+    private StudentPanel studentPane;
+    
+    private AdminRegistry adminReg = null;
+    private InstructorRegistry instructorReg = null;
+    private StudentRegistry stuReg = null;
+    
+    private boolean AdminTabTrue = false;
+    private boolean InstTabTrue = false;
+    private boolean StuTabTrue = false;
+    
+    private final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    private final String username;
+    // End of variables declaration 
+    
     /**
      * Creates new form MainWindow
+     * @param u String for username of user... received for login
      */
-    public MainWindow(String u, 
-            AdminRegistry aR, 
-            InstructorRegistry iR, 
-            StudentRegistry sR) {
+    public MainWindow(String u) {
         username = u;
-        adminReg = aR;
-        instructorReg = iR;
-        stuReg = sR;
+        adminReg = Singleton.getAdminRegInstance();
+        instructorReg = Singleton.getInstructorRegInstance();
+        stuReg = Singleton.getStuRegInstance();
         
         setIconImage(img.getImage());
         setTitle("University of FtS");
         initComponents();
     }
 
-    
-    @SuppressWarnings("unchecked")                      
+    /**
+    *  Makes everything the way is should be
+    */                    
     private void initComponents() {
 
-        jTabbedPane5 = new javax.swing.JTabbedPane();
+       GridBagConstraints gbc;
+        
+        cardTabbedPane = new JTabbedPane();
+        System.out.println("Log: Tabbed pane initilized.");
         
         checkPermissions();
+        
+        getContentPane().add(cardTabbedPane, BorderLayout.CENTER);
+        getAccessibleContext().setAccessibleName("Main Window");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane5)
-        );
-
-        this.setSize(750,600);
+        if (AdminTabTrue) {
+            System.out.println("Log: Admin tab to be made visible for: " + getUsername());
+            cardTabbedPane.addTab("Administrator", adminPane);
+            adminPane.initMe();
+            //adminPane.setVisible(AdminTabTrue);
+        }
+        if (InstTabTrue) {
+            System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
+            cardTabbedPane.addTab("Teacher", instructorPane);
+            instructorPane.initMe();
+            //instructorPane.setVisible(InstTabTrue);
+        }
+        if (StuTabTrue) {
+            System.out.println("Log: Student tab to be made visible for: " + getUsername());
+            cardTabbedPane.addTab("Student", studentPane);
+            studentPane.initMe();
+            System.out.println("Log: Student tab initialized");
+            //studentPane.setVisible(StuTabTrue);
+        }
+        
+        this.add(cardTabbedPane);
+        
+        revalidate();
+        setSize(750,600);
     }  
     
-
     /**
-     * @param args the command line arguments
-     */
-    /*
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        // Create and display the form
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new MainWindow();
-                frame.setVisible(true);
-            }
-        });
-    }*/
+    *  Fetches the username for Database query
+    *  @return the username of logged in student
+    */
+    public String getUsername() {
+        return username;
+    }
     
+    /**
+     * Establishes the font the system should use
+     * @return Font object built from provided parameters
+     */
+    public static Font getArialicFont() {
+        Font font;
+        try {
+            //create the font to use. Specify the size!
+            font = Font.createFont(Font.TRUETYPE_FONT,
+                new File( "."  +
+                    File.separator +
+                    "res" +
+                    File.separator +
+                    "Arialic_Hollow.ttf")).deriveFont(12f);
+            GraphicsEnvironment ge =
+            GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
+                new File("."  +
+                    File.separator +
+                    "res" +
+                    File.separator +
+                    "Arialic_Hollow.ttf")));
+        } catch (IOException|FontFormatException e) {
+            throw new RuntimeException(e);
+        }
+        return font;
+    }
+    
+    /**
+    *  Checks logged in users permissions and creates tabs appropriately
+    */
     private void checkPermissions(){
 
         //Checks if student
         if ( adminReg.isAdmin(username) || stuReg.isStudent(username)  ) {
 
-            try {
-                studentPane = new StudentPanel();
-            } catch (IOException e1) {
-                System.out.println("Exception thrown  :" + e1);
-            }
-            jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Student", studentPane);
-            CardLayout c1 = (CardLayout)(studentPane.getLayout());
-            studentPane.getAccessibleContext().setAccessibleName("");
+            this.StuTabTrue = true;
+            studentPane = StudentPanel.getStudentPanelInstance();
+            System.out.println("Log: Student tab initialized");
+            System.out.println("Log: I hate this program");
+            studentPane.getAccessibleContext().setAccessibleName("Student Panel");
         }
         
         //checks if Instructor
         if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
 
+            this.InstTabTrue = true;
             try {
-                InstructorPane = new InstructorPanel();;
+                instructorPane = new InstructorPanel();
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            
-            jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Teacher", InstructorPane);
-            InstructorPane.getAccessibleContext().setAccessibleName("");
-            //javax.swing.GroupLayout InstructorPaneLayout = new javax.swing.GroupLayout(InstructorPane);
+            System.out.println("Log: Instructor tab added");
+            instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
         
         }
         
         //checks if Admin
         if (adminReg.isAdmin(username)) {
 
+            this.AdminTabTrue = true;
             try {
-                AdminPane = new GUIPackage.AdminPanel();
+                adminPane = new GUIPackage.AdminPanel();
             } catch (IOException e1) {
                 System.out.println("Exception thrown  :" + e1);
             }
-            System.out.println("running");
-            
-            jTabbedPane5.updateUI();
-            jTabbedPane5.addTab("Administrator", AdminPane);
-            AdminPane.getAccessibleContext().setAccessibleName("");
+            System.out.println("Log: Admin tab added");
+            adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }
         
-    }
-
-    // Variables declaration - do not modify   
-    private JFrame loginFrame;
-    private LoginFrame loginPanel;
-    private javax.swing.JPanel AdminPane;
-    private javax.swing.JPanel InstructorPane;
-    private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JPanel studentPane;
-    //private javax.swing.JPanel student_welcome;
-    // End of variables declaration                   
+    }            
 }
