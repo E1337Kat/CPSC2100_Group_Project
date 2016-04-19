@@ -136,7 +136,7 @@ public class StudentPanel_Welcome extends JPanel {
         this.add(hiddenLabel1, gbc);
         
         //Row 6
-        addCourseButton.setText("Register");
+        addCourseButton.setText("Register New Courses");
         addCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -193,7 +193,7 @@ public class StudentPanel_Welcome extends JPanel {
         
         
         //Row 7
-        feesButton.setText("fees");
+        feesButton.setText("Fees Owed");
         feesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

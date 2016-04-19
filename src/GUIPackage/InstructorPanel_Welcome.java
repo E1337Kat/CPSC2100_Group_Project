@@ -5,190 +5,296 @@
  */
 package GUIPackage;
 
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.font.TextAttribute;
+import java.util.Map;
+import javax.swing.*;
+import javax.swing.border.*;
+
 /**
  *
- * @author ellie
+ * @author Ellie Peterson
  */
-public class InstructorPanel_Welcome extends javax.swing.JPanel {
+public class InstructorPanel_Welcome extends JPanel {
 
+    // Variables declaration 
+    private JLabel usernameLabel;
+    private JPanel schedule;
+    private JButton printScheduleButton;
+    private JButton hiddenButton1;
+    private JButton modifyCourseButton;
+    private JButton courseInfoButton;
+    private SwingLink helpLink;
+    private JButton logoutButton;
+    // End of variables declaration
+    
+    /***********************************************************************
+     * Public functions
+     **********************************************************************/
+    
+    
     /**
-     * Creates new form InstructorPanel_Welcome
+     * Creates new form StudentPanel_Welcome
      */
     public InstructorPanel_Welcome() {
+    }
+    
+    /**
+     * Public method to initialize components
+     * calls initComponents
+     */
+    public void initMe() {
         initComponents();
     }
-
-   
-    @SuppressWarnings("unchecked")                        
+    
+    /***********************************************************************
+     * Private functions
+     **********************************************************************/
+    
+    /**
+     * Initializes and adds components to the panel.
+     */
     private void initComponents() {
-
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jCheckBox8 = new javax.swing.JCheckBox();
-
-        jCheckBox4.setText("jCheckBox4");
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Welcome!", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("You have no classes yet");
-        jTextField1.setToolTipText("");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        
+        usernameLabel = new JLabel();
+        schedule = new CourseList();
+        printScheduleButton = new JButton();
+        hiddenButton1 = new JButton();
+        modifyCourseButton = new JButton();
+        courseInfoButton = new JButton();
+        helpLink = new SwingLink("help", "http://java.sun.com");
+        logoutButton = new JButton();
+        Font welcomeFont;
+        String welcomeText;
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints gbc;
+        
+        //Set Layout
+        this.setLayout(gridBag);
+        
+        welcomeText = getWelcomeText();
+        
+        // <editor-fold defaultstate="collapsed" desc="gridBag placement">
+        //Row One
+        usernameLabel.setText(welcomeText);
+        welcomeFont = usernameLabel.getFont();
+            Map attributes = welcomeFont.getAttributes();
+            attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+            attributes.put(TextAttribute.SIZE, 14);
+            attributes.put(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
+        usernameLabel.setFont(welcomeFont.deriveFont(attributes));
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 6;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(20,10,10,10); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
+        this.add(usernameLabel, gbc);
+        
+        //Rows 2-4
+        schedule.getAccessibleContext().setAccessibleName("Course Schedule");
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 3;
+            gbc.gridwidth = 6;
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
+            gbc.fill = gbc.BOTH;
+        this.add(schedule, gbc);
+        
+        //Row 5 - empty label
+        JLabel hiddenLabel1 = new JLabel();
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 6;
+            gbc.gridx = 0;
+            gbc.gridy = 4;
+            gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
+            gbc.fill = gbc.BOTH;
+        this.add(hiddenLabel1, gbc);
+        
+        //Row 6
+        printScheduleButton.setText("Print Schedule");
+        printScheduleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                printScheduleActionPerformed(evt);
             }
         });
-
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 0;
+            gbc.gridy = 5;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,10,10,5); //top, left, bottom, right
+            gbc.anchor = gbc.LINE_END;
+        this.add(printScheduleButton, gbc);
+        
+        hiddenButton1.setText("");
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 2;
+            gbc.gridy = 5;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,10,5); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
+        hiddenButton1.setVisible(false);
+        this.add(hiddenButton1, gbc);
+        
+        
+        modifyCourseButton.setText("Modify Course");
+        modifyCourseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                modifyCourseActionPerformed(evt);
             }
         });
-
-        jCheckBox2.setActionCommand("null");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 4;
+            gbc.gridy = 5;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,10,10); //top, left, bottom, right
+            gbc.anchor = gbc.LINE_START;
+        this.add(modifyCourseButton, gbc);
+        
+        
+        //Row 7
+        courseInfoButton.setText("Course Info");
+        courseInfoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                courseInfoButtonActionPerformed(evt);
             }
         });
-
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 0;
+            gbc.gridy = 6;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,10,20,5); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER; 
+        this.add(courseInfoButton, gbc);
+        
+        
+        //Help Link postioning
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 2;
+            gbc.gridy = 6;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,20,5); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER;
+        //helpLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.add(helpLink, gbc);
+        
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
             }
         });
+            gbc = new GridBagConstraints();
+            gbc.gridheight = 1;
+            gbc.gridwidth = 2;
+            gbc.weightx = 0.5;
+            gbc.gridx = 4;
+            gbc.gridy = 6;
+            gbc.ipadx = 5;
+            gbc.insets = new Insets(10,5,20,10); //top, left, bottom, right
+            gbc.anchor = gbc.CENTER; 
+        this.add(logoutButton, gbc);
+        //</editor-fold>
+        
+        setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
+        getAccessibleContext().setAccessibleName("Student Panel Welcome");
+        
+        setOpaque(false);
+    } 
+    
+    /**
+     * Retrieves the username stored in the MainWindow object
+     * @return The username provided in login
+     */
+    private String getUsername() {
+        String u;
+        PanelTester testWindow = null;
+        MainWindow topWindow = null;
+        
+        if (SwingUtilities.getWindowAncestor(this).getClass().equals(MainWindow.class)) {
+            
+            topWindow = (MainWindow)((JFrame)SwingUtilities.getWindowAncestor(this));
+            System.out.println("Log: Parent window = " + topWindow.getName());
+            System.out.println("Log: Student username = " + topWindow.getUsername());
+            u = topWindow.getUsername();
+        } else if (SwingUtilities.getWindowAncestor(this).getClass().equals(PanelTester.class)) {
+            
+            testWindow = (PanelTester)((JFrame)SwingUtilities.getWindowAncestor(this));
+            System.out.println("Log: Parent window = " + testWindow.getName());
+            System.out.println("Log: Student username = " + testWindow.getUsername());
+            u = testWindow.getUsername();
+        } else {
+            u = "";
+        }
+        
+        return u;
+    }
+    
+    /**
+     * creates the welcome/title text
+     * @return title text with username
+     */
+    private String getWelcomeText() {
+        return "Welcome " + getUsername();
+    }
+    
+    /***********************************************************************
+     * ACTION LISTENERS SECTION
+     **********************************************************************/
 
-        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Course Info");
-
-        jButton2.setText("Modify");
-
-        jButton3.setText("Logout");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jCheckBox3)
-                        .addComponent(jCheckBox1)
-                        .addComponent(jCheckBox2)
-                        .addComponent(jCheckBox5)
-                        .addComponent(jCheckBox6)
-                        .addComponent(jCheckBox7))
-                    .addComponent(jCheckBox8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(96, 96, 96))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(44, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-    }                       
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    }                                           
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    // End of variables declaration                   
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
+    private void printScheduleActionPerformed(ActionEvent evt) {
+        
+    }
+    
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
+    private void modifyCourseActionPerformed(ActionEvent evt) {
+        
+    }
+    
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
+    private void courseInfoButtonActionPerformed(ActionEvent evt) {
+        //TODO: confirmation dialog, if yes, delete, else do nothing
+    }
+    
+    /**
+     * Action event for button press
+     * @param evt idk lol
+     */
+    private void logoutButtonActionPerformed(ActionEvent evt) {
+        
+    }                
 }
