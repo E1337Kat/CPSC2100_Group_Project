@@ -77,7 +77,7 @@ public class InstructorPanel_ModifyCourse extends JPanel {
             courseCRNLabel = new JLabel();
                 courseCRN = new JLabel();
             courseDescLabel = new JLabel();
-            courseDescArea = new JTextArea(100,200);
+                courseDescArea = new JTextArea(100,200);
         hiddenButton1 = new JButton();
         cancelButton = new JButton();
         saveButton = new JButton();

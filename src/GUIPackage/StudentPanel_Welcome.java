@@ -77,7 +77,7 @@ public class StudentPanel_Welcome extends JPanel {
     private void initComponents() {
         
         usernameLabel = new JLabel();
-        schedule = new CourseList();
+        schedule = new checkBoxTable();
         addCourseButton = new JButton();
         deleteCourseButton = new JButton();
         printScheduleButton = new JButton();
