@@ -285,7 +285,7 @@ public class InstructorPanel_Welcome extends JPanel {
         Container c = this.getParent();
         System.out.println("Log: Inst Welcome parent name: " + c.getName());
         CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
-        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), "Card with modify");
+        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), InstructorPanel.MODIFY);
     }
     
     /**
@@ -293,7 +293,12 @@ public class InstructorPanel_Welcome extends JPanel {
      * @param evt idk lol
      */
     private void courseInfoButtonActionPerformed(ActionEvent evt) {
-        //TODO: confirmation dialog, if yes, delete, else do nothing
+        System.out.println("Log: Parent name: " + InstructorPanel.class.getName());
+        
+        Container c = this.getParent();
+        System.out.println("Log: Inst Modify parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), InstructorPanel.INFO);
     }
     
     /**

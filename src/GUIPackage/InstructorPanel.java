@@ -20,9 +20,9 @@ public class InstructorPanel extends JPanelwithBackground {
     
 // Variables declaration - do not modify 
     private JPanel cards;
-    private static final String WELCOME = "Card with welcome";
-    private static final String INFO = "Card with info";
-    private static final String MODIFY = "Card with modify";
+    public static final String WELCOME = "welcome";
+    public static final String INFO = "info";
+    public static final String MODIFY = "modify";
     private static InstructorPanel instPane = null;
     private InstructorPanel_Info instructorInfo;
     private InstructorPanel_Welcome instructorWelcome;
@@ -104,7 +104,7 @@ public class InstructorPanel extends JPanelwithBackground {
      */
     private InstructorPanel() throws IOException {
         setName("GUIPackage.InstructorPanel");
-        //setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     /**
@@ -129,12 +129,16 @@ public class InstructorPanel extends JPanelwithBackground {
         cards = new JPanel(new CardLayout());
         cards.setName("cards");
         
+        instructorWelcome.setLayout(null);
         cards.add(instructorWelcome, WELCOME);
+        instructorInfo.setLayout(null);
         cards.add(instructorInfo, INFO);
+        instructorModify.setLayout(null);
         cards.add(instructorModify, MODIFY);
         //setBackground(new java.awt.Color(255, 255, 255));
         //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        cards.setOpaque(false);
         this.add(cards);
         //instructorWelcome.setLayout(null);
         //cards.add(instructorWelcome);
@@ -148,11 +152,13 @@ public class InstructorPanel extends JPanelwithBackground {
         instructorInfo.setVisible(false);
         System.out.println("log: Instructor Info not displayed");
         
+        
         instructorModify.initMe();
         instructorModify.setVisible(false);
         System.out.println("Log: Instructor Modify not displayed");
         
-        setOpaque(false);
+        //setOpaque(false);
         revalidate();
+        repaint();
     }           
 }

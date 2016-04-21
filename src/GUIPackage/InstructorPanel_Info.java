@@ -26,7 +26,7 @@ public class InstructorPanel_Info extends JPanel {
     private JButton printRollButton;
     private JButton hiddenButton1;
     private SwingLink helpLink;
-    private JButton logoutButton;
+    private JButton backButton;
     // End of variables declaration
     
     /***********************************************************************
@@ -67,7 +67,7 @@ public class InstructorPanel_Info extends JPanel {
         printRollButton = new JButton();
         hiddenButton1 = new JButton();
         helpLink = new SwingLink("help", "http://java.sun.com");
-        logoutButton = new JButton();
+        backButton = new JButton();
         Font welcomeFont;
         String welcomeText;
         GridBagLayout gridBag = new GridBagLayout();
@@ -109,6 +109,7 @@ public class InstructorPanel_Info extends JPanel {
             gbc.anchor = gbc.CENTER;
             gbc.fill = gbc.BOTH;
         this.add(classList, gbc);
+        classList.setOpaque(false);
         
         //Row 5 - empty label
         JLabel hiddenLabel1 = new JLabel();
@@ -206,11 +207,11 @@ public class InstructorPanel_Info extends JPanel {
         //helpLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
         this.add(helpLink, gbc);
         
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                logoutActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
             gbc = new GridBagConstraints();
@@ -222,11 +223,11 @@ public class InstructorPanel_Info extends JPanel {
             gbc.ipadx = 5;
             gbc.insets = new Insets(10,5,20,10); //top, left, bottom, right
             gbc.anchor = gbc.CENTER; 
-        this.add(logoutButton, gbc);
+        this.add(backButton, gbc);
         //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
-        getAccessibleContext().setAccessibleName("Student Panel Welcome");
+        getAccessibleContext().setAccessibleName("Instructor Panel Info");
         
         setOpaque(false);
     } 
@@ -299,7 +300,12 @@ public class InstructorPanel_Info extends JPanel {
      * Action event for button press
      * @param evt idk lol
      */
-    private void logoutActionPerformed(ActionEvent evt) {
+    private void backActionPerformed(ActionEvent evt) {
+        System.out.println("Log: Parent name: " + InstructorPanel.class.getName());
         
+        Container c = this.getParent();
+        System.out.println("Log: Inst Modify parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), InstructorPanel.WELCOME);
     }                
 }

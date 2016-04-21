@@ -37,7 +37,7 @@ public class InstructorPanel_ModifyCourse extends JPanel {
     private JButton saveButton;
     private JButton hiddenButton2;
     private SwingLink helpLink;
-    private JButton logoutButton;
+    private JButton backButton;
     // End of variables declaration   
     
     /***********************************************************************
@@ -83,7 +83,7 @@ public class InstructorPanel_ModifyCourse extends JPanel {
         saveButton = new JButton();
         hiddenButton2 = new JButton();
         helpLink = new SwingLink("help", "http://java.sun.com");
-        logoutButton = new JButton();
+        backButton = new JButton();
         
         
         Font titleFont;
@@ -214,6 +214,7 @@ public class InstructorPanel_ModifyCourse extends JPanel {
             gbc.anchor = gbc.CENTER;
             gbc.fill = gbc.BOTH;
         this.add(contentPanel, gbc);
+        contentPanel.setOpaque(false);
         
         //Row 7
         //common gridbagconstraints 
@@ -286,16 +287,16 @@ public class InstructorPanel_ModifyCourse extends JPanel {
             gbc.insets = new Insets(10,2,20,2); //top, left, bottom, right
         this.add(helpLink, gbc);
         
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                logoutActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
             gbc.gridx = 4;
             gbc.insets = new Insets(10,2,20,10); //top, left, bottom, right
-        this.add(logoutButton, gbc);
+        this.add(backButton, gbc);
         //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
@@ -382,15 +383,25 @@ public class InstructorPanel_ModifyCourse extends JPanel {
      * @param evt idk lol
      */
     private void cancelActionPerformed(ActionEvent evt) {
+        System.out.println("Log: Parent name: " + InstructorPanel.class.getName());
         
+        Container c = this.getParent();
+        System.out.println("Log: Inst Modify parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), InstructorPanel.WELCOME);
     }
     
     /**
      * Action event for button press
      * @param evt idk lol
      */
-    private void logoutActionPerformed(ActionEvent evt) {
+    private void backActionPerformed(ActionEvent evt) {
+        System.out.println("Log: Parent name: " + InstructorPanel.class.getName());
         
+        Container c = this.getParent();
+        System.out.println("Log: Inst Modify parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), InstructorPanel.WELCOME);
     }    
     
     //</editor-fold>
