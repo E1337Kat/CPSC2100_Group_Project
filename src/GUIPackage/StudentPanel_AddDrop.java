@@ -279,6 +279,12 @@ public class StudentPanel_AddDrop extends JPanel {
      * @param evt idk lol
      */
     private void courseInfoActionPerformed(ActionEvent evt) {
+        System.out.println("Log: Parent name: " + StudentPanel.class.getName());
+        
+        Container c = this.getParent();
+        System.out.println("Log: Stu Register parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((StudentPanel)SwingUtilities.getAncestorNamed("GUIPackage.StudentPanel", this)).getCards(), StudentPanel.INFO);
         
     }
     
@@ -287,6 +293,12 @@ public class StudentPanel_AddDrop extends JPanel {
      * @param evt idk lol
      */
     private void logoutActionPerformed(ActionEvent evt) {
+        System.out.println("Log: Parent name: " + StudentPanel.class.getName());
+        
+        Container c = this.getParent();
+        System.out.println("Log: Stu Register parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((StudentPanel)SwingUtilities.getAncestorNamed("GUIPackage.StudentPanel", this)).getCards(), StudentPanel.WELCOME);
         
     }
 

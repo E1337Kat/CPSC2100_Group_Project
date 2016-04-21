@@ -71,12 +71,14 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Admin tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Administrator", adminPane);
             adminPane.initMe();
+            System.out.println("Log: Admin tab initialized");
             //adminPane.setVisible(AdminTabTrue);
         }
         if (InstTabTrue) {
             System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Teacher", instructorPane);
             instructorPane.initMe();
+            System.out.println("Log: Instructor tab initialized");
             //instructorPane.setVisible(InstTabTrue);
         }
         if (StuTabTrue) {

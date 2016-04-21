@@ -16,7 +16,7 @@ public class PanelTester extends JFrame {
     
     
     // Variables declaration - do not modify  
-    private InstructorPanel testPane;
+    private StudentPanel testPane;
     private final String username = "Panel T. Ester";
     // End of variables declaration   
     
@@ -32,7 +32,7 @@ public class PanelTester extends JFrame {
         
     private void initComponents() {
 
-        testPane = InstructorPanel.getInstructorPanelInstance();
+        testPane = StudentPanel.getStudentPanelInstance();
         testPane.setLayout(new GridBagLayout());
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
