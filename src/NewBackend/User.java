@@ -203,7 +203,7 @@ public class User {
      * @return boolean based on if a user has fees or not
      */
     public boolean hasFees(){
-        if(this.fees.isEmpty()){
+        if(this.fees == null || this.fees.isEmpty()){
             return false;
         } else {
             return true;
@@ -220,7 +220,10 @@ public class User {
      * Method to print the schedule of a user
      * @return s the string of all courses in the user's schedule
      */
-    public String printSchedule(){
+    public String scheduleToString(){
         return this.s.toString();
+    }
+    public String scheduleCRNsToString(){
+        return this.s.courseCRNsToString();
     }
 }

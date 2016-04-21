@@ -39,6 +39,13 @@ public class Schedule {
     public boolean checkScheduleForCourse(Course c){
         return this.courseList.contains(c);
     }
+    public String courseCRNsToString(){
+        String ret = "";
+        for(Course c : this.getSchedule()){
+            ret =ret + c.getCRN() + ",";
+        }
+        return ret;
+    }
     /**
      * Method to convert a schedule object to a string
      * @return ret the string of the schedule object

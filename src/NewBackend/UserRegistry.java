@@ -16,17 +16,19 @@ import javax.crypto.SecretKey;
  * Class to handle reading and writing of a data file
  * @author Will
  */
-public class UserRegistry {
+public class UserRegistry implements Registry{
     
     ArrayList<User> users = new ArrayList<User>();
     Security sec = new Security();
     //initializing ArrayList of User objects
+    CourseCatalog catalog = new CourseCatalog();
     
     
     /**
      * Method that reads in information from the text file "User-Reg.txt"
      */
     public void readFile(){
+        catalog.readFile();
         String fileName = "User-Reg.txt";
         String line = null;
         try {
@@ -52,52 +54,43 @@ public class UserRegistry {
                     String sched = reader.next();
                     Scanner schedReader = new Scanner(sched).useDelimiter("]");
                     //Another delimiter to go through each course 
-                    while(schedReader.hasNext()){
-                        String course = schedReader.next();
-                        
-                        Scanner courseReader = new Scanner(course).useDelimiter(",");
-                        //This delim goes through all the info for each course
-                        String courseName = courseReader.next();
-                        courseName = courseName.replace("[", "");
-                        //taking out the first [ char
-                        String courseDesc = courseReader.next();
-                        String courseDays = courseReader.next();
-                        int courseStart = courseReader.nextInt();
-                        int courseEnd = courseReader.nextInt();
-                        String courseLoc = courseReader.next();
-                        String courseDept = courseReader.next();
+                    String course = schedReader.next();
+                    course = course.replace("[", "");
+                    Scanner courseReader = new Scanner(course).useDelimiter(",");
+                    //This delim goes through all the info for each course
+                    while(courseReader.hasNext()){
                         int courseCRN = courseReader.nextInt();
-                        int studentsEnrolled = courseReader.nextInt();
-                        int maxStudents = courseReader.nextInt();
-                        Course newCourse = new Course(courseName, courseDesc, courseDays, courseStart,
-                        courseEnd, courseLoc, courseDept, courseCRN, studentsEnrolled, maxStudents);
-                        sc.addCourse(newCourse);
+                        sc.addCourse(catalog.getCourseByCRN(courseCRN));
+                        
                         //Reading in all course info, creating a course, and adding it to the schedule
-                    }
+                        }
+                    
                 }
+                
                 if(reader.hasNext()){
                     //Checking for any fees
                     String fees = reader.next();
-                    Scanner feeReader = new Scanner(fees).useDelimiter("}");
-                    //Going through this in a similar fashion as above
-                    ArrayList<Fee> aUsersFees = new ArrayList<Fee>();
-                    //An ArrayList to store all of a user's fees
-                    while(feeReader.hasNext()){
-                        String fee = feeReader.next();
-                        fee = fee.replace("{", "");
-                        Scanner feeInfoReader = new Scanner(fee);
-                        Double amount = feeInfoReader.nextDouble();
-                        String desc = feeInfoReader.next();
-                        aUsersFees.add(new Fee(amount,desc));
-                        //getting the info, creating the fees, and adding them to the AL
-                    }
-                    User userRead = new User(firstName, lastName, username, password, email,
-                        isSt, isIn, isAd, sc);
-                    userRead.addAllFees(aUsersFees);
-                    this.addUser(userRead);
+                    if(fees.contains("{")){
+                        Scanner feeReader = new Scanner(fees).useDelimiter("}");
+                        //Going through this in a similar fashion as above
+                        ArrayList<Fee> aUsersFees = new ArrayList<Fee>();
+                        //An ArrayList to store all of a user's fees
+                        while(feeReader.hasNext()){
+                            String fee = feeReader.next();
+                            fee = fee.replace("{", "");
+                            Scanner feeInfoReader = new Scanner(fee);
+                            Double amount = feeInfoReader.nextDouble();
+                            String desc = feeInfoReader.next();
+                            aUsersFees.add(new Fee(amount,desc));
+                            //getting the info, creating the fees, and adding them to the AL
+                        }
+                        User userRead = new User(firstName, lastName, username, password, email,
+                            isSt, isIn, isAd, sc);
+                        userRead.addAllFees(aUsersFees);
+                        this.addUser(userRead);
                     //creating a user, adding the info gathered above and if the have fees
                     //add them to the user and add the user to the reg ArrayList
-                    
+                    }
                 } else {
                     //if the user has no fees it just creates and adds the user instead
                     this.addUser(new User(firstName, lastName, username, password, email, 
@@ -139,7 +132,7 @@ public class UserRegistry {
                 Boolean isSt = u.studentStatus();
                 Boolean isIn = u.instructorStatus();
                 Boolean isAd = u.adminStatus();
-                String sched = u.printSchedule();
+                String sched = "[" + u.scheduleCRNsToString() + "]";
                 if(u.hasFees()){
                     //writing all info to a file if a user has fees
                     String fees = u.printFees();
