@@ -58,7 +58,7 @@ public class InstructorPanel_Welcome extends JPanel {
     private void initComponents() {
         
         usernameLabel = new JLabel();
-        schedule = new checkBoxTable();
+        schedule = new CheckBoxTable();
         printScheduleButton = new JButton();
         hiddenButton1 = new JButton();
         modifyCourseButton = new JButton();
@@ -221,7 +221,7 @@ public class InstructorPanel_Welcome extends JPanel {
         //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
-        getAccessibleContext().setAccessibleName("Student Panel Welcome");
+        getAccessibleContext().setAccessibleName("Instructor Panel");
         
         setOpaque(false);
     } 
@@ -262,6 +262,7 @@ public class InstructorPanel_Welcome extends JPanel {
         return "Welcome " + getUsername();
     }
     
+    
     /***********************************************************************
      * ACTION LISTENERS SECTION
      **********************************************************************/
@@ -279,7 +280,12 @@ public class InstructorPanel_Welcome extends JPanel {
      * @param evt idk lol
      */
     private void modifyCourseActionPerformed(ActionEvent evt) {
+        System.out.println("Log: Parent name: " + InstructorPanel.class.getName());
         
+        Container c = this.getParent();
+        System.out.println("Log: Inst Welcome parent name: " + c.getName());
+        CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
+        cl.show(((InstructorPanel)SwingUtilities.getAncestorNamed("GUIPackage.InstructorPanel", this)).getCards(), "Card with modify");
     }
     
     /**

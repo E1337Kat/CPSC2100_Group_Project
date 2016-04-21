@@ -23,7 +23,7 @@ public class StudentPanel_AddDrop extends JPanel {
 
     // Variables declaration 
     private JLabel titleLabel;
-    private checkBoxTable catalog;
+    private CheckBoxTable catalog;
     private JTextField regField1;
     private JTextField regField2;
     private JTextField regField3;
@@ -58,7 +58,7 @@ public class StudentPanel_AddDrop extends JPanel {
          }
         
         titleLabel = new JLabel();
-        catalog = new checkBoxTable();
+        catalog = new CheckBoxTable();
         regField1 = new JFormattedTextField(crnFormat);
         regField2 = new JFormattedTextField(crnFormat);
         regField3 = new JFormattedTextField(crnFormat);

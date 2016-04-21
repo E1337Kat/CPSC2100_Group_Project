@@ -6,70 +6,153 @@
 package GUIPackage;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.io.*;
 import javax.swing.*;
 
 /**
  *
- * @author EllieKat
+ * @author EMCS306
  */
-public class InstructorPanel extends JPanelwithBackground {
+public class InstructorPanel extends JPanelwithBackground {    
+    
+// Variables declaration - do not modify 
+    private JPanel cards;
+    private static final String WELCOME = "Card with welcome";
+    private static final String INFO = "Card with info";
+    private static final String MODIFY = "Card with modify";
+    private static InstructorPanel instPane = null;
+    private InstructorPanel_Info instructorInfo;
+    private InstructorPanel_Welcome instructorWelcome;
+    private InstructorPanel_ModifyCourse instructorModify;
+    private int context;
+    // End of variables declaration 
 
     /**
-     * Creates new form InstructorPanel
-     * @throws IOException
+     * Singleton method of getting the student panel
+     * @return a single student panel
      */
-    public InstructorPanel() throws IOException{
+    public static InstructorPanel getInstructorPanelInstance() {
+        if (instPane == null) {
+            try {
+                instPane = new InstructorPanel();
+            } catch (IOException ex) {
+                System.err.println("Log: ERROR Exception at " + ex);
+            }
+        }
+        return instPane;
     }
-
+    
+    /**
+     * public method to init the GUI
+     */
     public void initMe() {
         initComponents();
     }
     
-    @SuppressWarnings("unchecked")                         
+    /**
+     * Switches between welcome and modify views
+     */
+    public void switchPane(Container child) {
+        
+        if (child.getClass().equals(StudentPanel_Welcome.class)) {
+            context = 0;
+        } else if (child.getClass().equals(StudentPanel_AddDrop.class)) {
+            context = 1;
+        } 
+        
+        switch(context) {
+            case 0:
+                instructorWelcome.setVisible(false);
+                instructorInfo.setVisible(true);
+                
+                System.out.println("log: Student Add/Drop displayed");
+                break;
+            case 1:
+                instructorInfo.setVisible(false);
+                instructorWelcome.setVisible(true);
+                
+                System.out.println("log: Student Welcome displayed");
+                break;
+            default:
+                System.err.println("No window to show");
+                break;
+        }
+        
+        revalidate();
+    
+        
+    }
+    
+    /*
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, evt.getActionCommand());
+    }
+    */
+
+    
+    public JPanel getCards() {
+        return cards;
+    }
+    /**
+     * Creates new form Student
+     * @throws IOException
+     */
+    private InstructorPanel() throws IOException {
+        setName("GUIPackage.InstructorPanel");
+        //setLayout(new GridBagLayout());
+    }
+    
+    /**
+     * Gets the child class of this panel
+     * @return child container
+     */
+    private Container getChildClass() {
+        return new StudentPanel_Welcome();
+    }
+    
+    /**
+     * Sets the look and displays the gui
+     */                      
     private void initComponents() {
 
-        instructorWelcome = new javax.swing.JPanel();
-        modifyCourse = new javax.swing.JPanel();
+        //setName("GUIPackage.InstructorPanel");
+        getAccessibleContext().setAccessibleName("Instructor Panel");
+        instructorWelcome = new InstructorPanel_Welcome();
+        instructorInfo = new InstructorPanel_Info();
+        instructorModify = new InstructorPanel_ModifyCourse();
 
-        setLayout(null);
+        cards = new JPanel(new CardLayout());
+        cards.setName("cards");
+        
+        cards.add(instructorWelcome, WELCOME);
+        cards.add(instructorInfo, INFO);
+        cards.add(instructorModify, MODIFY);
+        //setBackground(new java.awt.Color(255, 255, 255));
+        //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        instructorWelcome.setOpaque(false);
+        this.add(cards);
+        //instructorWelcome.setLayout(null);
+        //cards.add(instructorWelcome);
+        instructorWelcome.initMe();
+        instructorWelcome.setVisible(true);
+        System.out.println("log: Instructor Welcome displayed");
 
-        javax.swing.GroupLayout instructorWelcomeLayout = new javax.swing.GroupLayout(instructorWelcome);
-        instructorWelcome.setLayout(instructorWelcomeLayout);
-        instructorWelcomeLayout.setHorizontalGroup(
-            instructorWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        instructorWelcomeLayout.setVerticalGroup(
-            instructorWelcomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        add(instructorWelcome);
-        instructorWelcome.setBounds(0, 0, 0, 0);
-
-        modifyCourse.setOpaque(false);
-
-        javax.swing.GroupLayout modifyCourseLayout = new javax.swing.GroupLayout(modifyCourse);
-        modifyCourse.setLayout(modifyCourseLayout);
-        modifyCourseLayout.setHorizontalGroup(
-            modifyCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        modifyCourseLayout.setVerticalGroup(
-            modifyCourseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        add(modifyCourse);
-        modifyCourse.setBounds(0, 0, 0, 0);
-    }                       
-
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JPanel instructorWelcome;
-    private javax.swing.JPanel modifyCourse;
-    // End of variables declaration                   
+        //instructorInfo.setLayout(new java.awt.GridBagLayout());
+        //this.add(instructorInfo);
+        instructorInfo.initMe();
+        instructorInfo.setVisible(false);
+        System.out.println("log: Instructor Info not displayed");
+        
+        instructorModify.initMe();
+        instructorModify.setVisible(false);
+        System.out.println("Log: Instructor Modify not displayed");
+        
+        setOpaque(false);
+        revalidate();
+    }           
 }

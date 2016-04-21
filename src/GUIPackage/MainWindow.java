@@ -148,12 +148,8 @@ public class MainWindow extends JFrame {
         if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
 
             this.InstTabTrue = true;
-            try {
-                instructorPane = new InstructorPanel();
-            } catch (IOException e1) {
-                System.out.println("Exception thrown  :" + e1);
-            }
-            System.out.println("Log: Instructor tab added");
+            instructorPane = InstructorPanel.getInstructorPanelInstance();
+            System.out.println("Log: Instructor tab initialized");
             instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
         
         }
