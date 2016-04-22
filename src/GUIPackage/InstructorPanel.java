@@ -84,6 +84,7 @@ public class InstructorPanel extends JPanelwithBackground {
      * Sets the look and displays the gui
      */                      
     private void initComponents() {
+        this.removeAll();
 
         getAccessibleContext().setAccessibleName("Instructor Panel");
         instructorWelcome = new InstructorPanel_Welcome();
@@ -119,7 +120,7 @@ public class InstructorPanel extends JPanelwithBackground {
         System.out.println("Log: Instructor Modify not displayed");
         
         
-        revalidate();
-        repaint();
+        this.revalidate();
+        this.repaint();
     }           
 }

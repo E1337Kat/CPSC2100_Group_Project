@@ -64,6 +64,7 @@ public class InstructorPanel_Info extends JPanel {
      * Initializes and adds components to the panel.
      */
     private void initComponents() {
+        this.removeAll();
         
         usernameLabel = new JLabel();
         emailAllButton = new JButton();
@@ -234,6 +235,9 @@ public class InstructorPanel_Info extends JPanel {
         getAccessibleContext().setAccessibleName("Instructor Panel Info");
         
         setOpaque(false);
+        
+        this.revalidate();
+        this.repaint();
     } 
     
     /**

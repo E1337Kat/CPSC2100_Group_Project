@@ -56,6 +56,7 @@ public class InstructorPanel_Welcome extends JPanel {
      * Initializes and adds components to the panel.
      */
     private void initComponents() {
+        this.removeAll();
         
         usernameLabel = new JLabel();
         schedule = new CheckBoxTable();
@@ -224,6 +225,8 @@ public class InstructorPanel_Welcome extends JPanel {
         getAccessibleContext().setAccessibleName("Instructor Panel");
         
         setOpaque(false);
+        this.revalidate();
+        this.repaint();
     } 
     
     /**

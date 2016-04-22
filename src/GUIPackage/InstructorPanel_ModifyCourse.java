@@ -69,6 +69,7 @@ public class InstructorPanel_ModifyCourse extends JPanel {
      * init components
      */
     private void initComponents() {
+        this.removeAll();
         
         titleLabel = new JLabel();
         contentPanel = new JPanel();
@@ -303,6 +304,9 @@ public class InstructorPanel_ModifyCourse extends JPanel {
         getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
         setOpaque(false);
+        
+        this.revalidate();
+        this.repaint();
     }      
     
     /**
