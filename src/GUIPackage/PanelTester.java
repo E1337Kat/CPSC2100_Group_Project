@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUIPackage;
-import NewBackend.*;
+import Backend.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -49,8 +49,8 @@ public class PanelTester extends JFrame {
         
         Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
         //testPane.addData(objs);
-        Course c1 = new Course("Name","Description","");
-        Object[] someInfo = 
+        //Course c1 = new Course("Name","Description","");
+        //Object[] someInfo = 
     }     
     
     public static void main(String args[]) {
