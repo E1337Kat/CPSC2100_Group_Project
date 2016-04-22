@@ -22,7 +22,7 @@ public class StudentPanel extends JPanelwithBackground {
     
     private JPanel cards;
     private static StudentPanel stuPane = null;
-    private StudentPanel_AddDrop registerCourses;
+    private StudentPanel_Register registerCourses;
     private StudentPanel_Welcome studentWelcome;
     private StudentPanel_Info courseInfo;
     // End of variables declaration 
@@ -71,10 +71,12 @@ public class StudentPanel extends JPanelwithBackground {
      */                      
     private void initComponents() {
 
+        this.removeAll();
+        
         getAccessibleContext().setAccessibleName("Student Panel");
-        studentWelcome = new StudentPanel_Welcome();
-        registerCourses = new StudentPanel_AddDrop();
-        courseInfo = new StudentPanel_Info();
+        studentWelcome = StudentPanel_Welcome.getStudentWelcomeInstance();
+        registerCourses = StudentPanel_Register.getStudentRegInstance();
+        courseInfo = StudentPanel_Info.getStudentInfoInstance();
 
         cards = new JPanel(new CardLayout());
         cards.setName("cards");
@@ -101,7 +103,7 @@ public class StudentPanel extends JPanelwithBackground {
         courseInfo.setVisible(false);
         System.out.println("Log: Student Info not displayed");
         
-        revalidate();
-        repaint();
+        this.revalidate();
+        this.repaint();
     }           
 }

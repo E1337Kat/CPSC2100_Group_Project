@@ -24,7 +24,7 @@ public class LoginFrame extends JFrame
     
 
     // Variables declaration 
-    private static final User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
+    //private static final User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
     
     private MainWindow mainFrame;
     private JButton loginButton;
@@ -43,7 +43,10 @@ public class LoginFrame extends JFrame
      */
     public LoginFrame() {
         userReg = UserRegistry.getUserRegistryInstance();
-        userReg.addUser(SYSADMIN);
+        userReg.addUser(MainClass.SYSADMIN);
+        userReg.addUser(MainClass.TEACHER);
+        userReg.addUser(MainClass.STUDENT);
+        userReg.addUser(MainClass.STUDENT_TEACHER);
         
         //setIconImage(img.getImage());
         //setTitle("University of FtS");
@@ -151,11 +154,16 @@ public class LoginFrame extends JFrame
     *  @return The username typed into username field
     */
     public String getUsername(){
-        return usernameTextField.getText();
+        return usernameTextField.getText().toLowerCase();
     }
     
     public String getPassword(){
-        return passwordTextField.getSelectedText();
+        String ret = "";
+        char[] array = passwordTextField.getPassword();
+        for(char ch : array){
+            ret += ch;
+        }
+        return ret;
     }
     
     /**

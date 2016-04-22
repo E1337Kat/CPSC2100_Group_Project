@@ -172,7 +172,7 @@ public class UserRegistry implements Registry{
      */
     public boolean checkLogin(String user, String pass){
         for(User u : this.users){
-            if(u.getUsername().equals(user)){
+            if(u.getUsername().toLowerCase().equals(user)){
                 if(u.getPassword().equals(pass)){
                     return true;
                 } else {
@@ -190,7 +190,7 @@ public class UserRegistry implements Registry{
      */
     public User getUser(String user){
         for(User u : this.users){
-            if(u.getUsername().equals(user)){
+            if(u.getUsername().toLowerCase().equals(user)){
                 return u;
             }
         }

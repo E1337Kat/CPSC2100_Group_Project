@@ -14,11 +14,14 @@ import javax.swing.*;
  * @author Ellie Peterson
  */
 public class MainClass {
-    private static final User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
+    protected static final User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
+    protected static final User TEACHER = new User("Jules","Verne","jiv575", "pass1", "jiv575@fts.edu", false, true, false, new Schedule());
+    protected static final User STUDENT = new User("Kin","Talos","dova980", "pass2", "dova980@fts.edu", true, false, false, new Schedule());
+    protected static final User STUDENT_TEACHER = new User("Barack","Obama","bao123", "pass3", "bao123@fts.edu", true, true, false, new Schedule());
     //public static UserRegistry userReg = UserRegistry.getUserRegistryInstance();
     public static final String LOOKANDFEEL = "System";
-    private static final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
-    private static final String UNI_NAME = "University of FtS";
+    protected static final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    protected static final String UNI_NAME = "University of FtS";
 
     /*
     * Start of Main thread

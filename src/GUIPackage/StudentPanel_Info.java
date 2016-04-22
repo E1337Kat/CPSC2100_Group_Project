@@ -19,6 +19,8 @@ import javax.swing.border.*;
 public class StudentPanel_Info extends JPanel {
 
     // Variables declaration 
+    private static StudentPanel_Info stu = null;
+    
     private JLabel usernameLabel;
     private JPanel contentPanel;
         private JLabel courseTitleLabel;
@@ -39,7 +41,14 @@ public class StudentPanel_Info extends JPanel {
     /**
      * Creates new form StudentPanel_Welcome
      */
-    public StudentPanel_Info() {
+    private StudentPanel_Info() {
+    }
+    
+    public static StudentPanel_Info getStudentInfoInstance(){
+        if (stu == null) {
+            stu = new StudentPanel_Info();
+        }
+        return stu;
     }
     
     /**
@@ -82,6 +91,7 @@ public class StudentPanel_Info extends JPanel {
      * Initializes and adds components to the panel.
      */
     private void initComponents() {
+        this.removeAll();
         
         usernameLabel = new JLabel();
         contentPanel = new CheckBoxTable();
@@ -107,7 +117,7 @@ public class StudentPanel_Info extends JPanel {
         
         welcomeText = getWelcomeText();
         
-        
+        //<editor-fold defaultstate="collapsed" desc="gridBag">
         //Row One
         usernameLabel.setText(welcomeText);
         welcomeFont = usernameLabel.getFont();
@@ -322,11 +332,14 @@ public class StudentPanel_Info extends JPanel {
             gbc.insets = new Insets(10,5,20,10); //top, left, bottom, right
             gbc.anchor = gbc.CENTER; 
         this.add(backButton, gbc);
+        //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
         getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
         setOpaque(false);
+        this.revalidate();
+        this.repaint();
     }      
     
     /**

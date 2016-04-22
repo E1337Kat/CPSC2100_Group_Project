@@ -20,7 +20,7 @@ public class InstructorPanel_Welcome extends JPanel {
 
     // Variables declaration 
     private JLabel usernameLabel;
-    private JPanel schedule;
+    private CheckBoxTable schedule;
     private JButton printScheduleButton;
     private JButton hiddenButton1;
     private JButton modifyCourseButton;
@@ -308,4 +308,8 @@ public class InstructorPanel_Welcome extends JPanel {
     private void logoutButtonActionPerformed(ActionEvent evt) {
         
     }                
+
+    protected void addData(Object[] o) {
+        schedule.addData(o);
+    }
 }

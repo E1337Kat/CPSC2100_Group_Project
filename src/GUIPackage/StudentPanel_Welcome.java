@@ -8,6 +8,7 @@ package GUIPackage;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
+import java.io.IOException;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -18,7 +19,9 @@ import javax.swing.border.*;
  */
 public class StudentPanel_Welcome extends JPanel {
 
-    // Variables declaration 
+    // Variables declaration
+    private static StudentPanel_Welcome stu;
+    
     private JLabel usernameLabel;
     private JPanel schedule;
     private JButton registerButton;
@@ -32,7 +35,14 @@ public class StudentPanel_Welcome extends JPanel {
     /**
      * Creates new form StudentPanel_Welcome
      */
-    public StudentPanel_Welcome() {
+    private StudentPanel_Welcome() {
+    }
+    
+    public static StudentPanel_Welcome getStudentWelcomeInstance(){
+        if (stu == null) {
+            stu = new StudentPanel_Welcome();
+        }
+        return stu;
     }
     
     /**
@@ -76,6 +86,7 @@ public class StudentPanel_Welcome extends JPanel {
      */
     private void initComponents() {
         
+        this.removeAll();
         usernameLabel = new JLabel();
         schedule = new CheckBoxTable();
         registerButton = new JButton();
@@ -94,7 +105,7 @@ public class StudentPanel_Welcome extends JPanel {
         
         welcomeText = getWelcomeText();
         
-        
+        //<editor-fold defaultstate="collapsed" desc="gridBag">
         //Row One
         usernameLabel.setText(welcomeText);
         welcomeFont = usernameLabel.getFont();
@@ -242,11 +253,16 @@ public class StudentPanel_Welcome extends JPanel {
             gbc.insets = new Insets(10,5,20,10); //top, left, bottom, right
             gbc.anchor = gbc.CENTER; 
         this.add(logoutButton, gbc);
+        //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
         getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
+        
         setOpaque(false);
+        
+        this.revalidate();
+        this.repaint();
     }      
     
     /**
@@ -293,7 +309,17 @@ public class StudentPanel_Welcome extends JPanel {
      * @param evt idk lol
      */
     private void logoutButtonActionPerformed(ActionEvent evt) {
+        SwingUtilities.getWindowAncestor(this).setVisible(false);
+        LoginFrame loginFrame = new LoginFrame();
+        loginFrame.setIconImage(MainClass.img.getImage());
+        loginFrame.setTitle(MainClass.UNI_NAME);
+
+        loginFrame.setDefaultCloseOperation(LoginFrame.EXIT_ON_CLOSE);
+        loginFrame.pack();
+
+        loginFrame.setVisible(true);
         
+        SwingUtilities.getWindowAncestor(this).dispose();
     }
 
     /**

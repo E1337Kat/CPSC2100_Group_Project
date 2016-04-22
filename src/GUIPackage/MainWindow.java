@@ -91,24 +91,25 @@ public class MainWindow extends JFrame {
         
         revalidate();
         setSize(750,600);
-        
+        /*
         Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
-        instructorPane.addData(objs);
+        instructorPane.addData(objs, 1);
         
         objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
-        instructorPane.addData(objs);
+        instructorPane.addData(objs, 1);
         
         objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
-        instructorPane.addData(objs);
+        instructorPane.addData(objs, 1);
         
         objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
-        instructorPane.addData(objs);
+        instructorPane.addData(objs, 1);
         
         objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
-        instructorPane.addData(objs);
+        instructorPane.addData(objs, 1);
         
         objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
-        instructorPane.addData(objs);
+        instructorPane.addData(objs, 1);
+        */
     }  
     
     /**

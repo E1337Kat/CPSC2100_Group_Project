@@ -19,9 +19,11 @@ import javax.swing.border.*;
  *
  * @author ellie
  */
-public class StudentPanel_AddDrop extends JPanel {
+public class StudentPanel_Register extends JPanel {
 
     // Variables declaration 
+    private static StudentPanel_Register stu = null;
+    
     private JLabel titleLabel;
     private CheckBoxTable catalog;
     private JTextField regField1;
@@ -42,8 +44,15 @@ public class StudentPanel_AddDrop extends JPanel {
     /**
      * Creates new form StudentPanel_AddDrop
      */
-    public StudentPanel_AddDrop() {
+    private StudentPanel_Register() {
         
+    }
+    
+    public static StudentPanel_Register getStudentRegInstance(){
+        if (stu == null) {
+            stu = new StudentPanel_Register();
+        }
+        return stu;
     }
 
     public void initMe() {
@@ -51,6 +60,8 @@ public class StudentPanel_AddDrop extends JPanel {
     }
        
     private void initComponents() {
+        
+        this.removeAll();
         
         NumberFormat crnFormat = NumberFormat.getInstance();
         if (crnFormat instanceof DecimalFormat) {
@@ -82,6 +93,7 @@ public class StudentPanel_AddDrop extends JPanel {
         
         titleText = getTitleText();
 
+        //<editor-fold desc="gridBag">
         //Row One
         titleLabel.setText(titleText);
         titleFont = titleLabel.getFont();
@@ -216,12 +228,15 @@ public class StudentPanel_AddDrop extends JPanel {
             gbc.gridx = 4;
             gbc.insets = new Insets(10,2,20,10); //top, left, bottom, right
         this.add(logoutButton, gbc);
-        
+        //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
         getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
         setOpaque(false);
+        
+        this.revalidate();
+        this.repaint();
     }      
     
     /**

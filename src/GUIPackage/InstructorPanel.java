@@ -57,8 +57,18 @@ public class InstructorPanel extends JPanelwithBackground {
         return cards;
     }
     
-    public void addData(Object[] o) {
-        instructorInfo.addData(o);
+    protected void addData(Object[] o, int context) {
+        switch (context) {
+            case 0:
+                instructorWelcome.addData(o);
+                break;
+            case 1:
+                instructorInfo.addData(o);
+                break;
+            default:
+                throw new UnsupportedOperationException("Error: Context for " + this.getName() + ".addData(Object[], int) must be 0 or 1");
+        }    
+        ;
     }
     
     /**
