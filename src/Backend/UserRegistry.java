@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PossibleNewBackend;
+package Backend;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.*;
@@ -21,7 +21,19 @@ public class UserRegistry implements Registry{
     ArrayList<User> users = new ArrayList<User>();
     Security sec = new Security();
     //initializing ArrayList of User objects
-    CourseCatalog catalog = new CourseCatalog();
+    CourseCatalog catalog = CourseCatalog.getCourseCatalogInstance();
+    private static UserRegistry userReg = null;
+    
+    private UserRegistry(){
+        
+    }
+    
+    public static UserRegistry getUserRegistryInstance(){
+        if(userReg == null){
+            userReg = new UserRegistry();
+        }
+        return userReg;
+    }
     
     
     /**
@@ -176,12 +188,10 @@ public class UserRegistry implements Registry{
      * @param pass the password of the user
      * @return User if the login was valid it returns the user object, else it returns null
      */
-    public User getUser(String user, String pass){
+    public User getUser(String user){
         for(User u : this.users){
             if(u.getUsername().equals(user)){
-                if(u.getPassword().equals(pass)){
-                    return u;
-                }
+                return u;
             }
         }
         return null;

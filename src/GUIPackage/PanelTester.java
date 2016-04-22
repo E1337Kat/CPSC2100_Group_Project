@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUIPackage;
-
+import Backend.*;
 import java.awt.*;
 import javax.swing.*;
 

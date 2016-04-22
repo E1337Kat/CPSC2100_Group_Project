@@ -31,9 +31,7 @@ public class LoginFrame extends JFrame
     private JLabel passwordLabel;
     private JPasswordField passwordTextField;
     private JTextField usernameTextField;
-    private final AdminRegistry adminReg;
-    private final InstructorRegistry instructorReg;
-    private final StudentRegistry stuReg;
+    private final UserRegistry userReg;
     private Object bean;
     public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
     // End of variables declaration 
@@ -42,9 +40,7 @@ public class LoginFrame extends JFrame
      * Creates new customizer Login 
      */
     public LoginFrame() {
-        adminReg = Singleton.getAdminRegInstance();
-        instructorReg = Singleton.getInstructorRegInstance();
-        stuReg = Singleton.getStuRegInstance();
+        userReg = UserRegistry.getUserRegistryInstance();
         
         //setIconImage(img.getImage());
         //setTitle("University of FtS");
@@ -155,12 +151,16 @@ public class LoginFrame extends JFrame
         return usernameTextField.getText();
     }
     
+    public String getPassword(){
+        return passwordTextField.getSelectedText();
+    }
+    
     /**
      * Checks the registries to see if the username entered is a valid username
      * @return true on valid username, false elsewhere
      */
     private boolean isValidUser() {
-        if(adminReg.isAdmin(getUsername()) || instructorReg.isInstructor(getUsername()) || stuReg.isStudent(getUsername()) ) {
+        if(userReg.checkLogin(getUsername(), getPassword())) {
             return true;
         }
         else {

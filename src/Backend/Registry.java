@@ -7,8 +7,9 @@ package Backend;
 
 /**
  *
- * @author EllieKat
+ * @author Will
  */
 public interface Registry {
-    
+    public void writeFile();
+    public void readFile();
 }

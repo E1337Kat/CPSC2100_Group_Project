@@ -22,7 +22,7 @@ public class MainClass {
     * Start of Main thread
     */
     public static void main(String args[]) {
-        Singleton.getInstance();
+        
         
         /* Set Look and Feel of program to system look and feel if possible*/
         initLookAndFeel();
