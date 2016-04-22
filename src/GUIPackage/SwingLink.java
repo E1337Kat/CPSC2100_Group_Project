@@ -94,7 +94,7 @@ public class SwingLink extends JLabel {
     /**
      * sets text of link and sets link look and feel
      * @param text text to display
-     * @param ul boolean for something
+     * @param ul boolean for checking underline
      */
     public void setText(String text, boolean ul){
         String link = ul ? "<u>"+text+"</u>" : text;
