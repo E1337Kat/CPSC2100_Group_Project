@@ -15,6 +15,9 @@ public class AdminPanel_AddDropStudent extends javax.swing.JPanel {
      * Creates new form AdminPanel_AddDropStudent
      */
     public AdminPanel_AddDropStudent() {
+    }
+    
+    public void initMe() {
         initComponents();
     }
 

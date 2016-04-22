@@ -50,8 +50,22 @@ public class PanelTester extends JFrame {
         Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
         testPane.addData(objs);
         
-        Object[] moreObjs = {"Kiddo", "Beatrice", "bok564", "bok@fts.edu"};
-        testPane.addData(moreObjs);
+        objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
+        testPane.addData(objs);
+        
+        //testPane.sortClassList(2);
     }     
     
     public static void main(String args[]) {

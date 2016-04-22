@@ -57,6 +57,10 @@ public class InstructorPanel extends JPanelwithBackground {
         return cards;
     }
     
+    public void addData(Object[] o) {
+        instructorInfo.addData(o);
+    }
+    
     /**
      * Creates new form Student
      * @throws IOException

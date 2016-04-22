@@ -14,7 +14,9 @@ import javax.swing.*;
  * @author Ellie Peterson
  */
 public class MainClass {
-    static final String LOOKANDFEEL = "System";
+    private static final User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
+    //public static UserRegistry userReg = UserRegistry.getUserRegistryInstance();
+    public static final String LOOKANDFEEL = "System";
     private static final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
     private static final String UNI_NAME = "University of FtS";
 
@@ -24,6 +26,7 @@ public class MainClass {
     public static void main(String args[]) {
         
         
+        //userReg.addUser(SYSADMIN);
         /* Set Look and Feel of program to system look and feel if possible*/
         initLookAndFeel();
         

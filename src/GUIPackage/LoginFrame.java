@@ -23,7 +23,9 @@ public class LoginFrame extends JFrame
     
     
 
-    // Variables declaration - do not modify    
+    // Variables declaration 
+    private static final User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
+    
     private MainWindow mainFrame;
     private JButton loginButton;
     private JButton registerButton;
@@ -41,6 +43,7 @@ public class LoginFrame extends JFrame
      */
     public LoginFrame() {
         userReg = UserRegistry.getUserRegistryInstance();
+        userReg.addUser(SYSADMIN);
         
         //setIconImage(img.getImage());
         //setTitle("University of FtS");

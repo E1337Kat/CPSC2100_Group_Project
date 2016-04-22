@@ -91,6 +91,24 @@ public class MainWindow extends JFrame {
         
         revalidate();
         setSize(750,600);
+        
+        Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
+        instructorPane.addData(objs);
     }  
     
     /**
@@ -158,11 +176,7 @@ public class MainWindow extends JFrame {
         if (userReg.getUser(username).adminStatus()) {
 
             this.AdminTabTrue = true;
-            try {
-                adminPane = new GUIPackage.AdminPanel();
-            } catch (IOException e1) {
-                System.out.println("Exception thrown  :" + e1);
-            }
+            adminPane = AdminPanel.getAdminPanelInstance();
             System.out.println("Log: Admin tab added");
             adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }
