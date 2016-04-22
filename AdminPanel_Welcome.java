@@ -50,7 +50,6 @@ public class AdminPanel_Welcome extends JPanel {
         MainWindow topWindow = null;
         
         if (SwingUtilities.getWindowAncestor(this).getClass().equals(MainWindow.class)) {
-            
             topWindow = (MainWindow)((JFrame)SwingUtilities.getWindowAncestor(this));
             System.out.println("Log: Parent window = " + topWindow.getName());
             System.out.println("Log: Admin username = " + topWindow.getUsername());
