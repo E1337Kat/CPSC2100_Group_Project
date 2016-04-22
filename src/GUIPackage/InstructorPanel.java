@@ -6,9 +6,6 @@
 package GUIPackage;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 import java.io.*;
 import javax.swing.*;
 
@@ -18,16 +15,16 @@ import javax.swing.*;
  */
 public class InstructorPanel extends JPanelwithBackground {    
     
-// Variables declaration - do not modify 
-    private JPanel cards;
+// Variables declaration 
     public static final String WELCOME = "welcome";
     public static final String INFO = "info";
     public static final String MODIFY = "modify";
+    
+    private JPanel cards;
     private static InstructorPanel instPane = null;
     private InstructorPanel_Info instructorInfo;
     private InstructorPanel_Welcome instructorWelcome;
     private InstructorPanel_ModifyCourse instructorModify;
-    private int context;
     // End of variables declaration 
 
     /**
@@ -53,51 +50,17 @@ public class InstructorPanel extends JPanelwithBackground {
     }
     
     /**
-     * Switches between welcome and modify views
+     * Gets card holder
+     * @return Panel that is card holder
      */
-    public void switchPane(Container child) {
-        
-        if (child.getClass().equals(StudentPanel_Welcome.class)) {
-            context = 0;
-        } else if (child.getClass().equals(StudentPanel_AddDrop.class)) {
-            context = 1;
-        } 
-        
-        switch(context) {
-            case 0:
-                instructorWelcome.setVisible(false);
-                instructorInfo.setVisible(true);
-                
-                System.out.println("log: Student Add/Drop displayed");
-                break;
-            case 1:
-                instructorInfo.setVisible(false);
-                instructorWelcome.setVisible(true);
-                
-                System.out.println("log: Student Welcome displayed");
-                break;
-            default:
-                System.err.println("No window to show");
-                break;
-        }
-        
-        revalidate();
-    
-        
-    }
-    
-    /*
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        CardLayout cl = (CardLayout)(cards.getLayout());
-        cl.show(cards, evt.getActionCommand());
-    }
-    */
-
-    
     public JPanel getCards() {
         return cards;
     }
+    
+    public void addData(Object[] o) {
+        instructorInfo.addData(o);
+    }
+    
     /**
      * Creates new form Student
      * @throws IOException
@@ -108,19 +71,10 @@ public class InstructorPanel extends JPanelwithBackground {
     }
     
     /**
-     * Gets the child class of this panel
-     * @return child container
-     */
-    private Container getChildClass() {
-        return new StudentPanel_Welcome();
-    }
-    
-    /**
      * Sets the look and displays the gui
      */                      
     private void initComponents() {
 
-        //setName("GUIPackage.InstructorPanel");
         getAccessibleContext().setAccessibleName("Instructor Panel");
         instructorWelcome = new InstructorPanel_Welcome();
         instructorInfo = new InstructorPanel_Info();
@@ -135,29 +89,26 @@ public class InstructorPanel extends JPanelwithBackground {
         cards.add(instructorInfo, INFO);
         instructorModify.setLayout(null);
         cards.add(instructorModify, MODIFY);
-        //setBackground(new java.awt.Color(255, 255, 255));
-        //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         cards.setOpaque(false);
         this.add(cards);
-        //instructorWelcome.setLayout(null);
-        //cards.add(instructorWelcome);
+        
+        //init and show instructor welcome
         instructorWelcome.initMe();
         instructorWelcome.setVisible(true);
         System.out.println("log: Instructor Welcome displayed");
 
-        //instructorInfo.setLayout(new java.awt.GridBagLayout());
-        //this.add(instructorInfo);
+        //init and do not show instructor info
         instructorInfo.initMe();
         instructorInfo.setVisible(false);
         System.out.println("log: Instructor Info not displayed");
         
-        
+        //init and do not show modify
         instructorModify.initMe();
         instructorModify.setVisible(false);
         System.out.println("Log: Instructor Modify not displayed");
         
-        //setOpaque(false);
+        
         revalidate();
         repaint();
     }           

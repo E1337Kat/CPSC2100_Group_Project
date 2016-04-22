@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUIPackage;
-
+import Backend.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -16,7 +16,7 @@ public class PanelTester extends JFrame {
     
     
     // Variables declaration - do not modify  
-    private InstructorPanel testPane;
+    private InstructorPanel_Info testPane;
     private final String username = "Panel T. Ester";
     // End of variables declaration   
     
@@ -32,7 +32,7 @@ public class PanelTester extends JFrame {
         
     private void initComponents() {
 
-        testPane = InstructorPanel.getInstructorPanelInstance();
+        testPane = new InstructorPanel_Info();
         testPane.setLayout(new GridBagLayout());
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +48,24 @@ public class PanelTester extends JFrame {
         setSize(750, 600);
         
         Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
-        //testPane.addData(objs);
+        testPane.addData(objs);
+        
+        objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
+        testPane.addData(objs);
+        
+        objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
+        testPane.addData(objs);
+        
+        //testPane.sortClassList(2);
     }     
     
     public static void main(String args[]) {

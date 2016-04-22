@@ -25,9 +25,8 @@ public class MainWindow extends JFrame {
     private InstructorPanel instructorPane;
     private StudentPanel studentPane;
     
-    private AdminRegistry adminReg = null;
-    private InstructorRegistry instructorReg = null;
-    private StudentRegistry stuReg = null;
+    private UserRegistry userReg = null;
+    private CourseCatalog courseReg = null;
     
     private boolean AdminTabTrue = false;
     private boolean InstTabTrue = false;
@@ -43,9 +42,8 @@ public class MainWindow extends JFrame {
      */
     public MainWindow(String u) {
         username = u;
-        adminReg = Singleton.getAdminRegInstance();
-        instructorReg = Singleton.getInstructorRegInstance();
-        stuReg = Singleton.getStuRegInstance();
+        userReg = UserRegistry.getUserRegistryInstance();
+        courseReg = CourseCatalog.getCourseCatalogInstance();
         
         setIconImage(img.getImage());
         setTitle("University of FtS");
@@ -71,12 +69,14 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Admin tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Administrator", adminPane);
             adminPane.initMe();
+            System.out.println("Log: Admin tab initialized");
             //adminPane.setVisible(AdminTabTrue);
         }
         if (InstTabTrue) {
             System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Teacher", instructorPane);
             instructorPane.initMe();
+            System.out.println("Log: Instructor tab initialized");
             //instructorPane.setVisible(InstTabTrue);
         }
         if (StuTabTrue) {
@@ -91,6 +91,24 @@ public class MainWindow extends JFrame {
         
         revalidate();
         setSize(750,600);
+        
+        Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
+        instructorPane.addData(objs);
+        
+        objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
+        instructorPane.addData(objs);
     }  
     
     /**
@@ -135,7 +153,7 @@ public class MainWindow extends JFrame {
     private void checkPermissions(){
 
         //Checks if student
-        if ( adminReg.isAdmin(username) || stuReg.isStudent(username)  ) {
+        if ( userReg.getUser(username).adminStatus() || userReg.getUser(username).studentStatus()  ) {
 
             this.StuTabTrue = true;
             studentPane = StudentPanel.getStudentPanelInstance();
@@ -145,7 +163,7 @@ public class MainWindow extends JFrame {
         }
         
         //checks if Instructor
-        if ( adminReg.isAdmin(username) || instructorReg.isInstructor(username) ) {
+        if ( userReg.getUser(username).adminStatus() || userReg.getUser(username).instructorStatus() ) {
 
             this.InstTabTrue = true;
             instructorPane = InstructorPanel.getInstructorPanelInstance();
@@ -155,14 +173,10 @@ public class MainWindow extends JFrame {
         }
         
         //checks if Admin
-        if (adminReg.isAdmin(username)) {
+        if (userReg.getUser(username).adminStatus()) {
 
             this.AdminTabTrue = true;
-            try {
-                adminPane = new GUIPackage.AdminPanel();
-            } catch (IOException e1) {
-                System.out.println("Exception thrown  :" + e1);
-            }
+            adminPane = AdminPanel.getAdminPanelInstance();
             System.out.println("Log: Admin tab added");
             adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }

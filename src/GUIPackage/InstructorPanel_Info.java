@@ -48,8 +48,12 @@ public class InstructorPanel_Info extends JPanel {
         initComponents();
     }
     
-    public void addData(Object[] objs) {
-        classList.addData(objs);
+    public void addData(Object[] o) {
+        classList.addData(o);
+    }
+    
+    public void sortClassList(int colToSortBy) {
+        classList.sortData(colToSortBy);
     }
     
     /***********************************************************************
@@ -272,6 +276,7 @@ public class InstructorPanel_Info extends JPanel {
      * ACTION LISTENERS SECTION
      **********************************************************************/
 
+    
     /**
      * Action event for button press
      * @param evt idk lol

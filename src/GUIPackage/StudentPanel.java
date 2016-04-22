@@ -15,11 +15,16 @@ import javax.swing.*;
  */
 public class StudentPanel extends JPanelwithBackground {    
     
-// Variables declaration - do not modify 
+// Variables declaration 
+    public static final String WELCOME = "welcome";
+    public static final String REGISTER = "Register";
+    public static final String INFO = "modify";
+    
+    private JPanel cards;
     private static StudentPanel stuPane = null;
-    private StudentPanel_AddDrop modifySchedule;
+    private StudentPanel_AddDrop registerCourses;
     private StudentPanel_Welcome studentWelcome;
-    private int context;
+    private StudentPanel_Info courseInfo;
     // End of variables declaration 
 
     /**
@@ -45,37 +50,11 @@ public class StudentPanel extends JPanelwithBackground {
     }
     
     /**
-     * Switches between welcome and modify views
+     * gets card holder
+     * @return Jpanel that is card holder
      */
-    public void switchPane(Container child) {
-        
-        if (child.getClass().equals(StudentPanel_Welcome.class)) {
-            context = 0;
-        } else if (child.getClass().equals(StudentPanel_AddDrop.class)) {
-            context = 1;
-        } 
-        
-        switch(context) {
-            case 0:
-                studentWelcome.setVisible(false);
-                modifySchedule.setVisible(true);
-                
-                System.out.println("log: Student Add/Drop displayed");
-                break;
-            case 1:
-                modifySchedule.setVisible(false);
-                studentWelcome.setVisible(true);
-                
-                System.out.println("log: Student Welcome displayed");
-                break;
-            default:
-                System.err.println("No window to show");
-                break;
-        }
-        
-        revalidate();
-    
-        
+    public JPanel getCards() {
+        return cards;
     }
     
     /**
@@ -83,15 +62,8 @@ public class StudentPanel extends JPanelwithBackground {
      * @throws IOException
      */
     private StudentPanel() throws IOException {
+        setName("GUIPackage.StudentPanel");
         setLayout(new GridBagLayout());
-    }
-    
-    /**
-     * Gets the child class of this panel
-     * @return child container
-     */
-    private Container getChildClass() {
-        return new StudentPanel_Welcome();
     }
     
     /**
@@ -99,25 +71,35 @@ public class StudentPanel extends JPanelwithBackground {
      */                      
     private void initComponents() {
 
+        getAccessibleContext().setAccessibleName("Student Panel");
         studentWelcome = new StudentPanel_Welcome();
-        modifySchedule = new StudentPanel_AddDrop();
+        registerCourses = new StudentPanel_AddDrop();
+        courseInfo = new StudentPanel_Info();
 
-        
-        //setBackground(new java.awt.Color(255, 255, 255));
-        //setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        
+        cards = new JPanel(new CardLayout());
+        cards.setName("cards");
+       
         studentWelcome.setLayout(null);
-        this.add(studentWelcome);
+        cards.add(studentWelcome, WELCOME);
+        registerCourses.setLayout(null);
+        cards.add(registerCourses, REGISTER);
+        courseInfo.setLayout(null);
+        cards.add(courseInfo, INFO);
+        
+        cards.setOpaque(false);
+        this.add(cards);
+        
         studentWelcome.initMe();
         studentWelcome.setVisible(true);
-        System.out.println("log: Student Welcome displayed");
+        System.out.println("Log: Student Welcome displayed");
 
-        modifySchedule.setLayout(new java.awt.GridBagLayout());
-        this.add(modifySchedule);
-        modifySchedule.initMe();
-        modifySchedule.setVisible(false);
-        System.out.println("log: Student Add/Drop not displayed");
+        registerCourses.initMe();
+        registerCourses.setVisible(false);
+        System.out.println("Log: Student Register not displayed");
+        
+        courseInfo.initMe();
+        courseInfo.setVisible(false);
+        System.out.println("Log: Student Info not displayed");
         
         revalidate();
         repaint();

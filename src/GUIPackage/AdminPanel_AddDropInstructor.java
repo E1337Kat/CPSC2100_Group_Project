@@ -15,6 +15,9 @@ public class AdminPanel_AddDropInstructor extends javax.swing.JPanel {
      * Creates new form AdminPanel_AddDropInstructor
      */
     public AdminPanel_AddDropInstructor() {
+    }
+    
+    public void initMe() {
         initComponents();
     }
 
