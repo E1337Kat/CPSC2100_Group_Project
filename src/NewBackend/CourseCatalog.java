@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PossibleNewBackend;
+package Backend;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.io.PrintWriter;
@@ -17,6 +17,19 @@ import java.util.Scanner;
 public class CourseCatalog implements Registry{
     ArrayList<Course> courses = new ArrayList<Course>();
     //initializing ArrayList of courses
+    
+    private static CourseCatalog catalog = null;
+    
+    private CourseCatalog(){
+        
+    }
+    
+    public static CourseCatalog getCourseCatalogInstance(){
+        if(catalog == null){
+            catalog = new CourseCatalog();
+        }
+        return catalog;
+    }
     
     public void writeFile(){
         //use write function from user class to write courses

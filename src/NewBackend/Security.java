@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PossibleNewBackend;
+package Backend;
 //Source: http://www.rosettacode.org/wiki/Caesar_cipher#Java
 /**
  *

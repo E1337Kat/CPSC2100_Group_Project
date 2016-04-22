@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PossibleNewBackend;
+package Backend;
 import java.util.ArrayList;
 /**
  * A class that creates course objects
