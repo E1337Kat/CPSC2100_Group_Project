@@ -5,12 +5,17 @@
  */
 package GUIPackage;
 
+import Backend.Course;
+import Backend.CourseCatalog;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Iterator;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -68,8 +73,10 @@ public class StudentPanel_Register extends JPanel {
             ((DecimalFormat) crnFormat).setDecimalSeparatorAlwaysShown(false);
          }
         
+        String[] col = {"CRN", "Title", "Course Name", "Enrolled", "Cap", "Days", "Start", "End", "Location"};
+        
         titleLabel = new JLabel();
-        catalog = new CheckBoxTable();
+        catalog = new CheckBoxTable(col, col.length);
         regField1 = new JFormattedTextField(crnFormat);
         regField2 = new JFormattedTextField(crnFormat);
         regField3 = new JFormattedTextField(crnFormat);
@@ -92,6 +99,8 @@ public class StudentPanel_Register extends JPanel {
         this.setLayout(gridBag);
         
         titleText = getTitleText();
+        
+        populateTable();
 
         //<editor-fold desc="gridBag">
         //Row One
@@ -317,5 +326,25 @@ public class StudentPanel_Register extends JPanel {
         
     }
 
-                    
+    private void populateTable() {
+        Course c = null;
+        Object[] o = new Object[catalog.getColNum()];
+        
+        Iterator<Course> it = CourseCatalog.getCourseCatalogInstance().getCourseCatalogArray().iterator();
+        
+        c = it.next();
+        while(it.hasNext()) {
+            o[0] = c.getCRN(); 
+            o[1] = c.getDepartment();
+            o[2] = c.getName(); 
+            o[3] = c.getStudentsEnrolled(); 
+            o[4] = c.getMaxStudentsAllowed(); 
+            o[5] = c.getDays(); 
+            o[6] = c.getStartTime(); 
+            o[7] = c.getEndTime(); 
+            o[8] = c.getLocation();
+            
+            catalog.addData(o);
+        }
+    }          
 }

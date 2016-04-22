@@ -244,6 +244,10 @@ public class CheckBoxTable extends JPanel {
         setOpaque(false);*/
     }
     
+    public int getColNum() {
+        return colNum-1;
+    }
+    
     private void doMergeSort( int colToSortBy, int low, int up ) {
         if (low < up) {
             int mid = low + (up-low) / 2;
