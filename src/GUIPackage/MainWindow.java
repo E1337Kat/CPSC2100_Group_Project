@@ -25,8 +25,8 @@ public class MainWindow extends JFrame {
     private InstructorPanel instructorPane;
     private StudentPanel studentPane;
     
-    private UserRegistry userReg = null;
-    private CourseCatalog courseReg = null;
+    protected UserRegistry userReg = null;
+    protected CourseCatalog courseReg = null;
     
     private boolean AdminTabTrue = false;
     private boolean InstTabTrue = false;
@@ -55,8 +55,6 @@ public class MainWindow extends JFrame {
     */                    
     private void initComponents() {
 
-       GridBagConstraints gbc;
-        
         cardTabbedPane = new JTabbedPane();
         System.out.println("Log: Tabbed pane initilized.");
         
@@ -87,29 +85,12 @@ public class MainWindow extends JFrame {
             //studentPane.setVisible(StuTabTrue);
         }
         
+        
         this.add(cardTabbedPane);
         
         revalidate();
         setSize(750,600);
-        /*
-        Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
-        instructorPane.addData(objs, 1);
         
-        objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
-        instructorPane.addData(objs, 1);
-        
-        objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
-        instructorPane.addData(objs, 1);
-        
-        objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
-        instructorPane.addData(objs, 1);
-        
-        objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
-        instructorPane.addData(objs, 1);
-        
-        objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
-        instructorPane.addData(objs, 1);
-        */
     }  
     
     /**

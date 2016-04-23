@@ -5,10 +5,12 @@
  */
 package GUIPackage;
 
+import Backend.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -21,9 +23,11 @@ public class StudentPanel_Welcome extends JPanel {
 
     // Variables declaration
     private static StudentPanel_Welcome stu;
+    private User user;
+    private Schedule stuSchedule;
     
     private JLabel usernameLabel;
-    private JPanel schedule;
+    private CheckBoxTable schedule;
     private JButton registerButton;
     private JButton deleteCourseButton;
     private JButton printScheduleButton;
@@ -31,11 +35,13 @@ public class StudentPanel_Welcome extends JPanel {
     private SwingLink helpLink;
     private JButton logoutButton;
     // End of variables declaration
+    private static final int WELCOME_SCHEDULE_SIZE = 9;
     
     /**
      * Creates new form StudentPanel_Welcome
      */
     private StudentPanel_Welcome() {
+        
     }
     
     public static StudentPanel_Welcome getStudentWelcomeInstance(){
@@ -87,8 +93,11 @@ public class StudentPanel_Welcome extends JPanel {
     private void initComponents() {
         
         this.removeAll();
+        
+        String[] col = {"CRN", "Title", "Name", "Days", "Start", "End", "Location"};
+        
         usernameLabel = new JLabel();
-        schedule = new CheckBoxTable();
+        schedule = new CheckBoxTable(col, col.length);
         registerButton = new JButton();
         deleteCourseButton = new JButton();
         printScheduleButton = new JButton();
@@ -104,6 +113,8 @@ public class StudentPanel_Welcome extends JPanel {
         this.setLayout(gridBag);
         
         welcomeText = getWelcomeText();
+        
+        
         
         //<editor-fold defaultstate="collapsed" desc="gridBag">
         //Row One
@@ -261,6 +272,9 @@ public class StudentPanel_Welcome extends JPanel {
         
         setOpaque(false);
         
+        this.user = UserRegistry.getUserRegistryInstance().getUser(getUsername());
+        //populateTable();
+        
         this.revalidate();
         this.repaint();
     }      
@@ -329,5 +343,25 @@ public class StudentPanel_Welcome extends JPanel {
     private String getWelcomeText() {
         return "Welcome " + getUsername();
     }
-                     
+              
+    private void populateTable() {
+        Course c = null;
+        
+        Object[] o = new Object[WELCOME_SCHEDULE_SIZE];
+        
+        System.out.println("Log: Logged in student has schedule: \n    " + user.getScheduleObject().toString());
+        
+        for (int i = 0; i < user.getSchedule().size(); i++) {
+            c = (Course)user.getSchedule().get(i);
+            o[0] = c.getCRN(); 
+            o[1] = c.getDepartment();
+            o[2] = c.getName(); 
+            o[5] = c.getDays(); 
+            o[6] = c.getStartTime(); 
+            o[7] = c.getEndTime(); 
+            o[8] = c.getLocation();
+            
+            schedule.addData(o);
+        }
+    }
 }

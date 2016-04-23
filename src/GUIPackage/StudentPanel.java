@@ -73,6 +73,8 @@ public class StudentPanel extends JPanelwithBackground {
 
         this.removeAll();
         
+        
+        
         getAccessibleContext().setAccessibleName("Student Panel");
         studentWelcome = StudentPanel_Welcome.getStudentWelcomeInstance();
         registerCourses = StudentPanel_Register.getStudentRegInstance();
@@ -89,7 +91,12 @@ public class StudentPanel extends JPanelwithBackground {
         cards.add(courseInfo, INFO);
         
         cards.setOpaque(false);
-        this.add(cards);
+        GridBagConstraints gbc = new GridBagConstraints();
+            gbc.ipadx = 10;
+            gbc.ipady = 10;
+            gbc.anchor = gbc.CENTER;
+            gbc.fill = gbc.BOTH;
+        this.add(cards, gbc);
         
         studentWelcome.initMe();
         studentWelcome.setVisible(true);

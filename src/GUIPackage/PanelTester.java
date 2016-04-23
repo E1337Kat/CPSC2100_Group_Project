@@ -16,7 +16,7 @@ public class PanelTester extends JFrame {
     
     
     // Variables declaration - do not modify  
-    private InstructorPanel_Info testPane;
+    private StudentPanel testPane;
     private final String username = "Panel T. Ester";
     // End of variables declaration   
     
@@ -32,7 +32,7 @@ public class PanelTester extends JFrame {
         
     private void initComponents() {
 
-        testPane = new InstructorPanel_Info();
+        testPane = StudentPanel.getStudentPanelInstance();
         testPane.setLayout(new GridBagLayout());
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -42,11 +42,13 @@ public class PanelTester extends JFrame {
         
 
         //initialize testpanes components
+        
         add(testPane);
         testPane.initMe();
         revalidate();
         setSize(750, 600);
         
+        /*
         Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
         testPane.addData(objs);
         
@@ -64,6 +66,7 @@ public class PanelTester extends JFrame {
         
         objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
         testPane.addData(objs);
+        */
         
         //testPane.sortClassList(2);
     }     

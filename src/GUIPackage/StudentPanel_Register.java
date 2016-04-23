@@ -331,8 +331,10 @@ public class StudentPanel_Register extends JPanel {
         Object[] o = new Object[catalog.getColNum()];
         
         Iterator<Course> it = CourseCatalog.getCourseCatalogInstance().getCourseCatalogArray().iterator();
+        if (it.hasNext()) {
+            c = it.next();
+        }
         
-        c = it.next();
         while(it.hasNext()) {
             o[0] = c.getCRN(); 
             o[1] = c.getDepartment();

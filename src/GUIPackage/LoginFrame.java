@@ -91,7 +91,7 @@ public class LoginFrame extends JFrame
         gBC.insets = new Insets(90, 100, 0, 0);
         add(loginLabel, gBC);
 
-        usernameTextField.setText("Username");
+        //usernameTextField.setText("Username");
         usernameTextField.setEditable(true);
         gBC = new GridBagConstraints();
         gBC.gridx = 3;
@@ -112,7 +112,7 @@ public class LoginFrame extends JFrame
         gBC.insets = new Insets(20, 100, 0, 0);
         add(passwordLabel, gBC);
 
-        passwordTextField.setText("pass");
+        //passwordTextField.setText("pass");
         passwordTextField.setEditable(true);
         gBC = new GridBagConstraints();
         gBC.gridx = 3;

@@ -17,7 +17,7 @@ import javax.swing.table.*;
 public class CheckBoxTable extends JPanel {
     
 // Variables declaration
-    private GTableModel tableModel;
+    private DefaultTableModel tableModel;
     private String col[];
     private int colNum;
     
@@ -90,7 +90,7 @@ public class CheckBoxTable extends JPanel {
         
         //add table to screen and display
         customTable = new JTable(tableModel);
-        tableModel.addMouseListenerToHeaderInTable(customTable);
+        //tableModel.addMouseListenerToHeaderInTable(customTable);
         scrollPane.setViewportView(customTable);
         customTable.setAutoCreateRowSorter(true);
         if (customTable.getColumnModel().getColumnCount() > 0) {
@@ -139,7 +139,7 @@ public class CheckBoxTable extends JPanel {
         tableModel.removeRow(rowNum);
         
         customTable = new JTable(tableModel);
-        tableModel.addMouseListenerToHeaderInTable(customTable);
+        //tableModel.addMouseListenerToHeaderInTable(customTable);
         scrollPane.setViewportView(customTable);
         customTable.setAutoCreateRowSorter(true);
         if (customTable.getColumnModel().getColumnCount() > 0) {
@@ -341,7 +341,7 @@ public class CheckBoxTable extends JPanel {
         tableModel.addRow(objs);
         */
         customTable = new JTable(tableModel);
-        tableModel.addMouseListenerToHeaderInTable(customTable);
+        //tableModel.addMouseListenerToHeaderInTable(customTable);
         scrollPane.setViewportView(customTable);
         if (customTable.getColumnModel().getColumnCount() > 0) {
             customTable.getColumnModel().getColumn(0).setPreferredWidth(20);
