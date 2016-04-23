@@ -273,7 +273,7 @@ public class StudentPanel_Welcome extends JPanel {
         setOpaque(false);
         
         this.user = UserRegistry.getUserRegistryInstance().getUser(getUsername());
-        //populateTable();
+        populateTable();
         
         this.revalidate();
         this.repaint();

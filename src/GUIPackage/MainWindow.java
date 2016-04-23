@@ -67,6 +67,7 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Admin tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Administrator", adminPane);
             adminPane.initMe();
+            adminPane.setSize(1000,7500);
             System.out.println("Log: Admin tab initialized");
             //adminPane.setVisible(AdminTabTrue);
         }
@@ -74,6 +75,7 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Teacher", instructorPane);
             instructorPane.initMe();
+            instructorPane.setSize(1000,7500);
             System.out.println("Log: Instructor tab initialized");
             //instructorPane.setVisible(InstTabTrue);
         }
@@ -81,6 +83,7 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Student tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Student", studentPane);
             studentPane.initMe();
+            studentPane.setSize(1000,7500);
             System.out.println("Log: Student tab initialized");
             //studentPane.setVisible(StuTabTrue);
         }
@@ -89,7 +92,7 @@ public class MainWindow extends JFrame {
         this.add(cardTabbedPane);
         
         revalidate();
-        setSize(750,600);
+        setSize(1280,800);
         
     }  
     
