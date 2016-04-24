@@ -25,7 +25,7 @@ public class UserRegistry implements Registry{
     private static UserRegistry userReg = null;
     
     private UserRegistry(){
-        
+        this.readFile();
     }
     
     public static UserRegistry getUserRegistryInstance(){
@@ -41,7 +41,8 @@ public class UserRegistry implements Registry{
      */
     public void readFile(){
         catalog.readFile();
-        String fileName = "User-Reg.txt";
+        String fileName = "."  + File.separator + "db" + File.separator + "DBPackage" + File.separator + "User-Reg.txt";
+        System.out.println("Log: User-Reg-DB located at: \n    " + fileName);
         String line = null;
         try {
             FileReader fR = new FileReader(fileName);

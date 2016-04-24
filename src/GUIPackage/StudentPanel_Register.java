@@ -73,7 +73,7 @@ public class StudentPanel_Register extends JPanel {
             ((DecimalFormat) crnFormat).setDecimalSeparatorAlwaysShown(false);
          }
         
-        String[] col = {"CRN", "Title", "Course Name", "Enrolled", "Cap", "Days", "Start", "End", "Location"};
+        String[] col = {"CRN", "Title", "Course Name", "Enrolled", "Cap", "Days", "Time", "Location"};
         
         titleLabel = new JLabel();
         catalog = new CheckBoxTable(col, col.length);
@@ -100,7 +100,7 @@ public class StudentPanel_Register extends JPanel {
         
         titleText = getTitleText();
         
-        populateTable();
+        
 
         //<editor-fold desc="gridBag">
         //Row One
@@ -244,6 +244,10 @@ public class StudentPanel_Register extends JPanel {
         
         setOpaque(false);
         
+        System.out.println("Log: In StudentRegister pre populateTable()");
+        populateTable();
+        System.out.println("Log: In StudentRegister post populateTable()");
+        
         this.revalidate();
         this.repaint();
     }      
@@ -329,22 +333,20 @@ public class StudentPanel_Register extends JPanel {
     private void populateTable() {
         Course c = null;
         Object[] o = new Object[catalog.getColNum()];
+        System.out.println("Log: StudentReg Catalog Table col num = " + catalog.getColNum());
         
-        Iterator<Course> it = CourseCatalog.getCourseCatalogInstance().getCourseCatalogArray().iterator();
-        if (it.hasNext()) {
-            c = it.next();
-        }
         
-        while(it.hasNext()) {
+        
+        for (int i = 0; i < CourseCatalog.getCourseCatalogInstance().getCourseCatalogArray().size(); i++) {
+            c = (Course)CourseCatalog.getCourseCatalogInstance().getCourseCatalogArray().get(i);
             o[0] = c.getCRN(); 
             o[1] = c.getDepartment();
             o[2] = c.getName(); 
             o[3] = c.getStudentsEnrolled(); 
             o[4] = c.getMaxStudentsAllowed(); 
             o[5] = c.getDays(); 
-            o[6] = c.getStartTime(); 
-            o[7] = c.getEndTime(); 
-            o[8] = c.getLocation();
+            o[6] = c.getTimeAsString(); 
+            o[7] = c.getLocation();
             
             catalog.addData(o);
         }

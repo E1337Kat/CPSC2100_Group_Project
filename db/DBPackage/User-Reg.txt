@@ -1,0 +1,3 @@
+studentFirstName	studentLastName	studentUsername	abclmvbXiaaewzl	studentEmail@email.com	true	false	false	[11111,11112,11113,]
+instructorFirstName	instructorLastName	instructorUsername	qvabzckbwzXiaaewzl	instructorEmail@email.com	false	true	false	[11111,11112,11113,]
+adminFirstName	adminLastName	adminUsername	iluqvXiaaewzl	adminEmail@email.com	false	false	true	[]

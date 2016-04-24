@@ -14,6 +14,8 @@ import javax.swing.*;
  * @author Ellie Peterson
  */
 public class MainClass {
+    public UserRegistry userReg = UserRegistry.getUserRegistryInstance();
+    
     protected static final Course TESTC1 = new Course("Intro to Sex", 
             "A brief overview of the human body and it's pleasure centers", 
             "MWF", 

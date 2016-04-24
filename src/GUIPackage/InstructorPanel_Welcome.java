@@ -242,13 +242,13 @@ public class InstructorPanel_Welcome extends JPanel {
             
             topWindow = (MainWindow)((JFrame)SwingUtilities.getWindowAncestor(this));
             System.out.println("Log: Parent window = " + topWindow.getName());
-            System.out.println("Log: Student username = " + topWindow.getUsername());
+            System.out.println("Log: Instructor username = " + topWindow.getUsername());
             u = topWindow.getUsername();
         } else if (SwingUtilities.getWindowAncestor(this).getClass().equals(PanelTester.class)) {
             
             testWindow = (PanelTester)((JFrame)SwingUtilities.getWindowAncestor(this));
             System.out.println("Log: Parent window = " + testWindow.getName());
-            System.out.println("Log: Student username = " + testWindow.getUsername());
+            System.out.println("Log: Instructor username = " + testWindow.getUsername());
             u = testWindow.getUsername();
         } else {
             u = "";

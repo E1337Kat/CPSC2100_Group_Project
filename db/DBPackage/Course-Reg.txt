@@ -1,0 +1,3 @@
+[Name1,Desc1,MWF,1100,1150,loc1,dept1,11111,2,25]
+[Name2,Desc2,TTh,1200,1250,loc2,dept2,11112,2,30]
+[Name3,Desc3,MW,800,945,loc3,dept3,11113,2,10]

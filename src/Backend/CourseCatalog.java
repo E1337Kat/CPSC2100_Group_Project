@@ -49,7 +49,7 @@ public class CourseCatalog implements Registry{
     
     public void readFile(){
         //read in courses from text file
-        String fileName = "Course-Reg.txt";
+        String fileName = "."  + File.separator + "db" + File.separator + "DBPackage" + File.separator + "Course-Reg.txt";
         String line = null;
         try {
             FileReader fR = new FileReader(fileName);

@@ -35,7 +35,7 @@ public class StudentPanel_Welcome extends JPanel {
     private SwingLink helpLink;
     private JButton logoutButton;
     // End of variables declaration
-    private static final int WELCOME_SCHEDULE_SIZE = 9;
+    private static final int WELCOME_SCHEDULE_SIZE = 6;
     
     /**
      * Creates new form StudentPanel_Welcome
@@ -94,7 +94,7 @@ public class StudentPanel_Welcome extends JPanel {
         
         this.removeAll();
         
-        String[] col = {"CRN", "Title", "Name", "Days", "Start", "End", "Location"};
+        String[] col = {"CRN", "Title", "Name", "Days", "Time", "Location"};
         
         usernameLabel = new JLabel();
         schedule = new CheckBoxTable(col, col.length);
@@ -272,8 +272,10 @@ public class StudentPanel_Welcome extends JPanel {
         
         setOpaque(false);
         
+        System.out.println("Log: In StudentWelcome pre populateTable()");
         this.user = UserRegistry.getUserRegistryInstance().getUser(getUsername());
         populateTable();
+        System.out.println("Log: In StudentWelcome post populateTable()");
         
         this.revalidate();
         this.repaint();
@@ -356,10 +358,9 @@ public class StudentPanel_Welcome extends JPanel {
             o[0] = c.getCRN(); 
             o[1] = c.getDepartment();
             o[2] = c.getName(); 
-            o[5] = c.getDays(); 
-            o[6] = c.getStartTime(); 
-            o[7] = c.getEndTime(); 
-            o[8] = c.getLocation();
+            o[3] = c.getDays(); 
+            o[4] = c.getTimeAsString();
+            o[5] = c.getLocation();
             
             schedule.addData(o);
         }
