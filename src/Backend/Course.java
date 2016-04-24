@@ -149,6 +149,13 @@ public class Course {
         this.endTime = newTime;
     }
     /**
+     * Method to get the Course time as a String. Format: startTime-endTime
+     * @return String the time of the course
+     */
+    public String getTimeAsString(){
+        return this.getStartTime() + "-" + this.getEndTime();
+    }
+    /**
      * Method to get the location of the course
      * @return location the location of the course
      */
