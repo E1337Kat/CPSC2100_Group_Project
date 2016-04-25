@@ -173,6 +173,9 @@ public class User {
     public Schedule getScheduleObject(){
         return this.s;
     }
+    public void addCourseToSchedule(Course c){
+        this.s.addCourse(c);
+    }
     /**
      * Method to add a fee to a user
      * @param f a new fee to be applied

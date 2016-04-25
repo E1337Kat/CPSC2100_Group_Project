@@ -9,9 +9,7 @@ import java.io.PrintWriter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+
 /**
  * Class to handle reading and writing of a data file
  * @author Will
@@ -21,11 +19,14 @@ public class UserRegistry implements Registry{
     ArrayList<User> users = new ArrayList<User>();
     Security sec = new Security();
     //initializing ArrayList of User objects
+    private static final String fileName = "User-Reg.txt";
+    //ClassLoader cl = getClass().getClassLoader();
+    //File file = new File(fileName);
     CourseCatalog catalog = CourseCatalog.getCourseCatalogInstance();
     private static UserRegistry userReg = null;
     
     private UserRegistry(){
-        
+        this.readFile();
     }
     
     public static UserRegistry getUserRegistryInstance(){
@@ -41,7 +42,7 @@ public class UserRegistry implements Registry{
      */
     public void readFile(){
         catalog.readFile();
-        String fileName = "User-Reg.txt";
+        System.out.println("Log: User-Reg-DB located at: \n    " + fileName);
         String line = null;
         try {
             FileReader fR = new FileReader(fileName);
@@ -130,7 +131,7 @@ public class UserRegistry implements Registry{
      */
     public void writeFile(){
         try{
-            PrintWriter writer = new PrintWriter("User-Reg.txt");
+            PrintWriter writer = new PrintWriter(fileName);
             //The file to be written to
             for(User u : this.users){
                 //Going through all the users in the ArrayList in UserRegistry object
