@@ -12,7 +12,7 @@ import javax.swing.table.*;
 
 /**
  *
- * @author Will Steed
+ * @author Ellie Peterson, Will Steed
  */
 public class CheckBoxTable extends JPanel {
     
@@ -303,6 +303,62 @@ public class CheckBoxTable extends JPanel {
             k++;
             i++;
         }
+    }
+    
+    public int getRows(){
+        return this.numRow;
+    }
+    
+    public Object getData(int row, int col){
+        return (Object) tableModel.getValueAt(row,col+1);
+    }
+    
+    public boolean checkBoolean(int row){
+        return (boolean) tableModel.getValueAt(row,0);
+    }
+    
+    public void repaintTable(){
+        customTable = new JTable(tableModel);
+        //tableModel.addMouseListenerToHeaderInTable(customTable);
+        scrollPane.setViewportView(customTable);
+        customTable.setAutoCreateRowSorter(true);
+        if (customTable.getColumnModel().getColumnCount() > 0) {
+            customTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            customTable.getColumnModel().getColumn(1).setPreferredWidth(20);
+        }
+
+        GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //.addComponent(jButton1)
+                .addGap(18, 18, 18)
+                //.addComponent(jButton2)
+                .addGap(187, 187, 187))
+            .addGroup(layout.createSequentialGroup()
+                //.addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                //.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    //.addComponent(jButton1)
+                    //.addComponent(jButton2)
+                )
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        
+        
+        setOpaque(false);
     }
  
     /**

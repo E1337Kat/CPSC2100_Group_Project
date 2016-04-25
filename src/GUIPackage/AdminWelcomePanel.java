@@ -12,7 +12,7 @@ import javax.swing.table.*;
 
 /**
  *
- * @author Jacob Motley
+ * @author Jacob Motley, Ellie Peterson
  */
 public class AdminWelcomePanel extends JPanel{
     

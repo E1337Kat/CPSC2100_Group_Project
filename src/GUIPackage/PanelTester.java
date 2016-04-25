@@ -10,7 +10,7 @@ import javax.swing.*;
 
 /**
  *
- * @author EllieKat
+ * @author Ellie Peterson
  */
 public class PanelTester extends JFrame {
     

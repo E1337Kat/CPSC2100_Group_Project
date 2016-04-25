@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *
- * @author EMCS306
+ * @author Ellie Peterson
  */
 public class AdminPanel extends JPanelwithBackground {    
     

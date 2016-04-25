@@ -16,7 +16,7 @@ import javax.swing.*;
 
 /**
  *
- * @author EMCS306
+ * @author Ellie Peterson
  */
 public class LoginFrame extends JFrame
         implements java.beans.Customizer {
@@ -43,10 +43,6 @@ public class LoginFrame extends JFrame
      */
     public LoginFrame() {
         userReg = UserRegistry.getUserRegistryInstance();
-        userReg.addUser(MainClass.SYSADMIN);
-        userReg.addUser(MainClass.TEACHER);
-        userReg.addUser(MainClass.STUDENT);
-        userReg.addUser(MainClass.STUDENT_TEACHER);
         
         //setIconImage(img.getImage());
         //setTitle("University of FtS");

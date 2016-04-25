@@ -14,21 +14,8 @@ import javax.swing.*;
  * @author Ellie Peterson
  */
 public class MainClass {
-    protected static final Course TESTC1 = new Course("Intro to Sex", 
-            "A brief overview of the human body and it's pleasure centers", 
-            "MWF", 
-            800, 
-            1000, 
-            "JEW Econ Building", 
-            "HSEX 1069", 
-            69696, 
-            2);
-    protected static Schedule testSchedule = new Schedule();
+    public UserRegistry userReg = UserRegistry.getUserRegistryInstance();
     
-    protected static User SYSADMIN = new User("Ellie","Peterson","Sysadmin", "B17ch", "pqy473@mocs.utc.edu", true, true, true, new Schedule());
-    protected static User TEACHER = new User("Jules","Verne","jiv575", "pass1", "jiv575@fts.edu", false, true, false, new Schedule());
-    protected static User STUDENT;
-    protected static User STUDENT_TEACHER = new User("Barack","Obama","bao123", "pass3", "bao123@fts.edu", true, true, false, new Schedule());
     
     
     
@@ -41,11 +28,7 @@ public class MainClass {
     * Start of Main thread
     */
     public static void main(String args[]) {
-        
-        testSchedule.addCourse(TESTC1);
-        
-        STUDENT = new User("Kin","Talos","dova980", "pass2", "dova980@fts.edu", true, false, false, testSchedule);
-        //userReg.addUser(SYSADMIN);
+
         /* Set Look and Feel of program to system look and feel if possible*/
         initLookAndFeel();
         

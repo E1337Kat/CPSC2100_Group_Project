@@ -94,7 +94,7 @@ public class StudentPanel_Info extends JPanel {
         this.removeAll();
         
         usernameLabel = new JLabel();
-        contentPanel = new CheckBoxTable();
+        contentPanel = new JPanel();
             courseTitleLabel = new JLabel();
                 courseTitle = new JLabel();
             courseCRNLabel = new JLabel();

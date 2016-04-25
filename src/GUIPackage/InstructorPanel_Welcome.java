@@ -5,6 +5,8 @@
  */
 package GUIPackage;
 
+import Backend.CourseCatalog;
+import Backend.UserRegistry;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
@@ -242,13 +244,13 @@ public class InstructorPanel_Welcome extends JPanel {
             
             topWindow = (MainWindow)((JFrame)SwingUtilities.getWindowAncestor(this));
             System.out.println("Log: Parent window = " + topWindow.getName());
-            System.out.println("Log: Student username = " + topWindow.getUsername());
+            System.out.println("Log: Instructor username = " + topWindow.getUsername());
             u = topWindow.getUsername();
         } else if (SwingUtilities.getWindowAncestor(this).getClass().equals(PanelTester.class)) {
             
             testWindow = (PanelTester)((JFrame)SwingUtilities.getWindowAncestor(this));
             System.out.println("Log: Parent window = " + testWindow.getName());
-            System.out.println("Log: Student username = " + testWindow.getUsername());
+            System.out.println("Log: Instructor username = " + testWindow.getUsername());
             u = testWindow.getUsername();
         } else {
             u = "";
@@ -309,7 +311,19 @@ public class InstructorPanel_Welcome extends JPanel {
      * @param evt idk lol
      */
     private void logoutButtonActionPerformed(ActionEvent evt) {
+        UserRegistry.getUserRegistryInstance().writeFile();
+        CourseCatalog.getCourseCatalogInstance().writeFile();
+        SwingUtilities.getWindowAncestor(this).setVisible(false);
+        LoginFrame loginFrame = new LoginFrame();
+        loginFrame.setIconImage(MainClass.img.getImage());
+        loginFrame.setTitle(MainClass.UNI_NAME);
+
+        loginFrame.setDefaultCloseOperation(LoginFrame.EXIT_ON_CLOSE);
+        loginFrame.pack();
+
+        loginFrame.setVisible(true);
         
+        SwingUtilities.getWindowAncestor(this).dispose();
     }                
 
     protected void addData(Object[] o) {

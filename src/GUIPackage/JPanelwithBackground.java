@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 /**
  *
- * @author EllieKat
+ * @author Ellie Peterson
  */
 
 /**
