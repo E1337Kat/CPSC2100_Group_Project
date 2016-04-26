@@ -8,7 +8,8 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.io.PrintWriter;
 import java.io.File;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 /**
  * A class that creates CourseCatalog objects
@@ -49,11 +50,13 @@ public class CourseCatalog implements Registry{
     
     public void readFile(){
         //read in courses from text file
-        String fileName = "."  + File.separator + "db" + File.separator + "DBPackage" + File.separator + "Course-Reg.txt";
+        ClassLoader cl = getClass().getClassLoader();
+        String fileName = File.separator + "DBPackage" + File.separator + "Course-Reg.txt";
+        //File file = new File(cl.getResource(fileName).getFile());
         String line = null;
         try {
-            FileReader fR = new FileReader(fileName);
-            BufferedReader bR = new BufferedReader(fR);
+            InputStream fR = getClass().getResourceAsStream(fileName);
+            BufferedReader bR = new BufferedReader(new InputStreamReader(fR));
             while((line = bR.readLine()) != null){
                 Scanner reader = new Scanner(line).useDelimiter("]");
                 while(reader.hasNext()){

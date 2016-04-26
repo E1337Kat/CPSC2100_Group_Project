@@ -36,7 +36,7 @@ public class MainClass {
     
     //public static UserRegistry userReg = UserRegistry.getUserRegistryInstance();
     public static final String LOOKANDFEEL = "System";
-    protected static final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    protected static final ImageIcon img = new ImageIcon("res" + File.separator + "poo.png");
     protected static final String UNI_NAME = "University of FtS";
 
     /*

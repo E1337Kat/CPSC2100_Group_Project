@@ -13,9 +13,12 @@ package GUIPackage;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.JPanel;
 /**
  *
@@ -36,7 +39,12 @@ public class JPanelwithBackground extends JPanel {
     public JPanelwithBackground() throws IOException {
         
         //Sets the background image from the relative path and *should* work on any given system ideally...
-        backgroundImage = ImageIO.read(new File( "."  + File.separator + "res" + File.separator + "Background.png"));
+        ClassLoader cl = getClass().getClassLoader();
+        String fileName = File.separator + "res" + File.separator + "Background.png";
+        InputStream ir = getClass().getResourceAsStream(fileName);
+        ImageInputStream imageInput = ImageIO.createImageInputStream(ir);
+        BufferedImage bufImage = ImageIO.read(imageInput);
+        backgroundImage = bufImage;
     }
 
     /*

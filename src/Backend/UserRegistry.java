@@ -41,12 +41,14 @@ public class UserRegistry implements Registry{
      */
     public void readFile(){
         catalog.readFile();
-        String fileName = "."  + File.separator + "db" + File.separator + "DBPackage" + File.separator + "User-Reg.txt";
+        ClassLoader cl = getClass().getClassLoader();
+        String fileName = File.separator + "DBPackage" + File.separator + "User-Reg.txt";
+        //File file = new File(cl.getResource(fileName).getFile());
         System.out.println("Log: User-Reg-DB located at: \n    " + fileName);
         String line = null;
         try {
-            FileReader fR = new FileReader(fileName);
-            BufferedReader bR = new BufferedReader(fR); 
+            InputStream fR = getClass().getResourceAsStream(fileName);
+            BufferedReader bR = new BufferedReader(new InputStreamReader(fR)); 
             //wrapping FileReader in BufferedReader
             while((line = bR.readLine()) != null){
                 Scanner reader = new Scanner(line).useDelimiter("\t"); 

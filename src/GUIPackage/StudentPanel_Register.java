@@ -121,7 +121,7 @@ public class StudentPanel_Register extends JPanel {
         this.add(titleLabel, gbc);
         
         //Row Two - Six
-        catalog.getAccessibleContext().setAccessibleName("Course Catalog");
+        //catalog.getAccessibleContext().setAccessibleName("Course Catalog");
             gbc = new GridBagConstraints();
             gbc.gridheight = 5;
             gbc.gridwidth = gbc.REMAINDER;
@@ -240,7 +240,7 @@ public class StudentPanel_Register extends JPanel {
         //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
-        getAccessibleContext().setAccessibleName("Student Panel Welcome");
+        //getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
         setOpaque(false);
         

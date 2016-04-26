@@ -136,7 +136,7 @@ public class StudentPanel_Info extends JPanel {
         this.add(usernameLabel, gbc);
         
         //Rows 2-4
-        contentPanel.getAccessibleContext().setAccessibleName("Course Schedule");
+        //contentPanel.getAccessibleContext().setAccessibleName("Course Schedule");
             contentPanel.setLayout(new GridBagLayout());
             
             courseTitleLabel.setText("Course Title: ");
@@ -335,7 +335,7 @@ public class StudentPanel_Info extends JPanel {
         //</editor-fold>
         
         setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
-        getAccessibleContext().setAccessibleName("Student Panel Welcome");
+        //getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
         setOpaque(false);
         this.revalidate();

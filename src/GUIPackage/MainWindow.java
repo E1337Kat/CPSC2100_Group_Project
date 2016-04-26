@@ -32,7 +32,8 @@ public class MainWindow extends JFrame {
     private boolean InstTabTrue = false;
     private boolean StuTabTrue = false;
     
-    private final ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    ClassLoader cl = getClass().getClassLoader();
+    private final ImageIcon img = new ImageIcon(cl.getResource("res" + File.separator + "poo.png").getFile());
     private final String username;
     // End of variables declaration 
     
@@ -61,13 +62,13 @@ public class MainWindow extends JFrame {
         checkPermissions();
         
         getContentPane().add(cardTabbedPane, BorderLayout.CENTER);
-        getAccessibleContext().setAccessibleName("Main Window");
+        //getAccessibleContext().setAccessibleName("Main Window");
 
         if (AdminTabTrue) {
             System.out.println("Log: Admin tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Administrator", adminPane);
             adminPane.initMe();
-            adminPane.setSize(1000,7500);
+            adminPane.setSize(1000,600);
             System.out.println("Log: Admin tab initialized");
             //adminPane.setVisible(AdminTabTrue);
         }
@@ -75,7 +76,7 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Teacher", instructorPane);
             instructorPane.initMe();
-            instructorPane.setSize(1000,7500);
+            instructorPane.setSize(1000,600);
             System.out.println("Log: Instructor tab initialized");
             //instructorPane.setVisible(InstTabTrue);
         }
@@ -83,7 +84,7 @@ public class MainWindow extends JFrame {
             System.out.println("Log: Student tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Student", studentPane);
             studentPane.initMe();
-            studentPane.setSize(1000,7500);
+            studentPane.setSize(1000,600);
             System.out.println("Log: Student tab initialized");
             //studentPane.setVisible(StuTabTrue);
         }
@@ -92,7 +93,7 @@ public class MainWindow extends JFrame {
         this.add(cardTabbedPane);
         
         revalidate();
-        setSize(1280,800);
+        setSize(1084,677);
         
     }  
     
@@ -107,30 +108,22 @@ public class MainWindow extends JFrame {
     /**
      * Establishes the font the system should use
      * @return Font object built from provided parameters
-     */
+     
     public static Font getArialicFont() {
         Font font;
         try {
             //create the font to use. Specify the size!
             font = Font.createFont(Font.TRUETYPE_FONT,
-                new File( "."  +
-                    File.separator +
-                    "res" +
-                    File.separator +
-                    "Arialic_Hollow.ttf")).deriveFont(12f);
+                new File( "res/Arialic_Hollow.ttf")).deriveFont(12f);
             GraphicsEnvironment ge =
             GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
-                new File("."  +
-                    File.separator +
-                    "res" +
-                    File.separator +
-                    "Arialic_Hollow.ttf")));
+                new File("res/Arialic_Hollow.ttf")));
         } catch (IOException|FontFormatException e) {
             throw new RuntimeException(e);
         }
         return font;
-    }
+    }*/
     
     /**
     *  Checks logged in users permissions and creates tabs appropriately
@@ -144,7 +137,7 @@ public class MainWindow extends JFrame {
             studentPane = StudentPanel.getStudentPanelInstance();
             System.out.println("Log: Student tab initialized");
             System.out.println("Log: I hate this program");
-            studentPane.getAccessibleContext().setAccessibleName("Student Panel");
+            //studentPane.getAccessibleContext().setAccessibleName("Student Panel");
         }
         
         //checks if Instructor
@@ -153,7 +146,7 @@ public class MainWindow extends JFrame {
             this.InstTabTrue = true;
             instructorPane = InstructorPanel.getInstructorPanelInstance();
             System.out.println("Log: Instructor tab initialized");
-            instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
+            //instructorPane.getAccessibleContext().setAccessibleName("Instructor Panel");
         
         }
         
@@ -163,7 +156,7 @@ public class MainWindow extends JFrame {
             this.AdminTabTrue = true;
             adminPane = AdminPanel.getAdminPanelInstance();
             System.out.println("Log: Admin tab added");
-            adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
+            //adminPane.getAccessibleContext().setAccessibleName("Admin Panel");
         }
         
     }            

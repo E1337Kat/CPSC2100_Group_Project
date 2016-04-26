@@ -35,7 +35,7 @@ public class LoginFrame extends JFrame
     private JTextField usernameTextField;
     private final UserRegistry userReg;
     private Object bean;
-    public ImageIcon img = new ImageIcon("."  + File.separator + "res" + File.separator + "poo.png");
+    
     // End of variables declaration 
     
     /**
@@ -48,7 +48,10 @@ public class LoginFrame extends JFrame
         userReg.addUser(MainClass.STUDENT);
         userReg.addUser(MainClass.STUDENT_TEACHER);
         
-        //setIconImage(img.getImage());
+        ClassLoader cl = getClass().getClassLoader();
+        ImageIcon img = new ImageIcon(cl.getResource("res" + File.separator + "poo.png").getFile());
+        
+        setIconImage(img.getImage());
         //setTitle("University of FtS");
         initComponents();
     }
@@ -77,8 +80,8 @@ public class LoginFrame extends JFrame
         setLayout(new GridBagLayout());
         
         
-        Font arialicFont = getArialicFont();
-        setFont(arialicFont);
+        //Font arialicFont = getArialicFont();
+        //setFont(arialicFont);
         
 
 
@@ -203,7 +206,7 @@ public class LoginFrame extends JFrame
     /**
      * Establishes the font the system should use
      * @return Font object built from provided parameters
-     */
+     
     public Font getArialicFont() {
         Font font;
         try {
@@ -226,5 +229,5 @@ public class LoginFrame extends JFrame
             throw new RuntimeException(e);
         }
         return font;
-    }                  
+    }     */             
 }

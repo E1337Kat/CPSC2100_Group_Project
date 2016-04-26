@@ -75,7 +75,7 @@ public class StudentPanel extends JPanelwithBackground {
         
         
         
-        getAccessibleContext().setAccessibleName("Student Panel");
+        //getAccessibleContext().setAccessibleName("Student Panel");
         studentWelcome = StudentPanel_Welcome.getStudentWelcomeInstance();
         registerCourses = StudentPanel_Register.getStudentRegInstance();
         courseInfo = StudentPanel_Info.getStudentInfoInstance();
