@@ -41,7 +41,7 @@ public class CourseCatalog implements Registry{
         //class to add the full course to the user's schedule
         try {
             
-            PrintWriter writer = new PrintWriter(fileName);
+            PrintWriter writer = new PrintWriter(new File(this.getClass().getResource(fileName).getPath()));
             
             for(Course c : this.courses){
                 writer.println(c.toString());

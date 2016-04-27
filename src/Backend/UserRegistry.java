@@ -135,7 +135,7 @@ public class UserRegistry implements Registry{
         ClassLoader cl = getClass().getClassLoader();
         try{
             //OutputStream os = getClass().getResource(fileName);
-            PrintWriter writer = new PrintWriter(this.getClass().getResource(fileName).getPath());
+            PrintWriter writer = new PrintWriter(new File(this.getClass().getResource(fileName).getPath()));
             //The file to be written to
             for(User u : this.users){
                 //Going through all the users in the ArrayList in UserRegistry object
