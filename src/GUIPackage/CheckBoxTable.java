@@ -5,6 +5,8 @@
  */
 package GUIPackage;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.lang.*;
 import java.util.Vector;
 import javax.swing.*;
@@ -12,7 +14,7 @@ import javax.swing.table.*;
 
 /**
  *
- * @author Will Steed
+ * @author Ellie Peterson, Will Steed
  */
 public class CheckBoxTable extends JPanel {
     
@@ -98,6 +100,7 @@ public class CheckBoxTable extends JPanel {
             customTable.getColumnModel().getColumn(1).setPreferredWidth(20);
         }
 
+        /*
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,6 +130,7 @@ public class CheckBoxTable extends JPanel {
                 )
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        */
         
         /*if (tableModel.getRowCount() > 1) {
             sortData(1);
@@ -245,7 +249,7 @@ public class CheckBoxTable extends JPanel {
     }
     
     public int getColNum() {
-        return colNum-1;
+        return this.tableModel.getColumnCount()-1;
     }
     
     private void doMergeSort( int colToSortBy, int low, int up ) {
@@ -304,6 +308,33 @@ public class CheckBoxTable extends JPanel {
             i++;
         }
     }
+    
+    public int getRows(){
+        return this.tableModel.getRowCount();
+    }
+    
+    public Object getData(int row, int col){
+        return tableModel.getValueAt(row,col+1);
+    }
+    
+    public boolean checkBoolean(int row){
+        return (boolean) tableModel.getValueAt(row,0);
+    }
+    
+    public void repaintTable(){
+        customTable = new JTable(tableModel);
+        //tableModel.addMouseListenerToHeaderInTable(customTable);
+        scrollPane.setViewportView(customTable);
+        customTable.setAutoCreateRowSorter(true);
+        if (customTable.getColumnModel().getColumnCount() > 0) {
+            customTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            customTable.getColumnModel().getColumn(1).setPreferredWidth(20);
+        }
+
+        
+        
+        setOpaque(false);
+    }
  
     /**
      * initializes components
@@ -348,6 +379,7 @@ public class CheckBoxTable extends JPanel {
             customTable.getColumnModel().getColumn(1).setPreferredWidth(20);
         }
 
+        /*
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -377,6 +409,12 @@ public class CheckBoxTable extends JPanel {
                 )
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+*/
+        this.setLayout(new GridBagLayout());
+        
+        this.add(scrollPane);
+            
+        this.setSize(800, 200);
         
         setOpaque(false);
     }

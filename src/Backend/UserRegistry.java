@@ -9,9 +9,7 @@ import java.io.PrintWriter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+
 /**
  * Class to handle reading and writing of a data file
  * @author Will
@@ -20,6 +18,8 @@ public class UserRegistry implements Registry{
     
     ArrayList<User> users = new ArrayList<User>();
     Security sec = new Security();
+    String fileName = File.separator + "DBPackage" + File.separator + "User-Reg.txt";
+    
     //initializing ArrayList of User objects
     CourseCatalog catalog = CourseCatalog.getCourseCatalogInstance();
     private static UserRegistry userReg = null;
@@ -42,15 +42,15 @@ public class UserRegistry implements Registry{
     public void readFile(){
         catalog.readFile();
         ClassLoader cl = getClass().getClassLoader();
-        String fileName = File.separator + "DBPackage" + File.separator + "User-Reg.txt";
+        //String fileName = File.separator + "DBPackage" + File.separator + "User-Reg.txt";
         //File file = new File(cl.getResource(fileName).getFile());
         System.out.println("Log: User-Reg-DB located at: \n    " + fileName);
         String line = null;
         try {
-            InputStream fR = getClass().getResourceAsStream(fileName);
-            BufferedReader bR = new BufferedReader(new InputStreamReader(fR)); 
+            InputStream iStream = getClass().getResourceAsStream(fileName);
+            BufferedReader bReader = new BufferedReader(new InputStreamReader(iStream)); 
             //wrapping FileReader in BufferedReader
-            while((line = bR.readLine()) != null){
+            while((line = bReader.readLine()) != null){
                 Scanner reader = new Scanner(line).useDelimiter("\t"); 
                 //using a delimiter of tab
                 String firstName = reader.next();
@@ -114,14 +114,14 @@ public class UserRegistry implements Registry{
                 
             }
             
-            bR.close();
-            fR.close();
+            bReader.close();
+            iStream.close();
             //closing the BufferedReader and FileReader
-        } catch (FileNotFoundException f){
-            f.printStackTrace();
-            //Exception handling
-        }
-        catch (IOException e){
+        } catch (IOException e){
+            System.err.println("Error: Could not read file from " + 
+                    fileName + 
+                    ".\n\tException: " + 
+                    e);
             e.printStackTrace();
             //Exception handling
         }
@@ -132,8 +132,10 @@ public class UserRegistry implements Registry{
      * Method to write all necessary data to a file
      */
     public void writeFile(){
+        ClassLoader cl = getClass().getClassLoader();
         try{
-            PrintWriter writer = new PrintWriter("User-Reg.txt");
+            //OutputStream os = getClass().getResource(fileName);
+            PrintWriter writer = new PrintWriter(this.getClass().getResource(fileName).getPath());
             //The file to be written to
             for(User u : this.users){
                 //Going through all the users in the ArrayList in UserRegistry object
@@ -163,6 +165,10 @@ public class UserRegistry implements Registry{
             writer.close();
             //closing the PrintWriter
         } catch(Exception e){
+            System.err.println("Error: Could not write to file at " + 
+                    fileName + 
+                    ".\n\tException: " + 
+                    e);
             e.printStackTrace();
             //Exception handling
         }

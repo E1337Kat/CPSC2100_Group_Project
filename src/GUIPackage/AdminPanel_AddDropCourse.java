@@ -7,7 +7,7 @@ package GUIPackage;
 
 /**
  *
- * @author EllieKat
+ * @author Ellie Peterson
  */
 public class AdminPanel_AddDropCourse extends javax.swing.JPanel {
 

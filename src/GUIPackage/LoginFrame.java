@@ -9,14 +9,17 @@ import Backend.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 
 
 
 /**
  *
- * @author EMCS306
+ * @author Ellie Peterson
  */
 public class LoginFrame extends JFrame
         implements java.beans.Customizer {
@@ -36,6 +39,8 @@ public class LoginFrame extends JFrame
     private final UserRegistry userReg;
     private Object bean;
     
+    private static ImageIcon img;
+    
     // End of variables declaration 
     
     /**
@@ -43,15 +48,22 @@ public class LoginFrame extends JFrame
      */
     public LoginFrame() {
         userReg = UserRegistry.getUserRegistryInstance();
-        userReg.addUser(MainClass.SYSADMIN);
-        userReg.addUser(MainClass.TEACHER);
-        userReg.addUser(MainClass.STUDENT);
-        userReg.addUser(MainClass.STUDENT_TEACHER);
         
         ClassLoader cl = getClass().getClassLoader();
-        ImageIcon img = new ImageIcon(cl.getResource("res" + File.separator + "poo.png").getFile());
-        
-        setIconImage(img.getImage());
+        String fileName = File.separator + "res" + File.separator + "poo.png";
+        InputStream ir = getClass().getResourceAsStream(fileName);
+        try {
+            ImageInputStream imageInput = ImageIO.createImageInputStream(ir);
+            BufferedImage bufImage = ImageIO.read(imageInput);
+            img = new ImageIcon(bufImage);
+            setIconImage(img.getImage());
+        } catch (IOException e) {
+            System.err.println("Error: Could not read image from " + 
+                    fileName + 
+                    ".\n\tException: " + 
+                    e);
+            e.printStackTrace();
+        }
         //setTitle("University of FtS");
         initComponents();
     }

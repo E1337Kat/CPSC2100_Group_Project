@@ -22,7 +22,7 @@ import javax.imageio.stream.ImageInputStream;
 import javax.swing.JPanel;
 /**
  *
- * @author EllieKat
+ * @author Ellie Peterson
  */
 
 /**

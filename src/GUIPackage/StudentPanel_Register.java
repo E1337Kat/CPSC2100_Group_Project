@@ -7,6 +7,7 @@ package GUIPackage;
 
 import Backend.Course;
 import Backend.CourseCatalog;
+import Backend.UserRegistry;
 
 
 import java.awt.*;
@@ -19,10 +20,13 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
+import Backend.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
- * @author ellie
+ * @author Ellie Peterson, Will Steed
  */
 public class StudentPanel_Register extends JPanel {
 
@@ -77,11 +81,11 @@ public class StudentPanel_Register extends JPanel {
         
         titleLabel = new JLabel();
         catalog = new CheckBoxTable(col, col.length);
-        regField1 = new JFormattedTextField(crnFormat);
-        regField2 = new JFormattedTextField(crnFormat);
-        regField3 = new JFormattedTextField(crnFormat);
-        regField4 = new JFormattedTextField(crnFormat);
-        regField5 = new JFormattedTextField(crnFormat);
+        regField1 = new JTextField();
+        regField2 = new JTextField();
+        regField3 = new JTextField();
+        regField4 = new JTextField();
+        regField5 = new JTextField();
         okButton = new JButton();
         clearFieldsButton = new JButton();
         addToSheetButton = new JButton();
@@ -194,8 +198,13 @@ public class StudentPanel_Register extends JPanel {
             gbc.anchor = gbc.CENTER;
         this.add(clearFieldsButton, gbc);
         
-        okButton.setText("");
-        okButton.setVisible(false);
+        okButton.setText("Register");
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt){
+                registerActionPerformed(evt);
+            }
+        });
             gbc.gridx = 4;
             gbc.insets = new Insets(10,2,10,10); //top, left, bottom, right
             gbc.anchor = gbc.LINE_START;
@@ -227,7 +236,7 @@ public class StudentPanel_Register extends JPanel {
             gbc.insets = new Insets(10,2,20,2); //top, left, bottom, right
         this.add(helpLink, gbc);
         
-        logoutButton.setText("Logout");
+        logoutButton.setText("Back");
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -291,7 +300,60 @@ public class StudentPanel_Register extends JPanel {
      * @param evt idk lol
      */
     private void addToSheetActionPerformed(ActionEvent evt) {
+        for(int i = 0; i < catalog.getRows(); i++){
+            System.out.println("Log: Checking boolean on row " + i);
+            if(catalog.checkBoolean(i)){
+                System.out.println("Log: Row " + i + " is true, fetching CRN.");
+                String crn = catalog.getData(i,0).toString();
+                System.out.println("Log: CRN is: " + crn);
+                if (regField1.getText().equals("")) {
+                    regField1.setText(crn);
+                } else if (regField2.getText().equals("")) {
+                    regField2.setText(crn);
+                } else if (regField3.getText().equals("")) {
+                    regField3.setText(crn);
+                } else if (regField4.getText().equals("")) {
+                    regField4.setText(crn);
+                } else if (regField5.getText().equals("")) {
+                    regField5.setText(crn);
+                }
+            }
+        }
+        this.revalidate();
+        this.repaint();
+    }
+    
+    private void registerActionPerformed(ActionEvent evt){
+        User u = UserRegistry.getUserRegistryInstance().getUser(getUsername());
+        CourseCatalog c = CourseCatalog.getCourseCatalogInstance();
+        for(int i = 0; i < catalog.getRows(); i++){
+            System.out.println("Log: Checking boolean on row " + i);
+            if(catalog.checkBoolean(i)){
+                System.out.println("Log: Row " + i + " is true, fetching CRN.");
+                String crn = catalog.getData(i,0).toString();
+                System.out.println("Log: CRN is: " + crn);
+                u.addCourseToSchedule(c.getCourseByCRNAsString(crn));
+            }
+        }
+        if(c.isValidCRNAsString(regField1.getText())) {
+            u.addCourseToSchedule(c.getCourseByCRNAsString(regField1.getText()));
+        }
+        if(c.isValidCRNAsString(regField2.getText())) {
+            u.addCourseToSchedule(c.getCourseByCRNAsString(regField2.getText()));
+        }
+        if(c.isValidCRNAsString(regField3.getText())) {
+            u.addCourseToSchedule(c.getCourseByCRNAsString(regField3.getText()));
+        }
+        if(c.isValidCRNAsString(regField4.getText())) {
+            u.addCourseToSchedule(c.getCourseByCRNAsString(regField4.getText()));
+        }
+        if(c.isValidCRNAsString(regField5.getText())) {
+            u.addCourseToSchedule(c.getCourseByCRNAsString(regField5.getText()));
+        }
+        UserRegistry.getUserRegistryInstance().overwriteUser(u);
         
+        this.revalidate();
+        this.repaint();
     }
     
     /**
@@ -299,7 +361,14 @@ public class StudentPanel_Register extends JPanel {
      * @param evt idk lol
      */
     private void clearActionPerformed(ActionEvent evt) {
+        regField1.setText(null);
+        regField2.setText(null);
+        regField3.setText(null);
+        regField3.setText(null);
+        regField3.setText(null);
         
+        this.revalidate();
+        this.repaint();
     }
     
     /**
@@ -314,6 +383,8 @@ public class StudentPanel_Register extends JPanel {
         CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
         cl.show(((StudentPanel)SwingUtilities.getAncestorNamed("GUIPackage.StudentPanel", this)).getCards(), StudentPanel.INFO);
         
+        this.revalidate();
+        this.repaint();
     }
     
     /**
@@ -328,6 +399,8 @@ public class StudentPanel_Register extends JPanel {
         CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
         cl.show(((StudentPanel)SwingUtilities.getAncestorNamed("GUIPackage.StudentPanel", this)).getCards(), StudentPanel.WELCOME);
         
+        this.revalidate();
+        this.repaint();
     }
 
     private void populateTable() {
@@ -350,5 +423,5 @@ public class StudentPanel_Register extends JPanel {
             
             catalog.addData(o);
         }
-    }          
+    }  
 }

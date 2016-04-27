@@ -8,10 +8,12 @@ package GUIPackage;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 /**
  *
- * @author EMCS306
+ * @author Ellie Peterson
  */
 public class StudentPanel extends JPanelwithBackground {    
     
@@ -82,6 +84,24 @@ public class StudentPanel extends JPanelwithBackground {
 
         cards = new JPanel(new CardLayout());
         cards.setName("cards");
+        
+        cards.addAncestorListener(new AncestorListener(){
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+                studentWelcome.repopulateTable();
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+                
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
+                
+            }
+            
+        });
        
         studentWelcome.setLayout(null);
         cards.add(studentWelcome, WELCOME);
@@ -113,4 +133,8 @@ public class StudentPanel extends JPanelwithBackground {
         this.revalidate();
         this.repaint();
     }           
+    
+    private void populateCourseInfo(String crn) {
+        courseInfo.populate(crn);
+    }
 }

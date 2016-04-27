@@ -5,6 +5,8 @@
  */
 package GUIPackage;
 
+import Backend.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
@@ -20,6 +22,9 @@ public class StudentPanel_Info extends JPanel {
 
     // Variables declaration 
     private static StudentPanel_Info stu = null;
+    private String title;
+    private String crn;
+    private String desc;
     
     private JLabel usernameLabel;
     private JPanel contentPanel;
@@ -57,6 +62,20 @@ public class StudentPanel_Info extends JPanel {
      */
     public void initMe() {
         initComponents();
+    }
+    
+    public void populate(String crn) {
+        this.crn = crn;
+        Course c = CourseCatalog.getCourseCatalogInstance().getCourseByCRNAsString(crn);
+        this.title = c.getName();
+        this.desc = c.getDescription();
+        
+        courseTitle.setText(title);
+        courseCRN.setText(this.crn);
+        courseDesc.setText(desc);
+        
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -368,7 +387,7 @@ public class StudentPanel_Info extends JPanel {
         Container c = this.getParent();
         System.out.println("Log: Stu Welcome parent name: " + c.getName());
         CardLayout cl = (CardLayout) SwingUtilities.getAncestorNamed("cards", this).getLayout();
-        cl.show(((StudentPanel)SwingUtilities.getAncestorNamed("GUIPackage.StudentPanel", this)).getCards(), StudentPanel.WELCOME);
+        cl.show(((StudentPanel)SwingUtilities.getAncestorNamed("GUIPackage.StudentPanel", this)).getCards(), StudentPanel.REGISTER);
         
     }
 
@@ -381,15 +400,15 @@ public class StudentPanel_Info extends JPanel {
     }
 
     private String getCourseTitleText() {
-        return "CPSC 2100";
+        return this.title;
     }
 
     private String getCourseCRNText() {
-        return "12345";
+        return this.crn;
     }
 
     private String getDescText() {
-        return "A class about boobs.";
+        return this.desc;
     }
                      
 }

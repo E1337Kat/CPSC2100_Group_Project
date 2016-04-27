@@ -18,6 +18,9 @@ import java.util.Scanner;
 public class CourseCatalog implements Registry{
     ArrayList<Course> courses = new ArrayList<Course>();
     //initializing ArrayList of courses
+    //private ClassLoader cl = getClass().getClassLoader();
+    private static final String fileName = File.separator + "DBPackage" + File.separator + "Course-Reg.txt";
+    //File file = new File(fileName);
     
     private static CourseCatalog catalog = null;
     
@@ -37,13 +40,18 @@ public class CourseCatalog implements Registry{
         //instead in user class store courses as just CRN and use this
         //class to add the full course to the user's schedule
         try {
-            PrintWriter writer = new PrintWriter("Course-Reg.txt");
+            
+            PrintWriter writer = new PrintWriter(fileName);
             
             for(Course c : this.courses){
                 writer.println(c.toString());
             }
             writer.close();
         } catch(Exception e){
+            System.err.println("Error: Could not write to file at " + 
+                    fileName + 
+                    ".\n\tException: " + 
+                    e);
             e.printStackTrace();
         }
     }
@@ -81,6 +89,10 @@ public class CourseCatalog implements Registry{
                 }
             }
         } catch (Exception e){
+            System.err.println("Error: Could not read file from " + 
+                    fileName + 
+                    ".\n\tException: " + 
+                    e);
             e.printStackTrace();
         }
     }
@@ -113,5 +125,34 @@ public class CourseCatalog implements Registry{
             }
         }
         return null;
+    }
+    
+    public Course getCourseByCRNAsString(String crn){
+        for(Course c : this.courses){
+            String s = "" + c.getCRN();
+            if(s.equals(crn)){
+                return c;
+            }
+        }
+        return null;
+    }
+    
+    public boolean isValidCRN(int crn){
+        for(Course c : this.courses){
+            if(c.getCRN() == crn){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean isValidCRNAsString(String crn){
+        for(Course c : this.courses){
+            String s = "" + c.getCRN();
+            if(s.equals(crn)){
+                return true;
+            }
+        }
+        return false;
     }
 }

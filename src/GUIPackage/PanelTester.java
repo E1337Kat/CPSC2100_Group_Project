@@ -4,26 +4,32 @@
  * and open the template in the editor.
  */
 package GUIPackage;
+
 import Backend.*;
 import java.awt.*;
 import javax.swing.*;
 
 /**
  *
- * @author EllieKat
+ * @author Ellie Peterson
  */
 public class PanelTester extends JFrame {
     
     
-    // Variables declaration - do not modify  
+    // Variables declaration - do not modify 
+    
+    public UserRegistry userReg = UserRegistry.getUserRegistryInstance();
+    private CourseCatalog courseReg = CourseCatalog.getCourseCatalogInstance();
     private StudentPanel testPane;
-    private final String username = "Panel T. Ester";
+    private final String username = "studentusername";
     // End of variables declaration   
+    private boolean StuTabTrue = false;
     
     public PanelTester () {
+        userReg = UserRegistry.getUserRegistryInstance();
+        courseReg = CourseCatalog.getCourseCatalogInstance();
         initComponents();
     }
-        @SuppressWarnings("unchecked")   
         
     public String getUsername() {
         
@@ -32,43 +38,42 @@ public class PanelTester extends JFrame {
         
     private void initComponents() {
 
-        testPane = StudentPanel.getStudentPanelInstance();
-        testPane.setLayout(new GridBagLayout());
+        //testPane = StudentPanel.getStudentPanelInstance();
+        
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         
-        getContentPane().add(testPane, BorderLayout.CENTER);
+        
         
 
         //initialize testpanes components
         
-        add(testPane);
-        testPane.initMe();
+        if ( userReg.getUser(username).adminStatus() || userReg.getUser(username).studentStatus()  ) {
+
+            this.StuTabTrue = true;
+            testPane = StudentPanel.getStudentPanelInstance();
+            System.out.println("Log: Student tab initialized");
+            System.out.println("Log: I hate this program");
+            //studentPane.getAccessibleContext().setAccessibleName("Student Panel");
+        }
+        
+        testPane.setLayout(new GridBagLayout());
+        getContentPane().add(testPane);
+        
+        if (StuTabTrue) {
+            System.out.println("Log: Student test panel to be made visible for: " + getUsername());
+            
+            add(testPane);
+            testPane.initMe();
+            testPane.setSize(1000, 600);
+            System.out.println("Log: Student tab initialized");
+            //studentPane.setVisible(StuTabTrue);
+        }
+        
         revalidate();
-        setSize(750, 600);
-        
-        /*
-        Object[] objs = {"Granger", "Frank", "fag654", "fag654@fts.edu"};
-        testPane.addData(objs);
-        
-        objs = new Object[] {"Kiddo", "Beatrice", "bok564", "bok565@fts.edu"};
-        testPane.addData(objs);
-        
-        objs = new Object[] {"McSubs", "Subway", "sum454", "sum454@fts.edu"};
-        testPane.addData(objs);
-        
-        objs = new Object[] {"McPhearson", "Grace", "gum343", "gum343@fts.edu"};
-        testPane.addData(objs);
-        
-        objs = new Object[] {"Verne", "Jules", "jqv232", "jqv232@fts.edu"};
-        testPane.addData(objs);
-        
-        objs = new Object[] {"Marley", "Bob", "bum676", "bum676@fts.edu"};
-        testPane.addData(objs);
-        */
-        
-        //testPane.sortClassList(2);
+        repaint();
+        setSize(1084, 677);
     }     
     
     public static void main(String args[]) {

@@ -1,0 +1,4 @@
+[Name1,Desc1,MWF,1100,1150,loc1,dept1,11111,4,25]
+[Name2,Desc2,TTh,1200,1250,loc2,dept2,11112,4,30]
+[Name3,Desc3,MW,800,945,loc3,dept3,11113,4,10]
+[Intro to Sex,A brief overview of the human body and it's pleasure centers,MWF,800,1000,JEW Econ Building,HSEX 1069,69696,0,2]

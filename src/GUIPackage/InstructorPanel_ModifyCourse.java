@@ -17,7 +17,7 @@ import javax.swing.border.*;
 
 /**
  *
- * @author ellie
+ * @author Ellie Peterson
  */
 public class InstructorPanel_ModifyCourse extends JPanel {
 

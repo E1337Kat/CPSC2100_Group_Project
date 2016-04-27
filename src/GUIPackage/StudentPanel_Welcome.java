@@ -14,6 +14,8 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 /**
  *
@@ -141,6 +143,8 @@ public class StudentPanel_Welcome extends JPanel {
             gbc.gridwidth = 6;
             gbc.gridx = 0;
             gbc.gridy = 1;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
             gbc.insets = new Insets(10,10,10,10); //top, left, bottom, right
             gbc.anchor = gbc.CENTER;
             gbc.fill = gbc.BOTH;
@@ -266,7 +270,7 @@ public class StudentPanel_Welcome extends JPanel {
         this.add(logoutButton, gbc);
         //</editor-fold>
         
-        setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
+        //setBorder(BorderFactory.createTitledBorder(new MatteBorder(null), "", TitledBorder.CENTER, TitledBorder.TOP, new Font("Tahoma", 1, 14), new Color(255, 255, 255))); // NOI18N
         //getAccessibleContext().setAccessibleName("Student Panel Welcome");
         
         
@@ -325,6 +329,8 @@ public class StudentPanel_Welcome extends JPanel {
      * @param evt idk lol
      */
     private void logoutButtonActionPerformed(ActionEvent evt) {
+        UserRegistry.getUserRegistryInstance().writeFile();
+        CourseCatalog.getCourseCatalogInstance().writeFile();
         SwingUtilities.getWindowAncestor(this).setVisible(false);
         LoginFrame loginFrame = new LoginFrame();
         loginFrame.setIconImage(MainClass.img.getImage());
@@ -351,6 +357,8 @@ public class StudentPanel_Welcome extends JPanel {
         
         Object[] o = new Object[WELCOME_SCHEDULE_SIZE];
         
+        user = UserRegistry.getUserRegistryInstance().getUser(getUsername());
+        System.out.println("Log: Student is: " + user);
         System.out.println("Log: Logged in student has schedule: \n    " + user.getScheduleObject().toString());
         
         for (int i = 0; i < user.getSchedule().size(); i++) {
@@ -364,5 +372,8 @@ public class StudentPanel_Welcome extends JPanel {
             
             schedule.addData(o);
         }
+    }
+    protected void repopulateTable(){
+        schedule.repaintTable();
     }
 }

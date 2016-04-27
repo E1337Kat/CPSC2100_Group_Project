@@ -7,33 +7,37 @@ package GUIPackage;
 
 import Backend.*;
 
-import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 
 /**
  *
- * @author EMCS306
+ * @author Ellie Peterson
  */
 public class MainWindow extends JFrame {
 
     
     // Variables declaration 
+    //sub components of this
     private JTabbedPane cardTabbedPane;
     private AdminPanel adminPane;
     private InstructorPanel instructorPane;
     private StudentPanel studentPane;
     
+    //Vars used by package
     protected UserRegistry userReg = null;
     protected CourseCatalog courseReg = null;
     
+    //locally used vars
     private boolean AdminTabTrue = false;
     private boolean InstTabTrue = false;
     private boolean StuTabTrue = false;
-    
-    ClassLoader cl = getClass().getClassLoader();
-    private final ImageIcon img = new ImageIcon(cl.getResource("res" + File.separator + "poo.png").getFile());
+    private static ImageIcon img;
     private final String username;
     // End of variables declaration 
     
@@ -46,7 +50,24 @@ public class MainWindow extends JFrame {
         userReg = UserRegistry.getUserRegistryInstance();
         courseReg = CourseCatalog.getCourseCatalogInstance();
         
-        setIconImage(img.getImage());
+        ClassLoader cl = getClass().getClassLoader();
+        String fileName = File.separator + "res" + File.separator + "poo.png";
+        InputStream ir = getClass().getResourceAsStream(fileName);
+        
+        //attempt to add an icon image
+        try {
+            ImageInputStream imageInput = ImageIO.createImageInputStream(ir);
+            BufferedImage bufImage = ImageIO.read(imageInput);
+            img = new ImageIcon(bufImage);
+            setIconImage(img.getImage());
+        } catch (IOException e) {
+            System.err.println("Error: Could not read image from " + 
+                    fileName + 
+                    ".\n\tException: " + 
+                    e);
+            e.printStackTrace();
+        }
+        
         setTitle("University of FtS");
         initComponents();
     }
@@ -61,16 +82,17 @@ public class MainWindow extends JFrame {
         
         checkPermissions();
         
-        getContentPane().add(cardTabbedPane, BorderLayout.CENTER);
-        //getAccessibleContext().setAccessibleName("Main Window");
-
+        getContentPane().add(cardTabbedPane);
+        
+        
+        this.add(cardTabbedPane);
+        
         if (AdminTabTrue) {
             System.out.println("Log: Admin tab to be made visible for: " + getUsername());
             cardTabbedPane.addTab("Administrator", adminPane);
             adminPane.initMe();
             adminPane.setSize(1000,600);
             System.out.println("Log: Admin tab initialized");
-            //adminPane.setVisible(AdminTabTrue);
         }
         if (InstTabTrue) {
             System.out.println("Log: Instructor tab to be made visible for: " + getUsername());
@@ -78,7 +100,19 @@ public class MainWindow extends JFrame {
             instructorPane.initMe();
             instructorPane.setSize(1000,600);
             System.out.println("Log: Instructor tab initialized");
-            //instructorPane.setVisible(InstTabTrue);
+            
+            //hide tab bar if needed
+            if (!AdminTabTrue && !StuTabTrue) {
+                cardTabbedPane.setUI(new BasicTabbedPaneUI() {
+                    @Override
+                    protected int calculateTabAreaHeight(int tab_placement, int run_count, int max_tab_height) {  
+                        if (cardTabbedPane.getTabCount() > 1)
+                            return super.calculateTabAreaHeight(tab_placement, run_count, max_tab_height);  
+                        else  
+                            return 0;  
+                    }
+                });
+            }
         }
         if (StuTabTrue) {
             System.out.println("Log: Student tab to be made visible for: " + getUsername());
@@ -86,13 +120,23 @@ public class MainWindow extends JFrame {
             studentPane.initMe();
             studentPane.setSize(1000,600);
             System.out.println("Log: Student tab initialized");
-            //studentPane.setVisible(StuTabTrue);
+            
+            //hide tab bar if needed
+            if (!AdminTabTrue && !InstTabTrue) {
+                cardTabbedPane.setUI(new BasicTabbedPaneUI() {
+                    @Override
+                    protected int calculateTabAreaHeight(int tab_placement, int run_count, int max_tab_height) {  
+                        if (cardTabbedPane.getTabCount() > 1)
+                            return super.calculateTabAreaHeight(tab_placement, run_count, max_tab_height);  
+                        else  
+                            return 0;  
+                    }
+                });
+            }
         }
         
-        
-        this.add(cardTabbedPane);
-        
         revalidate();
+        repaint();
         setSize(1084,677);
         
     }  
@@ -104,26 +148,6 @@ public class MainWindow extends JFrame {
     public String getUsername() {
         return username;
     }
-    
-    /**
-     * Establishes the font the system should use
-     * @return Font object built from provided parameters
-     
-    public static Font getArialicFont() {
-        Font font;
-        try {
-            //create the font to use. Specify the size!
-            font = Font.createFont(Font.TRUETYPE_FONT,
-                new File( "res/Arialic_Hollow.ttf")).deriveFont(12f);
-            GraphicsEnvironment ge =
-            GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT,
-                new File("res/Arialic_Hollow.ttf")));
-        } catch (IOException|FontFormatException e) {
-            throw new RuntimeException(e);
-        }
-        return font;
-    }*/
     
     /**
     *  Checks logged in users permissions and creates tabs appropriately
